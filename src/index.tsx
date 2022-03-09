@@ -6,6 +6,15 @@ import * as serviceWorker from './serviceWorker'
 import { App } from './App'
 import './styles/reset.css'
 import { BrowserRouter } from 'react-router-dom'
+import {
+  ApolloClient,
+  InMemoryCache
+} from "@apollo/client"
+
+export const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(
   <React.StrictMode>
