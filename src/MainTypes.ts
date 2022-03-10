@@ -32,8 +32,8 @@ export type ProductType = {
   prices?: PriceType
   brand?: string
 }
-export type Category = {
-  name: string
-  products: ProductType
+export type CategoryType = {
+  name?: string
+  products: Array<ProductType>
 }
-export type Categories = Array<Category>
+export type Categories = Array<CategoryType>

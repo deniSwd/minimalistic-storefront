@@ -1,54 +1,68 @@
 import React, { Component } from 'react'
 import { Product } from './Product'
-import { ApolloQueryResult, gql } from '@apollo/client'
+import { ApolloQueryResult } from '@apollo/client'
 import s from './body.module.scss'
-import { client } from '../API/api'
+import { connect } from 'react-redux'
+import { getAllProducts } from '../redux/categoryPageReducer'
 
-type MyState = {
-  result: ApolloQueryResult<any> | null/*ApolloQueryResult<any> | null*/
- }
+/*type MyState = {
+  result: ApolloQueryResult<any> | null/!*ApolloQueryResult<any> | null*!/
+ }*/
 
-export class Body extends Component<{ text: string }, MyState> {
-  constructor(props: { text: string }) {
-    super(props);
-
+export class Body extends Component<any> {
+  componentDidMount() {
+    this.props.getAllProducts()
   }
-  state: MyState = {
-  result: null
-}
+
+  /*  constructor(props:string ) {
+      super(props);
+    }*/
+  /*  state: MyState = {
+    result: null
+  }*/
 
 
-  async componentDidMount() {
-    this.setState({
-      ...this.state,
-      result: await client
-      .query({
-        query: gql`
-            query {
-                category {
-                    name
-                    products {
-                        id
-                        name
-                        gallery
-                        category
-                    }
-                }
-            }
-        `
+  /*   componentDidMount() {
+      this.setState({props.products
+        ...this.state,
+        result: await client
+        .query({
+          query: gql`
+              query {
+                  category {
+                      name
+                      products {
+                          id
+                          name
+                          gallery
+                          category
+                      }
+                  }
+              }
+          `
+        })
       })
-    })
-  }
+    }*/
 
 
   render() {
 
+
     return <div>
       {this.props.text}
       <div className={s.products}>
-        {this.state.result && this.state.result.data.category.products.map((u:any) =>
-          <Product  name = {u.name} image = {u.gallery[0]}/>)}
+        {this.props.products && this.props.products.map((u: any) =>
+          <Product name={u.name} image={u.gallery[0]} />)}
       </div>
     </div>
   }
 }
+
+let mapStateToProps = (state: any) => {
+  return {
+    products: state.categoryPage.products
+  }
+}
+
+const CategoryPageContainer = connect(mapStateToProps, { getAllProducts })(Body)
+export default CategoryPageContainer
