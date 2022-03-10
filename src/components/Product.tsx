@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import productImg from '../assets/product.jpg'
 import s from './product.module.scss'
+import { NavLink } from 'react-router-dom'
 
 export class Product extends Component<any, any> {
   render() {
@@ -8,7 +8,7 @@ export class Product extends Component<any, any> {
       <div>
         <img src={this.props.image} />
       </div>
-      <div>{this.props.name}</div>
+      <NavLink to='/productPage'>{this.props.name}</NavLink>
       <div>Price</div>
     </div>
   }

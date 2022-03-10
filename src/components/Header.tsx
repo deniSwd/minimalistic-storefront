@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import cartImg from '../assets/cart.png'
 import logoImg from '../assets/Logo.svg'
-import s from './Header.module.scss'
+import s from './header.module.scss'
+
 export class Header extends Component {
   render() {
     return <div className={s.header}>

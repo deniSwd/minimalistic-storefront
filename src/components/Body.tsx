@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Product } from './Product'
 import { ApolloQueryResult, gql } from '@apollo/client'
-import { client } from '../index'
 import s from './body.module.scss'
+import { client } from '../API/api'
 
- type MyState = {
-  result: any | null/*ApolloQueryResult<any> | null*/
+type MyState = {
+  result: ApolloQueryResult<any> | null/*ApolloQueryResult<any> | null*/
  }
 
 export class Body extends Component<{ text: string }, MyState> {
