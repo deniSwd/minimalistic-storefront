@@ -46,17 +46,18 @@ export class Body extends Component<any> {
 
 
   render() {
-
+    const clothesCategory: any = this.props.products.filter((u:any) => u.category === "clothes")
 
     return <div>
-      {this.props.name}
+      {this.props.category}
       <div className={s.products}>
-        {this.props.products && this.props.products.map((u: any) =>
+        {this.props.products && this.props.category ==="clothes" && clothesCategory.map((u: any) =>
           <Product name={u.name} image={u.gallery[0]} />)}
       </div>
     </div>
   }
 }
+
 
 let mapStateToProps = (state: any) => {
   return {

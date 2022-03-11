@@ -8,8 +8,8 @@ export class Main extends Component {
     return <div>
       <Routes>
         <Route path='/all' element={<CategoryPageContainer />} />
-        <Route path='/clothes' element={<CategoryPageContainer />} />
-        <Route path='/tech' element={<CategoryPageContainer />} />
+        <Route path='/clothes' element={<CategoryPageContainer category = "clothes"/>} />
+        <Route path='/tech' element={<CategoryPageContainer category = "tech"/>} />
         <Route path='/productPage' element={<ProductPage />} />
       </Routes>
     </div>
