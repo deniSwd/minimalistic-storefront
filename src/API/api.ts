@@ -26,7 +26,7 @@ export const productAPI = {
               }
           }
       `
-    }).then(res => res.data.category.products)
+    }).then(res => res.data.category)
   }
 }
 

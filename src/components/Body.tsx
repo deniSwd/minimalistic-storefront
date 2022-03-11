@@ -49,7 +49,7 @@ export class Body extends Component<any> {
 
 
     return <div>
-      {this.props.text}
+      {this.props.name}
       <div className={s.products}>
         {this.props.products && this.props.products.map((u: any) =>
           <Product name={u.name} image={u.gallery[0]} />)}
@@ -60,7 +60,8 @@ export class Body extends Component<any> {
 
 let mapStateToProps = (state: any) => {
   return {
-    products: state.categoryPage.products
+    products: state.categoryPage.products,
+    name: state.categoryPage.name
   }
 }
 

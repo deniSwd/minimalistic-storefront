@@ -12,17 +12,18 @@ const categoryPageReducer = (state = initialsState, action:any) => {
     case SET_PRODUCTS:
       return {
         ...state,
-        products: action.products
+        name: action.category.name,
+        products: action.category.products
       }
     default:
       return (state);
   }
 }
-export const setAllProductsSuccess = (products:any) => ({
-  type: SET_PRODUCTS, products })
+export const setAllProductsSuccess = (category:any) => ({
+  type: SET_PRODUCTS, category })
 
 export const getAllProducts = () => async (dispatch: any) => {
-  const products  = await productAPI.getProducts()
-  dispatch(setAllProductsSuccess(products))
+  const category  = await productAPI.getProducts()
+  dispatch(setAllProductsSuccess(category))
 }
 export default categoryPageReducer
