@@ -6,7 +6,7 @@ export class Product extends Component<any, any> {
   render() {
     return <div className={s.productStyle}>
       <div>
-        <img src={this.props.image} />
+        <img src={this.props.image} className={s.img} />
       </div>
       <NavLink to='/productPage'>{this.props.name}</NavLink>
       <div>Price</div>
