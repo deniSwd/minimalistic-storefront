@@ -5,6 +5,7 @@ import store from './redux/redux-store'
 import * as serviceWorker from './serviceWorker'
 import { App } from './App'
 import './styles/reset.css'
+import './styles/basic.scss'
 import { BrowserRouter } from 'react-router-dom'
 
 

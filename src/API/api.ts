@@ -21,6 +21,7 @@ export const productAPI = {
                       id
                       name
                       gallery
+                      description
                       category
                   }
               }

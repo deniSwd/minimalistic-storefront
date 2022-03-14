@@ -10,8 +10,8 @@ import { getAllProducts } from '../redux/categoryPageReducer'
  }*/
 
 export class Body extends Component<any> {
-  componentDidMount() {
-    this.props.getAllProducts()
+  async componentDidMount() {
+    await this.props.getAllProducts()
   }
 
   /*  constructor(props:string ) {
@@ -53,9 +53,9 @@ export class Body extends Component<any> {
       {categoryName ? categoryName : 'All'}
       <div className={s.products}>
         {this.props.products && categoryName ? renderCategory.map((u: any) =>
-          <Product name={u.name} image={u.gallery[0]} />) :
+          <Product name={u.name} image={u.gallery[0]} id={u.id} />) :
           this.props.products.map((u: any) =>
-            <Product name={u.name} image={u.gallery[0]} />)}
+            <Product name={u.name} image={u.gallery[0]} id={u.id}/>)}
       </div>
     </div>
   }

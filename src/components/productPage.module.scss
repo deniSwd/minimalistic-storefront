@@ -5,4 +5,11 @@
 .info {
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+}
+.productPhotos {
+  max-height: 80px ;
+}
+.productMainPhoto {
+  max-height: 511px ;
 }
