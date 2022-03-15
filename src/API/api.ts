@@ -2,6 +2,7 @@ import {
   ApolloClient, gql,
   InMemoryCache
 } from '@apollo/client'
+import { CategoryType } from '../MainTypes'
 
 
 export const client = new ApolloClient({
@@ -9,10 +10,11 @@ export const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+
 export const productAPI = {
-  async getProducts() {
+  async getAllProducts() {
     return client
-    .query({
+    .query ({
       query: gql`
           query {
               category {
@@ -28,6 +30,22 @@ export const productAPI = {
           }
       `
     }).then(res => res.data.category)
+  },
+  async getProduct() {
+    return client
+    .query ({
+      query: gql`
+          query {
+              product (id: "xbox-series-s") {
+                  id
+                  name
+                  gallery
+                  category
+
+              }
+          }
+      `
+    }).then(res => res.data.product)
   }
 }
 

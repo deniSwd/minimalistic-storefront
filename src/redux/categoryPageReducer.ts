@@ -23,7 +23,7 @@ export const setAllProductsSuccess = (category:any) => ({
   type: SET_PRODUCTS, category })
 
 export const getAllProducts = () => async (dispatch: any) => {
-  const category  = await productAPI.getProducts()
+  const category  = await productAPI.getAllProducts()
   dispatch(setAllProductsSuccess(category))
 }
 export default categoryPageReducer

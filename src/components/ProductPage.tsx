@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import s from './productPage.module.scss'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { ProductType } from '../MainTypes'
 import ReactHtmlParser from 'react-html-parser'
 
 export class ProductPage extends Component<any> {
