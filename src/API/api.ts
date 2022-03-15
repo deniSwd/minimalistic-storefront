@@ -1,20 +1,16 @@
-import {
-  ApolloClient, gql,
-  InMemoryCache
-} from '@apollo/client'
-import { CategoryType } from '../MainTypes'
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/',
   cache: new InMemoryCache()
-});
+})
 
 
 export const productAPI = {
   async getAllProducts() {
     return client
-    .query ({
+    .query({
       query: gql`
           query {
               category {
@@ -31,17 +27,17 @@ export const productAPI = {
       `
     }).then(res => res.data.category)
   },
-  async getProduct() {
+  async getProduct(idProduct: string) {
     return client
-    .query ({
+    .query({
       query: gql`
           query {
-              product (id: "xbox-series-s") {
+              product (id: "${idProduct}") {
                   id
                   name
                   gallery
                   category
-
+                  description
               }
           }
       `
