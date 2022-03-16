@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import CategoryPageContainer from './Body'
+import CategoryPageContainer from './CategoryPage'
 import ProductPageContainer from './ProductPage'
 
 export class Main extends Component {

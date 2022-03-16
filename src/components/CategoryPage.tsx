@@ -9,7 +9,7 @@ import { getAllProducts } from '../redux/categoryPageReducer'
   result: ApolloQueryResult<any> | null/!*ApolloQueryResult<any> | null*!/
  }*/
 
-export class Body extends Component<any> {
+export class CategoryPage extends Component<any> {
   async componentDidMount() {
     await this.props.getAllProducts()
   }
@@ -38,5 +38,5 @@ let mapStateToProps = (state: any) => {
   }
 }
 
-const CategoryPageContainer = connect(mapStateToProps, { getAllProducts })(Body)
+const CategoryPageContainer = connect(mapStateToProps, { getAllProducts })(CategoryPage)
 export default CategoryPageContainer
