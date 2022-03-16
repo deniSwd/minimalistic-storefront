@@ -4,7 +4,6 @@ import cartImg from '../assets/cart.png'
 import logoImg from '../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
-import cartReducer from '../redux/cartReducer'
 
 export class Header extends Component<any, any> {
   constructor(props: any) {
@@ -29,6 +28,7 @@ export class Header extends Component<any, any> {
     this.setState({ showCart: false })
   }
 
+
   render() {
     return <div className={s.header}>
       <nav className={s.nav}>
@@ -52,10 +52,7 @@ export class Header extends Component<any, any> {
             : <div onClick={this.showCurrencyOnPage}>^</div>}
           {this.state.showCurrency &&
           <div>
-            <div>GBP</div>
-            <div>AUD</div>
-            <div>JPY</div>
-            <div>RUB</div>
+            {this.props.products[0]?.prices.map((u: any) => <div>{u.currency.label}</div>)}
           </div>}
         </div>
         <NavLink to={'/cartPage'}>

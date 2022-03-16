@@ -21,6 +21,14 @@ export const productAPI = {
                       gallery
                       description
                       category
+                      brand
+                      prices{
+                          currency{
+                              label
+                              symbol
+                          }
+                          amount
+                      }
                   }
               }
           }

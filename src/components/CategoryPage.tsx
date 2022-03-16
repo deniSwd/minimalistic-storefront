@@ -22,9 +22,9 @@ export class CategoryPage extends Component<any> {
       {categoryName ? categoryName : 'All'}
       <div className={s.products}>
         {this.props.products && categoryName ? renderCategory.map((u: any) =>
-            <Product name={u.name} image={u.gallery[0]} id={u.id} />) :
+            <Product name={u.name} image={u.gallery[0]} id={u.id} brand ={u.brand} prices={u.prices}/>) :
           this.props.products.map((u: any) =>
-            <Product name={u.name} image={u.gallery[0]} id={u.id} />)}
+            <Product name={u.name} image={u.gallery[0]} id={u.id} brand ={u.brand} prices={u.prices}/>)}
       </div>
     </div>
   }
