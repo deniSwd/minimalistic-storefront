@@ -4,12 +4,15 @@ import cartImg from '../assets/cart.png'
 import logoImg from '../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
-import { getHideCurrency, getShowCurrency } from '../redux/categoryPageReducer'
+import cartReducer from '../redux/cartReducer'
 
 export class Header extends Component<any, any> {
   constructor(props: any) {
     super(props)
-    this.state = { showCurrency: false }
+    this.state = {
+      showCurrency: false,
+      showCart: false
+    }
   }
 
   showCurrencyOnPage = () => {
@@ -17,6 +20,13 @@ export class Header extends Component<any, any> {
   }
   hideCurrencyOnPage = () => {
     this.setState({ showCurrency: false })
+  }
+
+  showCartOnPage = () => {
+    this.setState({ showCart: true })
+  }
+  hideCartOnPage = () => {
+    this.setState({ showCart: false })
   }
 
   render() {
@@ -37,9 +47,9 @@ export class Header extends Component<any, any> {
       </div>
       <div className={s.cart}>
         <div>
-          <span>$</span>
-          {this.state.showCurrency ? <span onClick={this.hideCurrencyOnPage}>^</span>
-            : <span onClick={this.showCurrencyOnPage}>^</span>}
+          <div>$</div>
+          {this.state.showCurrency ? <div onClick={this.hideCurrencyOnPage}>^</div>
+            : <div onClick={this.showCurrencyOnPage}>^</div>}
           {this.state.showCurrency &&
           <div>
             <div>GBP</div>
@@ -48,17 +58,21 @@ export class Header extends Component<any, any> {
             <div>RUB</div>
           </div>}
         </div>
-        <div>
-          <img src={cartImg} />
-        </div>
-
+        <NavLink to={'/cartPage'}>
+          <div onMouseEnter={this.showCartOnPage} onMouseLeave={this.hideCartOnPage}>
+            <img src={cartImg} />
+            {this.state.showCart && <div>MY CART</div>}
+          </div>
+        </NavLink>
       </div>
     </div>
   }
 }
 
 let mapStateToProps = (state: any) => {
-  return {}
+  return {
+    products: state.categoryPage.products
+  }
 }
 
 const HeaderPageContainer = connect(mapStateToProps, null)(Header)
