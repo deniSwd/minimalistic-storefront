@@ -4,6 +4,8 @@ import cartImg from '../assets/cart.png'
 import logoImg from '../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
+import { CurrencyType } from '../MainTypes'
+import { getCurrency } from '../redux/categoryPageReducer'
 
 export class Header extends Component<any, any> {
   constructor(props: any) {
@@ -27,13 +29,18 @@ export class Header extends Component<any, any> {
   hideCartOnPage = () => {
     this.setState({ showCart: false })
   }
-
+ getCurrencyOnPage = (currency: CurrencyType) => {
+   this.props.getCurrency(currency)
+ }
 
   render() {
+    if (!this.props.products) {
+      return <div>LOADING....</div>
+    }
     return <div className={s.header}>
       <nav className={s.nav}>
         <div>
-          <NavLink to='/all'>All</NavLink>
+          <NavLink to='/'>All</NavLink>
         </div>
         <div>
           <NavLink to='/clothes'>Clothes</NavLink>
@@ -47,12 +54,12 @@ export class Header extends Component<any, any> {
       </div>
       <div className={s.cart}>
         <div>
-          <div>$</div>
+          {this.props.selectedCurrency ?  <div>{this.props.selectedCurrency.symbol}</div> : '$'}
           {this.state.showCurrency ? <div onClick={this.hideCurrencyOnPage}>^</div>
             : <div onClick={this.showCurrencyOnPage}>^</div>}
           {this.state.showCurrency &&
           <div>
-            {this.props.products[0]?.prices.map((u: any) => <div>{u.currency.label}</div>)}
+            {this.props.products[0].prices.map((u: any) => <div onClick={ () => this.getCurrencyOnPage(u.currency)}>{u.currency.label}</div>)}
           </div>}
         </div>
         <NavLink to={'/cartPage'}>
@@ -68,9 +75,10 @@ export class Header extends Component<any, any> {
 
 let mapStateToProps = (state: any) => {
   return {
-    products: state.categoryPage.products
+    products: state.categoryPage.products,
+    selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
 
-const HeaderPageContainer = connect(mapStateToProps, null)(Header)
+const HeaderPageContainer = connect(mapStateToProps, { getCurrency })(Header)
 export default HeaderPageContainer

@@ -34,7 +34,8 @@ export class CategoryPage extends Component<any> {
 let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
-    name: state.categoryPage.name
+    name: state.categoryPage.name,
+
   }
 }
 

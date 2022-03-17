@@ -1,15 +1,14 @@
-import { CategoryType } from '../MainTypes'
+import { CategoryType, CurrencyType } from '../MainTypes'
 import { productAPI } from '../API/api'
 
 const SET_PRODUCTS = 'SET-PRODUCTS'
-/*const SET_SHOW_CURRENCY = 'SET-SHOW-CURRENCY'
-const SET_HIDE_CURRENCY = 'SET-HIDE-CURRENCY'*/
+const SET_SELECTED_CURRENCY = 'SET-SELECTED-CURRENCY'
+
 
 let initialsState: CategoryType = {
   name: '',
   products: [],
-/*  showCurrency: false,
-  showCart: false*/
+  selectedCurrency: null
 }
 const categoryPageReducer = (state = initialsState, action: any) => {
   switch (action.type) {
@@ -17,44 +16,31 @@ const categoryPageReducer = (state = initialsState, action: any) => {
       return {
         ...state,
         name: action.category.name,
-        products: action.category.products
+        products: action.category.products,
       }
-  /*  case SET_SHOW_CURRENCY:
+    case SET_SELECTED_CURRENCY:
       return {
         ...state,
-        showCurrency: true
+        selectedCurrency: action.currency
       }
-    case SET_HIDE_CURRENCY:
-      return {
-        ...state,
-        showCurrency: false
-      }*/
     default:
       return (state)
   }
 }
 export const setAllProductsSuccess = (category: any) => ({
-  type: SET_PRODUCTS, category
-})
-/*export const setShowCurrency = () => ({
-  type: SET_SHOW_CURRENCY
-})
-export const setHideCurrency = () => ({
-  type: SET_HIDE_CURRENCY
-})*/
+  type: SET_PRODUCTS, category })
+
+export const setSelectedCurrency = (currency: CurrencyType) => ({
+  type: SET_SELECTED_CURRENCY, currency })
 
 export const getAllProducts = () => async (dispatch: any) => {
   const category = await productAPI.getAllProducts()
   dispatch(setAllProductsSuccess(category))
 }
 
-/*export const getShowCurrency = () => (dispatch: any) => {
-  dispatch(setShowCurrency())
+export const getCurrency = (currency: CurrencyType) => (dispatch: any) => {
+  dispatch(setSelectedCurrency(currency))
 }
-
-export const getHideCurrency = () => (dispatch: any) => {
-  dispatch(setHideCurrency())
-}*/
 
 
 export default categoryPageReducer

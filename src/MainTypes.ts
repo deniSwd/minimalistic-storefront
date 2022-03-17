@@ -35,7 +35,6 @@ export type ProductType = {
 export type CategoryType = {
   name?: string
   products: Array<ProductType>
-  showCurrency?: boolean
-  showCart?: boolean
+  selectedCurrency: null | CurrencyType
 }
 export type Categories = Array<CategoryType>
