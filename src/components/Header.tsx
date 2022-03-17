@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import cartImg from '../assets/cart.png'
+import setCurrencyOn from '../assets/setCurrencyOn.png'
+import setCurrencyOff from '../assets/setCurrencyOff.png'
 import logoImg from '../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
@@ -29,9 +31,13 @@ export class Header extends Component<any, any> {
   hideCartOnPage = () => {
     this.setState({ showCart: false })
   }
- getCurrencyOnPage = (currency: CurrencyType) => {
-   this.props.getCurrency(currency)
- }
+  getCurrencyOnPage = (currency: CurrencyType) => {
+    this.props.getCurrency(currency)
+  }
+  getAndHideCurrency = (currency: CurrencyType) => {
+    this.getCurrencyOnPage(currency)
+    this.hideCurrencyOnPage()
+  }
 
   render() {
     if (!this.props.products) {
@@ -54,12 +60,14 @@ export class Header extends Component<any, any> {
       </div>
       <div className={s.cart}>
         <div>
-          {this.props.selectedCurrency ?  <div>{this.props.selectedCurrency.symbol}</div> : '$'}
-          {this.state.showCurrency ? <div onClick={this.hideCurrencyOnPage}>^</div>
-            : <div onClick={this.showCurrencyOnPage}>^</div>}
+          <div>{this.props.selectedCurrency.symbol}</div>
+          {!this.state.showCurrency ? <div onClick={this.showCurrencyOnPage}><img src={setCurrencyOn} /></div> :
+            <div><img src={setCurrencyOff} /></div>}
           {this.state.showCurrency &&
           <div>
-            {this.props.products[0].prices.map((u: any) => <div onClick={ () => this.getCurrencyOnPage(u.currency)}>{u.currency.label}</div>)}
+            {this.props.products[0].prices.map((u: any) =>
+              <div
+                onClick={() => this.getAndHideCurrency(u.currency)}>{[u.currency.symbol, ' ', u.currency.label]}</div>)}
           </div>}
         </div>
         <NavLink to={'/cartPage'}>

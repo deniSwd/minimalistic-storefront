@@ -15,16 +15,17 @@ export class CategoryPage extends Component<any> {
   }
 
   render() {
-
     const categoryName = this.props.category
     const renderCategory: any = this.props.products.filter((u: any) => u.category === categoryName)
     return <div>
       {categoryName ? categoryName : 'All'}
       <div className={s.products}>
         {this.props.products && categoryName ? renderCategory.map((u: any) =>
-            <Product name={u.name} image={u.gallery[0]} id={u.id} brand ={u.brand} prices={u.prices}/>) :
+            <Product name={u.name} image={u.gallery[0]} id={u.id}
+                     brand={u.brand} prices={u.prices} selectedCurrency = {this.props.selectedCurrency} />) :
           this.props.products.map((u: any) =>
-            <Product name={u.name} image={u.gallery[0]} id={u.id} brand ={u.brand} prices={u.prices}/>)}
+            <Product name={u.name} image={u.gallery[0]} id={u.id}
+                     brand={u.brand} prices={u.prices} selectedCurrency = {this.props.selectedCurrency}/>)}
       </div>
     </div>
   }
@@ -35,7 +36,7 @@ let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,
-
+    selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
 

@@ -8,7 +8,10 @@ const SET_SELECTED_CURRENCY = 'SET-SELECTED-CURRENCY'
 let initialsState: CategoryType = {
   name: '',
   products: [],
-  selectedCurrency: null
+  selectedCurrency: {
+    label: 'USD',
+    symbol: '$'
+  }
 }
 const categoryPageReducer = (state = initialsState, action: any) => {
   switch (action.type) {
