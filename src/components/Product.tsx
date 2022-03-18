@@ -11,7 +11,6 @@ export class Product extends Component<any, any> {
 
   render() {
     const currentPrice = this.getPrice()
-    console.log(currentPrice)
     return <div className={s.productStyle}>
       <div>
         <img src={this.props.image} className={s.img} />

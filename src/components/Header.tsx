@@ -67,7 +67,7 @@ export class Header extends Component<any, any> {
           <div>
             {this.props.products[0].prices.map((u: any) =>
               <div
-                onClick={() => this.getAndHideCurrency(u.currency)}>{[u.currency.symbol, ' ', u.currency.label]}</div>)}
+                onClick={() => this.getAndHideCurrency(u.currency)}>{u.currency.symbol} {u.currency.label}</div>)}
           </div>}
         </div>
         <NavLink to={'/cartPage'}>

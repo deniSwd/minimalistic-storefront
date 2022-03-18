@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../API/api'
+import { PriceType } from '../MainTypes'
 
 export class ProductPage extends Component<any, any> {
   constructor(props: any) {
@@ -16,8 +17,17 @@ export class ProductPage extends Component<any, any> {
     this.setState({ product: result })
   }
 
+   getPrice(): PriceType {
+    return this.state.product.prices.find((u:any) => u.currency.symbol === this.props.selectedCurrency.symbol)
+  }
+
+
 
   render() {
+    if (!this.state.product) {
+      return <div>LOADING....</div>
+    }
+    const currentPrice = this.getPrice()
     return <>{this.state.product && <div className={s.productPage}>
       <div>
         {this.state.product.gallery.map((a: any) => <div><img src={a} className={s.productPhotos} /></div>)}
@@ -26,9 +36,11 @@ export class ProductPage extends Component<any, any> {
         <img src={this.state.product.gallery[0]} className={s.productMainPhoto} />
       </div>
       <div className={s.info}>
+        <div>{this.state.product.brand}</div>
         <div>{this.state.product.name}</div>
         <div>Size</div>
-        <div>Price</div>
+        <div>PRICE:</div>
+        <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
         <button>Add to Cart</button>
         <div>{ReactHtmlParser(this.state.product.description)}</div>
       </div>
@@ -39,7 +51,8 @@ export class ProductPage extends Component<any, any> {
 let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
-    name: state.categoryPage.name
+    name: state.categoryPage.name,
+    selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
 let withRouterDataContainer = withRouter(ProductPage)
