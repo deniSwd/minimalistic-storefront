@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Product } from './Product'
 import { ApolloQueryResult } from '@apollo/client'
-import s from './body.module.scss'
+import s from './categoryPage.module.scss'
 import { connect } from 'react-redux'
 import { getAllProducts } from '../redux/categoryPageReducer'
 

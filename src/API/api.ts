@@ -43,9 +43,20 @@ export const productAPI = {
               product (id: "${idProduct}") {
                   id
                   name
+                  inStock
                   gallery
                   category
                   description
+                  attributes{
+                      id
+                      name
+                      type
+                      items{
+                          displayValue
+                          value
+                          id
+                      }
+                  }
                   brand
                   prices{
                       currency{

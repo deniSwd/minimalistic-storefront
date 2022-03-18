@@ -17,16 +17,22 @@ export class ProductPage extends Component<any, any> {
     this.setState({ product: result })
   }
 
-   getPrice(): PriceType {
-    return this.state.product.prices.find((u:any) => u.currency.symbol === this.props.selectedCurrency.symbol)
+  getPrice(): PriceType {
+    return this.state.product.prices.find((u: any) => u.currency.symbol === this.props.selectedCurrency.symbol)
   }
-
 
 
   render() {
     if (!this.state.product) {
       return <div>LOADING....</div>
     }
+    const attributesName = this.state.product.attributes.map((attribute: any) =>
+      <div>
+        <div>{attribute.name}</div>
+        <ul>
+          {attribute.items.map((item: any) => <li>{item.value}</li>)}
+        </ul>
+      </div>)
     const currentPrice = this.getPrice()
     return <>{this.state.product && <div className={s.productPage}>
       <div>
@@ -38,7 +44,7 @@ export class ProductPage extends Component<any, any> {
       <div className={s.info}>
         <div>{this.state.product.brand}</div>
         <div>{this.state.product.name}</div>
-        <div>Size</div>
+        <div>{attributesName}</div>
         <div>PRICE:</div>
         <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
         <button>Add to Cart</button>

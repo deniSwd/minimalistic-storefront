@@ -59,15 +59,15 @@ export class Header extends Component<any, any> {
         <img src={logoImg} />
       </div>
       <div className={s.cart}>
-        <div>
+        <div onMouseEnter={this.showCurrencyOnPage} onMouseLeave={this.hideCurrencyOnPage}>
           <div>{this.props.selectedCurrency.symbol}</div>
-          {!this.state.showCurrency ? <div onClick={this.showCurrencyOnPage}><img src={setCurrencyOn} /></div> :
+          {!this.state.showCurrency ? <div><img src={setCurrencyOn} /></div> :
             <div><img src={setCurrencyOff} /></div>}
           {this.state.showCurrency &&
           <div>
             {this.props.products[0].prices.map((u: any) =>
               <div
-                onClick={() => this.getAndHideCurrency(u.currency)}>{u.currency.symbol} {u.currency.label}</div>)}
+                   onClick={() => this.getCurrencyOnPage(u.currency)}>{u.currency.symbol} {u.currency.label}</div>)}
           </div>}
         </div>
         <NavLink to={'/cartPage'}>

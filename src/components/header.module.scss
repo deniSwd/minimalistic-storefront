@@ -1,13 +1,22 @@
-.header  {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
 .nav {
- display: flex;
+  display: flex;
 }
+
 .cart {
- display: flex;
- justify-content: space-between;
-width: 204px;
+  display: flex;
+  justify-content: space-between;
+  width: 204px;
+
+
+
+}
+.currency {
+
+
 }
