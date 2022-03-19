@@ -5,11 +5,15 @@ import { withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../API/api'
 import { PriceType } from '../MainTypes'
+import { AttributeBox } from './AttributeBox'
 
 export class ProductPage extends Component<any, any> {
   constructor(props: any) {
     super(props)
-    this.state = { product: null }
+    this.state = {
+      product: null,
+      productMainPhoto: ''
+    }
   }
 
   async componentDidMount() {
@@ -21,38 +25,43 @@ export class ProductPage extends Component<any, any> {
     return this.state.product.prices.find((u: any) => u.currency.symbol === this.props.selectedCurrency.symbol)
   }
 
+  getProductMainPhoto(mainPhoto: any) {
+    this.setState({ productMainPhoto: mainPhoto })
+  }
+
 
   render() {
     if (!this.state.product) {
       return <div>LOADING....</div>
     }
+
     const currentAttributes = this.state.product.attributes.map((attribute: any) =>
-      <div>
-        <div>{attribute.name}:</div>
-        <div className={s.attributesItem}>
-          {attribute.items.map((item: any) => attribute.id === 'Color' ?
-            <div className={s.itemElement} style={{backgroundColor:item.value}} > </div>
-            : <div className={s.itemElement} >{item.value}</div>)}
-        </div>
-      </div>)
+      <AttributeBox attribute={attribute} />)
+
     const currentPrice = this.getPrice()
-    return <>{this.state.product && <div className={s.productPage}>
-      <div>
-        {this.state.product.gallery.map((a: any) => <div><img src={a} className={s.productPhotos} /></div>)}
-      </div>
-      <div>
-        <img src={this.state.product.gallery[0]} className={s.productMainPhoto} />
-      </div>
-      <div className={s.info}>
-        <div>{this.state.product.brand}</div>
-        <div>{this.state.product.name}</div>
-        <div>{currentAttributes}</div>
-        <div>PRICE:</div>
-        <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
-        <button>Add to Cart</button>
-        <div>{ReactHtmlParser(this.state.product.description)}</div>
-      </div>
-    </div>}</>
+
+    return <>
+      {this.state.product &&
+      <div className={s.productPage}>
+        <div>
+          {this.state.product.gallery.map((mainPhoto: any) => <div><img src={mainPhoto} className={s.productPhotos}
+                                                                onClick={()=>this.getProductMainPhoto(mainPhoto)} /></div>)}
+        </div>
+        <div>
+          {this.state.productMainPhoto ===''
+            ? <img src={this.state.product.gallery[0]} className={s.productMainPhoto} />
+          :<img src={this.state.productMainPhoto} className={s.productMainPhoto} />}
+        </div>
+        <div className={s.info}>
+          <div>{this.state.product.brand}</div>
+          <div>{this.state.product.name}</div>
+          <div>{currentAttributes}</div>
+          <div>PRICE:</div>
+          <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
+          <button>Add to Cart</button>
+          <div>{ReactHtmlParser(this.state.product.description)}</div>
+        </div>
+      </div>}</>
   }
 }
 
