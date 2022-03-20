@@ -13,7 +13,7 @@ let initialsState: CategoryType = {
     symbol: '$'
   }
 }
-const categoryPageReducer = (state = initialsState, action: any) => {
+const categoryPageReducer = (state:CategoryType = initialsState, action: any) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return {
@@ -30,10 +30,19 @@ const categoryPageReducer = (state = initialsState, action: any) => {
       return (state)
   }
 }
-export const setAllProductsSuccess = (category: any) => ({
+
+type setAllProductsSuccessActionType = {
+type: typeof SET_PRODUCTS
+category: CategoryType
+}
+export const setAllProductsSuccess = (category:CategoryType ): setAllProductsSuccessActionType => ({
   type: SET_PRODUCTS, category })
 
-export const setSelectedCurrency = (currency: CurrencyType) => ({
+type setSelectedCurrencyActionType = {
+  type: typeof SET_SELECTED_CURRENCY
+  currency: CurrencyType
+}
+export const setSelectedCurrency = (currency: CurrencyType): setSelectedCurrencyActionType  => ({
   type: SET_SELECTED_CURRENCY, currency })
 
 export const getAllProducts = () => async (dispatch: any) => {
