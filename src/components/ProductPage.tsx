@@ -13,7 +13,7 @@ export class ProductPage extends Component<any, any> {
     this.state = {
       product: null,
       productMainPhoto: '',
-      currentItem: null,
+      currentItem: {},
       attributeId: ''
     }
   }
@@ -32,16 +32,13 @@ export class ProductPage extends Component<any, any> {
   }
 
   getProductItem = (item: AttributeType,attributeId: string) => {
-    this.setState({ currentItem: item,
-      attributeId:attributeId})
+    this.setState({...this.state, currentItem: {...this.state.currentItem,[attributeId]: item }})
   }
 
   render() {
     if (!this.state.product) {
       return <div>LOADING....</div>
     }
-    console.log(this.state.currentItem)
-    console.log(this.state.attributeId)
 
     const currentAttributes = this.state.product.attributes.map((attribute: any) =>
       <AttributeBox attribute={attribute} getProductItem={this.getProductItem}
