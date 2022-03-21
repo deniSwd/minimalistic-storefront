@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../API/api'
-import { PriceType } from '../MainTypes'
+import { AttributeType, PriceType } from '../MainTypes'
 import { AttributeBox } from './AttributeBox'
 
 export class ProductPage extends Component<any, any> {
@@ -12,7 +12,9 @@ export class ProductPage extends Component<any, any> {
     super(props)
     this.state = {
       product: null,
-      productMainPhoto: ''
+      productMainPhoto: '',
+      currentItem: null,
+      attributeId: ''
     }
   }
 
@@ -29,14 +31,21 @@ export class ProductPage extends Component<any, any> {
     this.setState({ productMainPhoto: mainPhoto })
   }
 
+  getProductItem = (item: AttributeType,attributeId: string) => {
+    this.setState({ currentItem: item,
+      attributeId:attributeId})
+  }
 
   render() {
     if (!this.state.product) {
       return <div>LOADING....</div>
     }
+    console.log(this.state.currentItem)
+    console.log(this.state.attributeId)
 
     const currentAttributes = this.state.product.attributes.map((attribute: any) =>
-      <AttributeBox attribute={attribute} />)
+      <AttributeBox attribute={attribute} getProductItem={this.getProductItem}
+                    currentItem={this.state.currentItem} />)
 
     const currentPrice = this.getPrice()
 
@@ -45,12 +54,13 @@ export class ProductPage extends Component<any, any> {
       <div className={s.productPage}>
         <div>
           {this.state.product.gallery.map((mainPhoto: any) => <div><img src={mainPhoto} className={s.productPhotos}
-                                                                onClick={()=>this.getProductMainPhoto(mainPhoto)} /></div>)}
+                                                                        onClick={() => this.getProductMainPhoto(mainPhoto)} />
+          </div>)}
         </div>
         <div>
-          {this.state.productMainPhoto ===''
+          {this.state.productMainPhoto === ''
             ? <img src={this.state.product.gallery[0]} className={s.productMainPhoto} />
-          :<img src={this.state.productMainPhoto} className={s.productMainPhoto} />}
+            : <img src={this.state.productMainPhoto} className={s.productMainPhoto} />}
         </div>
         <div className={s.info}>
           <div>{this.state.product.brand}</div>
