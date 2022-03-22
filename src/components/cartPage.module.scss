@@ -3,6 +3,9 @@
   display: flex;
   justify-content: space-between;
 }
-.galleryInCart {
-  max-height: 185px
+
+.amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

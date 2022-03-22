@@ -1,0 +1,15 @@
+.slider{
+  position: relative;
+  .sliderButtons {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%
+
+  }
+}
+.galleryInCart {
+  max-height: 185px;
+}

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import s from './cartPage.module.scss'
+import { SliderForCart } from './SliderForCart'
 
 export class Cart extends Component<any, any> {
 
 
   render() {
     console.log(this.props.currentCart)
-    if (!this.props.currentCart) {
+    if (this.props.currentCart.length === 0) {
       return <div>CART EMPTY....</div>
     }
     return <div>
@@ -20,13 +21,13 @@ export class Cart extends Component<any, any> {
           <div>Attribute</div>
         </div>
         <div className={s.amountAndGallery}>
-          <div>
+          <div className={s.amount}>
             <div>+</div>
             <div>amount</div>
             <div>-</div>
           </div>
           <div>
-            <img src={this.props.currentCart[0].product.gallery[0]} className={s.galleryInCart}/>
+            <SliderForCart gallery ={this.props.currentCart[0].product.gallery}/>
           </div>
         </div>
       </div>
