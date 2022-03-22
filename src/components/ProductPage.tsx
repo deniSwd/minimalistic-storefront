@@ -6,6 +6,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../API/api'
 import { AttributeType, PriceType } from '../MainTypes'
 import { AttributeBox } from './AttributeBox'
+import { addProductInCart, getCurrentProduct } from '../redux/cartReducer'
 
 export class ProductPage extends Component<any, any> {
   constructor(props: any) {
@@ -31,9 +32,13 @@ export class ProductPage extends Component<any, any> {
     this.setState({ productMainPhoto: mainPhoto })
   }
 
-  getProductItem = (item: AttributeType,attributeId: string) => {
-    this.setState({...this.state, currentItem: {...this.state.currentItem,[attributeId]: item }})
+  getProductItem = (item: AttributeType, attributeId: string) => {
+    this.setState({ ...this.state, currentItem: { ...this.state.currentItem, [attributeId]: item } })
   }
+  getProduct (selectedProduct:any) {
+    this.props.getCurrentProduct(selectedProduct)
+  }
+
 
   render() {
     if (!this.state.product) {
@@ -65,7 +70,7 @@ export class ProductPage extends Component<any, any> {
           <div>{currentAttributes}</div>
           <div>PRICE:</div>
           <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
-          <button>Add to Cart</button>
+          <button className={s.button} onClick={()=> this.getProduct(this.state)}>Add to Cart</button>
           <div>{ReactHtmlParser(this.state.product.description)}</div>
         </div>
       </div>}</>
@@ -80,5 +85,5 @@ let mapStateToProps = (state: any) => {
   }
 }
 let withRouterDataContainer = withRouter(ProductPage)
-const ProductPageContainer = connect(mapStateToProps, null)(withRouterDataContainer)
+const ProductPageContainer = connect(mapStateToProps, {getCurrentProduct})(withRouterDataContainer)
 export default ProductPageContainer

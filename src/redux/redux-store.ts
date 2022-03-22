@@ -1,14 +1,13 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import thunkMiddleware from "redux-thunk"
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import cartReducer from './cartReducer'
-import productReducer from './productReducer'
 import categoryPageReducer from './categoryPageReducer'
 
 
 let rootReducers = combineReducers({
-  categoryPage: categoryPageReducer
-/*  cartPage: cartReducer,
-  productPage: productReducer,*/
+  categoryPage: categoryPageReducer,
+  cartPage: cartReducer,
+  /*productPage: productReducer,*/
 })
 type RootRedusersType = typeof rootReducers
 export type AppStateType = ReturnType<RootRedusersType>

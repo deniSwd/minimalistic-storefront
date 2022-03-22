@@ -5,9 +5,7 @@ import s from './categoryPage.module.scss'
 import { connect } from 'react-redux'
 import { getAllProducts } from '../redux/categoryPageReducer'
 
-/*type MyState = {
-  result: ApolloQueryResult<any> | null/!*ApolloQueryResult<any> | null*!/
- }*/
+
 
 export class CategoryPage extends Component<any> {
   async componentDidMount() {
