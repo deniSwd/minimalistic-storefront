@@ -25,7 +25,7 @@ export class ProductPage extends Component<any, any> {
   }
 
   getPrice(): PriceType {
-    return this.state.product.prices.find((u: any) => u.currency.symbol === this.props.selectedCurrency.symbol)
+    return this.state.product.prices.find((u: any) => u.currency.symbol === this.props.selectedCurrency.symbol) /*повторяется 3 раза оптимизировать*/
   }
 
   getProductMainPhoto(mainPhoto: any) {

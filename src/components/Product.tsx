@@ -20,7 +20,7 @@ export class Product extends Component<any, any> {
           {this.props.brand} {this.props.name}
         </div>
         <div>
-          {currentPrice?.currency?.symbol}{currentPrice?.amount}
+          {currentPrice.currency.symbol}{currentPrice.amount}
         </div>
       </NavLink>
     </div>

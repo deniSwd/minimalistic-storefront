@@ -7,8 +7,10 @@ const SET_CURRENT_AMOUNT_UP = 'SET-CURRENT-AMOUNT-UP'
 
 
 let initialsState = {
-  currentCart: [],
-  currentAmount: 1,
+  currentCart: {
+    selectedProducts: [],
+    currentAmount: 1
+  },
   totalPrice: 0
 }
 const cartReducer = (state = initialsState, action: any) => {
@@ -16,16 +18,23 @@ const cartReducer = (state = initialsState, action: any) => {
     case ADD_PRODUCTS_IN_CART:
       return {
         ...state,
-        currentCart: [...state.currentCart, action.selectedProduct]
+        currentCart: { ...state.currentCart,
+          selectedProducts: [...state.currentCart.selectedProducts, action.selectedProduct]
+        }
       }
     case SET_CURRENT_AMOUNT_DOWN:
       return {
-        ...state,  currentAmount: state.currentAmount > 0 ?  action.amountOfProduct - 1 : 0
+        ...state,
+        currentCart: { ...state.currentCart,
+          currentAmount: state.currentCart.currentAmount > 0 ? action.amountOfProduct - 1 : 0
+        }
       }
     case SET_CURRENT_AMOUNT_UP:
       return {
         ...state,
-        currentAmount: action.amountOfProduct + 1
+        currentCart: { ...state.currentCart,
+          currentAmount: action.amountOfProduct + 1
+        }
       }
     default:
       return (state)
