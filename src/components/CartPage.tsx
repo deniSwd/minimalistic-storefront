@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import s from './cartPage.module.scss'
 import { SliderForCart } from './SliderForCart'
+import { currentAmountDown, currentAmountUp } from '../redux/cartReducer'
 
 export class Cart extends Component<any, any> {
+
+  amountDown = (amountOfProduct: number) => {
+    this.props.currentAmountDown(amountOfProduct)
+  }
+  amountUp = (amountOfProduct: number) => {
+    this.props.currentAmountUp(amountOfProduct)
+  }
 
 
   render() {
@@ -22,12 +30,12 @@ export class Cart extends Component<any, any> {
         </div>
         <div className={s.amountAndGallery}>
           <div className={s.amount}>
-            <div>+</div>
-            <div>amount</div>
-            <div>-</div>
+            <button onClick={() => this.amountUp(this.props.currentAmount)}>+</button>
+            <div>{this.props.currentAmount}</div>
+            <button onClick={() => this.amountDown(this.props.currentAmount)}>-</button>
           </div>
           <div>
-            <SliderForCart gallery ={this.props.currentCart[0].product.gallery}/>
+            <SliderForCart gallery={this.props.currentCart[0].product.gallery} />
           </div>
         </div>
       </div>
@@ -37,10 +45,11 @@ export class Cart extends Component<any, any> {
 
 let mapStateToProps = (state: any) => {
   return {
-    currentCart: state.cartPage.currentCart
+    currentCart: state.cartPage.currentCart,
+    currentAmount: state.cartPage.currentAmount
   }
 }
-const CartPageContainer = connect(mapStateToProps, null)(Cart)
+const CartPageContainer = connect(mapStateToProps, { currentAmountDown, currentAmountUp })(Cart)
 export default CartPageContainer
 
 
