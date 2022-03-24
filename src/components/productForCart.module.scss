@@ -1,0 +1,29 @@
+.currentAttributes {
+  display: flex;
+  width: 200px;
+}
+
+
+.attributeBox{
+  width: 63px;
+  height: 45px;
+  border: 3px solid red;
+  text-align: center;
+}
+
+.attributeBoxForColor {
+  width: 63px;
+  height: 45px;
+}
+
+.selectedProduct,
+.amountAndGallery{
+  display: flex;
+  justify-content: space-between;
+}
+
+.amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
