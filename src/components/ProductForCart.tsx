@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { PriceType } from '../MainTypes'
-import s from './cartPage.module.scss'
+import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
 
 export class ProductForCart extends Component<any, any> {
@@ -25,6 +25,12 @@ export class ProductForCart extends Component<any, any> {
         <div>{this.props.productInCart.product.name}</div>
         <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
         <div>Attribute</div>
+        {Object.entries(this.props.productInCart.currentItem).map(([attribute,itemValues]:any )=>
+          <div className={s.currentAttributes}>
+            <div>{attribute}:</div>
+            {attribute === 'Color' ?  <div className={s.attributeBoxForColor} style={{ backgroundColor: itemValues.value }}/> :
+              <div className={s.attributeBox}>{itemValues.value}</div>}
+          </div>)}
       </div>
       <div className={s.amountAndGallery}>
         <div className={s.amount}>
