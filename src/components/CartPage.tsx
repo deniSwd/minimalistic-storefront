@@ -7,11 +7,11 @@ import { PriceType } from '../MainTypes'
 
 export class Cart extends Component<any, any> {
 
-  amountDown = (amountOfProduct: number) => {
-    this.props.currentAmountDown(amountOfProduct)
+  amountDown = (amountOfProduct: number, productId: number) => {
+    this.props.currentAmountDown(amountOfProduct, productId)
   }
-  amountUp = (amountOfProduct: number) => {
-    this.props.currentAmountUp(amountOfProduct)
+  amountUp = (amountOfProduct: number, productId: number) => {
+    this.props.currentAmountUp(amountOfProduct, productId)
   }
 
   getPrice(): PriceType {
@@ -26,24 +26,26 @@ export class Cart extends Component<any, any> {
     const currentPrice = this.getPrice()
     return <div>
       <div>CART PAGE</div>
-      <div className={s.selectedProduct}>
-        <div>
-          <div>{this.props.selectedProducts[0].product.brand}</div>
-          <div>{this.props.selectedProducts[0].product.name}</div>
-          <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
-          <div>Attribute</div>
-        </div>
-        <div className={s.amountAndGallery}>
-          <div className={s.amount}>
-            <button onClick={() => this.amountUp(this.props.currentAmount)}>+</button>
-            <div>{this.props.currentAmount}</div>
-            <button onClick={() => this.amountDown(this.props.currentAmount)}>-</button>
-          </div>
+      {this.props.selectedProducts.map((productInCart:any) =>
+        <div className={s.selectedProduct}>
           <div>
-            <SliderForCart gallery={this.props.selectedProducts[0].product.gallery} /> {/*пока передаем только первый продукт в корзину*/}
+            <div>{productInCart.product.brand}</div>
+            <div>{productInCart.product.name}</div>
+            <div>{currentPrice.currency.symbol} {currentPrice.amount}</div>
+            <div>Attribute</div>
+          </div>
+          <div className={s.amountAndGallery}>
+            <div className={s.amount}>
+              <button onClick={() => this.amountUp(productInCart.amount,productInCart.product.id)}>+</button>
+              <div>{productInCart.amount}</div>
+              <button onClick={() => this.amountDown(productInCart.amount,productInCart.product.id)}>-</button>
+            </div>
+            <div>
+              <SliderForCart gallery={productInCart.product.gallery} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   }
 }
@@ -51,7 +53,6 @@ export class Cart extends Component<any, any> {
 let mapStateToProps = (state: any) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts,
-    currentAmount: state.cartPage.currentCart.currentAmount,
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }

@@ -31,6 +31,7 @@ export type ProductType = {
   attributes?: AttributeSetType
   prices?: PriceType
   brand?: string
+  amount?: number
 }
 export type CategoryType = {
   name?: string
