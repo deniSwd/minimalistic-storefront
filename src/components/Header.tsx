@@ -8,6 +8,7 @@ import s from './header.module.scss'
 import { connect } from 'react-redux'
 import { CurrencyType } from '../MainTypes'
 import { getCurrency } from '../redux/categoryPageReducer'
+import CartPageContainer from './CartPage'
 
 export class Header extends Component<any, any> {
   constructor(props: any) {
@@ -73,7 +74,18 @@ export class Header extends Component<any, any> {
         <NavLink to={'/cartPage'}>
           <div onMouseEnter={this.showCartOnPage} onMouseLeave={this.hideCartOnPage}>
             <img src={cartImg} />
-            {this.state.showCart && <div>MY CART</div>}
+            {this.state.showCart &&
+            <div className={s.cartOverlay}>
+              <CartPageContainer />
+              <div className={s.totalPrice}>
+                <div>Total:</div>
+                <div> 200$</div>
+              </div>
+              <div className={s.button}>
+                <button>VIEW BAG</button>
+                <button>CHECK OUT</button>
+              </div>
+            </div>}
           </div>
         </NavLink>
       </div>

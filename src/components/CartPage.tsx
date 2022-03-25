@@ -14,7 +14,7 @@ export class Cart extends Component<any, any> {
       return <div>CART EMPTY....</div>
     }
     return <div>
-      <div>CART PAGE</div>
+      <div>MY CART</div>
       {this.props.selectedProducts.map((productInCart:any) =>
         <ProductForCart productInCart = {productInCart}
                         currentAmountDown ={this.props.currentAmountDown}
