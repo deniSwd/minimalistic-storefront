@@ -21,6 +21,7 @@ export class Cart extends Component<any, any> {
                         currentAmountUp ={this.props.currentAmountUp}
                         selectedCurrency={this.props.selectedCurrency}
         />)}
+        <div>TOTAL PRICE :</div>
     </div>
   }
 }

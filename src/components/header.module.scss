@@ -22,9 +22,18 @@
   border: 1px solid black;
   left: 1150px;
   background: #FFFFFF;
+  z-index: 100;
   .totalPrice,
   .button {
     display: flex;
     justify-content: space-between;
   }
+}
+.counterProducts {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
 }

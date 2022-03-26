@@ -71,9 +71,10 @@ export class Header extends Component<any, any> {
                    onClick={() => this.getCurrencyOnPage(u.currency)}>{u.currency.symbol} {u.currency.label}</div>)}
           </div>}
         </div>
-        <NavLink to={'/cartPage'}>
+
           <div onMouseEnter={this.showCartOnPage} onMouseLeave={this.hideCartOnPage}>
             <img src={cartImg} />
+            <div className={s.counterProducts}>{this.props.selectedProducts.length}</div>
             {this.state.showCart &&
             <div className={s.cartOverlay}>
               <CartPageContainer />
@@ -82,12 +83,14 @@ export class Header extends Component<any, any> {
                 <div> 200$</div>
               </div>
               <div className={s.button}>
+                <NavLink to={'/cartPage'}>
                 <button>VIEW BAG</button>
+                </NavLink>
                 <button>CHECK OUT</button>
               </div>
             </div>}
           </div>
-        </NavLink>
+
       </div>
     </div>
   }
@@ -96,7 +99,8 @@ export class Header extends Component<any, any> {
 let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
-    selectedCurrency: state.categoryPage.selectedCurrency
+    selectedCurrency: state.categoryPage.selectedCurrency,
+    selectedProducts: state.cartPage.currentCart.selectedProducts
   }
 }
 
