@@ -8,7 +8,6 @@ import './styles/reset.css'
 import './styles/basic.scss'
 import { BrowserRouter } from 'react-router-dom'
 
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

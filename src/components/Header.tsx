@@ -15,7 +15,7 @@ export class Header extends Component<any, any> {
     super(props)
     this.state = {
       showCurrency: false,
-      showCart: false
+      showCart: false,
     }
   }
 
@@ -44,55 +44,78 @@ export class Header extends Component<any, any> {
     if (!this.props.products) {
       return <div>LOADING....</div>
     }
-    return <div className={s.header}>
-      <nav className={s.nav}>
-        <div>
-          <NavLink to='/'>All</NavLink>
-        </div>
-        <div>
-          <NavLink to='/clothes'>Clothes</NavLink>
-        </div>
-        <div>
-          <NavLink to='/tech'>Tech</NavLink>
-        </div>
-      </nav>
-      <div>
-        <img src={logoImg} />
-      </div>
-      <div className={s.cart}>
-        <div onMouseEnter={this.showCurrencyOnPage} onMouseLeave={this.hideCurrencyOnPage}>
-          <div>{this.props.selectedCurrency.symbol}</div>
-          {!this.state.showCurrency ? <div><img src={setCurrencyOn} /></div> :
-            <div><img src={setCurrencyOff} /></div>}
-          {this.state.showCurrency &&
+    return (
+      <div className={s.header}>
+        <nav className={s.nav}>
           <div>
-            {this.props.products[0].prices.map((u: any) =>
-              <div
-                   onClick={() => this.getCurrencyOnPage(u.currency)}>{u.currency.symbol} {u.currency.label}</div>)}
-          </div>}
+            <NavLink to="/">All</NavLink>
+          </div>
+          <div>
+            <NavLink to="/clothes">Clothes</NavLink>
+          </div>
+          <div>
+            <NavLink to="/tech">Tech</NavLink>
+          </div>
+        </nav>
+        <div>
+          <img src={logoImg} />
         </div>
-
-          <div onMouseEnter={this.showCartOnPage} onMouseLeave={this.hideCartOnPage}>
-            <img src={cartImg} />
-            <div className={s.counterProducts}>{this.props.selectedProducts.length}</div>
-            {this.state.showCart &&
-            <div className={s.cartOverlay}>
-              <CartPageContainer />
-              <div className={s.totalPrice}>
-                <div>Total:</div>
-                <div> 200$</div>
+        <div className={s.cart}>
+          <div
+            onMouseEnter={this.showCurrencyOnPage}
+            onMouseLeave={this.hideCurrencyOnPage}
+          >
+            <div>{this.props.selectedCurrency.symbol}</div>
+            {!this.state.showCurrency ? (
+              <div>
+                <img src={setCurrencyOn} />
               </div>
-              <div className={s.button}>
-                <NavLink to={'/cartPage'}>
-                <button>VIEW BAG</button>
-                </NavLink>
-                <button>CHECK OUT</button>
+            ) : (
+              <div>
+                <img src={setCurrencyOff} />
               </div>
-            </div>}
+            )}
+            {this.state.showCurrency && (
+              <div>
+                {this.props.products[0].prices.map((u: any, i: number) => (
+                  <div
+                    key={i}
+                    onClick={() => this.getCurrencyOnPage(u.currency)}
+                  >
+                    {u.currency.symbol} {u.currency.label}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
+          <div
+            onMouseEnter={this.showCartOnPage}
+            onMouseLeave={this.hideCartOnPage}
+          >
+            <img src={cartImg} />
+            <div className={s.counterProducts}>
+              {this.props.selectedProducts.length}
+            </div>
+            {this.state.showCart && (
+              <div className={s.cartOverlay}>
+                <CartPageContainer />
+                {/*<div className={s.totalPrice}>
+                <div>Total:</div>
+                <div> {this.props.totalPrice}</div>
+              </div>*/}
+                <div className={s.button}>
+                  <NavLink to={'/cartPage'}>
+                    <button>VIEW BAG</button>
+                  </NavLink>
+                  <button>CHECK OUT</button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    )
   }
 }
 
@@ -100,7 +123,8 @@ let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
     selectedCurrency: state.categoryPage.selectedCurrency,
-    selectedProducts: state.cartPage.currentCart.selectedProducts
+    selectedProducts: state.cartPage.currentCart.selectedProducts,
+    totalPrice: state.cartPage.totalPrice,
   }
 }
 

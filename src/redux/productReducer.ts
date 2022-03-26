@@ -1,6 +1,3 @@
 const productReducer = () => {}
 
-
-
-
-export default productReducer;
+export default productReducer

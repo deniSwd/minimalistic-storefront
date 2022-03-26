@@ -1,44 +1,43 @@
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 
-
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 })
-
 
 export const productAPI = {
   async getAllProducts() {
     return client
-    .query({
-      query: gql`
+      .query({
+        query: gql`
           query {
-              category {
-                  name
-                  products {
-                      id
-                      name
-                      gallery
-                      description
-                      category
-                      brand
-                      prices{
-                          currency{
-                              label
-                              symbol
-                          }
-                          amount
-                      }
+            category {
+              name
+              products {
+                id
+                name
+                gallery
+                description
+                category
+                brand
+                prices {
+                  currency {
+                    label
+                    symbol
                   }
+                  amount
+                }
               }
+            }
           }
-      `
-    }).then(res => res.data.category)
+        `,
+      })
+      .then(res => res.data.category)
   },
   async getProduct(idProduct: string) {
     return client
-    .query({
-      query: gql`
+      .query({
+        query: gql`
           query {
               product (id: "${idProduct}") {
                   id
@@ -67,8 +66,8 @@ export const productAPI = {
                   }
               }
           }
-      `
-    }).then(res => res.data.product)
-  }
+      `,
+      })
+      .then(res => res.data.product)
+  },
 }
-

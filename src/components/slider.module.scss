@@ -1,4 +1,4 @@
-.slider{
+.slider {
   position: relative;
   .sliderButtons {
     display: flex;
@@ -6,8 +6,7 @@
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
-    width: 100%
-
+    width: 100%;
   }
 }
 .galleryInCart {
