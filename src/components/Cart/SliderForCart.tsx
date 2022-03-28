@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import sliderButtonLeft from '../assets/sliderButtonLeft.png'
-import sliderButtonRight from '../assets/sliderButtonRight.png'
+import sliderButtonLeft from '../../assets/sliderButtonLeft.png'
+import sliderButtonRight from '../../assets/sliderButtonRight.png'
 import s from './slider.module.scss'
 
 export class SliderForCart extends Component<any, any> {

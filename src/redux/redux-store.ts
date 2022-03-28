@@ -2,12 +2,11 @@ import { Action, ThunkAction } from '@reduxjs/toolkit'
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import cartReducer from './cartReducer'
-import categoryPageReducer from './categoryPageReducer'
+import categoryReducer from './categoryReducer'
 
 let rootReducers = combineReducers({
-  categoryPage: categoryPageReducer,
+  categoryPage: categoryReducer,
   cartPage: cartReducer
-  /*productPage: productReducer,*/
 })
 type RootReducersType = typeof rootReducers
 export type AppStateType = ReturnType<RootReducersType>

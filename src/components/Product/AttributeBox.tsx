@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import s from './attributeBox.module.scss'
-import { AttributeType } from '../MainTypes'
+import { AttributeType } from '../../MainTypes'
 
 export class AttributeBox extends Component<any, any> {
   render() {

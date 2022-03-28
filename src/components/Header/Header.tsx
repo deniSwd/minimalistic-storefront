@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import cartImg from '../assets/cart.png'
-import setCurrencyOn from '../assets/setCurrencyOn.png'
-import setCurrencyOff from '../assets/setCurrencyOff.png'
-import logoImg from '../assets/Logo.svg'
+import cartImg from '../../assets/cart.png'
+import setCurrencyOn from '../../assets/setCurrencyOn.png'
+import setCurrencyOff from '../../assets/setCurrencyOff.png'
+import logoImg from '../../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
-import { CurrencyType } from '../MainTypes'
-import { getCurrency } from '../redux/categoryPageReducer'
-import CartPageContainer from './CartPage'
+import { CurrencyType } from '../../MainTypes'
+import CartPageContainer from '../Cart/CartPage'
+import { actions } from '../../redux/categoryReducer'
 
 export class Header extends Component<any, any> {
   constructor(props: any) {
@@ -33,7 +33,7 @@ export class Header extends Component<any, any> {
     this.setState({ showCart: false })
   }
   getCurrencyOnPage = (currency: CurrencyType) => {
-    this.props.getCurrency(currency)
+    this.props.setSelectedCurrency(currency)
   }
   getAndHideCurrency = (currency: CurrencyType) => {
     this.getCurrencyOnPage(currency)
@@ -128,5 +128,5 @@ let mapStateToProps = (state: any) => {
   }
 }
 
-const HeaderPageContainer = connect(mapStateToProps, { getCurrency })(Header)
+const HeaderPageContainer = connect(mapStateToProps, {...actions})(Header)
 export default HeaderPageContainer

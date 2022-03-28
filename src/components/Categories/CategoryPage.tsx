@@ -3,7 +3,7 @@ import { Product } from './Product'
 import { ApolloQueryResult } from '@apollo/client'
 import s from './categoryPage.module.scss'
 import { connect } from 'react-redux'
-import { getAllProducts } from '../redux/categoryPageReducer'
+import { getAllProducts } from '../../redux/categoryReducer'
 
 export class CategoryPage extends Component<any> {
   async componentDidMount() {

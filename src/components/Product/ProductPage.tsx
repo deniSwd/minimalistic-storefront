@@ -3,12 +3,12 @@ import s from './productPage.module.scss'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
-import { productAPI } from '../API/api'
-import { AttributeType, PriceType } from '../MainTypes'
+import { productAPI } from '../../API/api'
+import { AttributeType, PriceType } from '../../MainTypes'
 import { AttributeBox } from './AttributeBox'
-import { getCurrentProduct } from '../redux/cartReducer'
+import { actions } from '../../redux/cartReducer'
 
-export class ProductPage extends Component<any, any> {
+export class ProductPage extends Component<any,any > {
   constructor(props: any) {
     super(props)
     this.state = {
@@ -18,6 +18,7 @@ export class ProductPage extends Component<any, any> {
       attributeId: '',
     }
   }
+
 
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
@@ -43,7 +44,7 @@ export class ProductPage extends Component<any, any> {
   }
 
   getProduct = () => {
-    this.props.getCurrentProduct(this.state)
+    this.props.addProductInCart(this.state)
   }
 
   render() {
@@ -120,7 +121,7 @@ let mapStateToProps = (state: any) => {
   }
 }
 let withRouterDataContainer = withRouter(ProductPage)
-const ProductPageContainer = connect(mapStateToProps, { getCurrentProduct })(
+const ProductPageContainer = connect(mapStateToProps, {...actions})(
   withRouterDataContainer
 )
 export default ProductPageContainer

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HeaderPageContainer from './components/Header'
+import HeaderPageContainer from './components/Header/Header'
 import { Main } from './components/Main'
 import s from './app.module.scss'
 import { AppStateType } from './redux/redux-store'

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import CartPageContainer from './CartPage'
-import CategoryPageContainer from './CategoryPage'
-import ProductPageContainer from './ProductPage'
+import CartPageContainer from './Cart/CartPage'
+import CategoryPageContainer from './Categories/CategoryPage'
+import ProductPageContainer from './Product/ProductPage'
 
 export class Main extends Component {
   render() {

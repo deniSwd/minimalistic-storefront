@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import s from './product.module.scss'
 import { NavLink } from 'react-router-dom'
-import { PriceType } from '../MainTypes'
+import { PriceType } from '../../MainTypes'
 
 export class Product extends Component<any, any> {
   getPrice(): PriceType {

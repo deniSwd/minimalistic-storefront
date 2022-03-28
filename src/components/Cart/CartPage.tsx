@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { currentAmountDown, currentAmountUp } from '../redux/cartReducer'
+import { actions } from '../../redux/cartReducer'
 import { ProductForCart } from './ProductForCart'
 import TotalPriceContainer from './TotalPrice'
 
@@ -17,8 +17,8 @@ export class Cart extends Component<any, any> {
           <ProductForCart
             key={i}
             productInCart={productInCart}
-            currentAmountDown={this.props.currentAmountDown}
-            currentAmountUp={this.props.currentAmountUp}
+            currentAmountDown={this.props.setCurrentAmountDown}
+            currentAmountUp={this.props.setCurrentAmountUp}
             selectedCurrency={this.props.selectedCurrency}
           />
         ))}
@@ -34,8 +34,5 @@ let mapStateToProps = (state: any) => {
     selectedCurrency: state.categoryPage.selectedCurrency,
   }
 }
-const CartPageContainer = connect(mapStateToProps, {
-  currentAmountDown,
-  currentAmountUp,
-})(Cart)
+const CartPageContainer = connect(mapStateToProps, { ...actions })(Cart)
 export default CartPageContainer
