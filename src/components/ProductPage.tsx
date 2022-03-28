@@ -6,7 +6,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../API/api'
 import { AttributeType, PriceType } from '../MainTypes'
 import { AttributeBox } from './AttributeBox'
-import { addProductInCart, getCurrentProduct } from '../redux/cartReducer'
+import { getCurrentProduct } from '../redux/cartReducer'
 
 export class ProductPage extends Component<any, any> {
   constructor(props: any) {
@@ -21,8 +21,9 @@ export class ProductPage extends Component<any, any> {
 
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
-    this.setState({ product: result })
+    this.setState({ ...this.state, product: result })
   }
+
 
   getPrice(): PriceType {
     return this.state.product.prices.find(
@@ -31,13 +32,13 @@ export class ProductPage extends Component<any, any> {
   }
 
   getProductMainPhoto(mainPhoto: any) {
-    this.setState({ productMainPhoto: mainPhoto })
+    this.setState({ ...this.state, productMainPhoto: mainPhoto })
   }
 
   getProductItem = (item: AttributeType, attributeId: string) => {
     this.setState({
       ...this.state,
-      currentItem: { ...this.state.currentItem, [attributeId]: item },
+      currentItem: { ...this.state.currentItem, [attributeId]: item }
     })
   }
 
@@ -115,7 +116,7 @@ let mapStateToProps = (state: any) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,
-    selectedCurrency: state.categoryPage.selectedCurrency,
+    selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
 let withRouterDataContainer = withRouter(ProductPage)

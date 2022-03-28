@@ -3,6 +3,7 @@ import { productAPI } from '../API/api'
 import { Simulate } from 'react-dom/test-utils'
 import copy = Simulate.copy
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { BaseThunkType, InferActionsTypes } from './redux-store'
 
 const ADD_PRODUCTS_IN_CART = 'ADD-PRODUCTS-IN-CART'
 const SET_CURRENT_AMOUNT_DOWN = 'SET-CURRENT-AMOUNT-DOWN'
@@ -10,9 +11,8 @@ const SET_CURRENT_AMOUNT_UP = 'SET-CURRENT-AMOUNT-UP'
 
 let initialsState = {
   currentCart: {
-    selectedProducts: [],
-  },
-  totalPrice: 0,
+    selectedProducts: []
+  }
 }
 
 const cartReducer = (state = initialsState, action: any) => {
@@ -24,13 +24,13 @@ const cartReducer = (state = initialsState, action: any) => {
       else stateCopy.currentCart.selectedProducts.push({ ...action.selectedProduct, amount: 1 })
       return stateCopy*/
       const currentCartProductsForAdd: any = [
-        ...state.currentCart.selectedProducts,
+        ...state.currentCart.selectedProducts
       ]
       const copyOfProduct = currentCartProductsForAdd.find(
         (v: any) =>
           v.product.id === action.selectedProduct.product.id &&
           JSON.stringify(v.currentItem) ===
-            JSON.stringify(action.selectedProduct.currentItem)
+          JSON.stringify(action.selectedProduct.currentItem)
       )
       if (copyOfProduct) ++copyOfProduct.amount
       return {
@@ -40,10 +40,10 @@ const cartReducer = (state = initialsState, action: any) => {
           selectedProducts: copyOfProduct
             ? [...state.currentCart.selectedProducts]
             : [
-                ...state.currentCart.selectedProducts,
-                { ...action.selectedProduct, amount: 1 },
-              ],
-        },
+              ...state.currentCart.selectedProducts,
+              { ...action.selectedProduct, amount: 1 }
+            ]
+        }
       }
     case SET_CURRENT_AMOUNT_DOWN:
       const currentCartProducts: any = [...state.currentCart.selectedProducts]
@@ -57,12 +57,12 @@ const cartReducer = (state = initialsState, action: any) => {
         ...state,
         currentCart: {
           ...state.currentCart,
-          selectedProducts: [...currentCartProducts],
-        },
+          selectedProducts: [...currentCartProducts]
+        }
       }
     case SET_CURRENT_AMOUNT_UP:
       const currentCartProductsInUp: any = [
-        ...state.currentCart.selectedProducts,
+        ...state.currentCart.selectedProducts
       ]
       const currentProductInUp = currentCartProductsInUp.find(
         (v: any) => v.product.id === action.productId
@@ -72,13 +72,14 @@ const cartReducer = (state = initialsState, action: any) => {
         ...state,
         currentCart: {
           ...state.currentCart,
-          selectedProducts: [...currentCartProductsInUp],
-        },
+          selectedProducts: [...currentCartProductsInUp]
+        }
       }
     default:
       return state
   }
 }
+
 
 type addProductInCartActionType = {
   type: typeof ADD_PRODUCTS_IN_CART
@@ -88,7 +89,7 @@ export const addProductInCart = (
   selectedProduct: any
 ): addProductInCartActionType => ({
   type: ADD_PRODUCTS_IN_CART,
-  selectedProduct,
+  selectedProduct
 })
 
 type setCurrentAmountDownActionType = {
@@ -102,7 +103,7 @@ export const setCurrentAmountDown = (
 ): setCurrentAmountDownActionType => ({
   type: SET_CURRENT_AMOUNT_DOWN,
   amountOfProduct,
-  productId,
+  productId
 })
 
 type setCurrentAmountUpActionType = {
@@ -116,7 +117,7 @@ export const setCurrentAmountUp = (
 ): setCurrentAmountUpActionType => ({
   type: SET_CURRENT_AMOUNT_UP,
   amountOfProduct,
-  productId,
+  productId
 })
 
 export const getCurrentProduct = (selectedProduct: any) => (dispatch: any) => {
@@ -133,3 +134,5 @@ export const currentAmountUp =
     dispatch(setCurrentAmountUp(amountOfProduct, productId))
   }
 export default cartReducer
+
+

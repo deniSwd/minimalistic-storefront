@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { currentAmountDown, currentAmountUp } from '../redux/cartReducer'
 import { ProductForCart } from './ProductForCart'
+import TotalPriceContainer from './TotalPrice'
 
 export class Cart extends Component<any, any> {
   render() {
@@ -21,7 +22,7 @@ export class Cart extends Component<any, any> {
             selectedCurrency={this.props.selectedCurrency}
           />
         ))}
-        <div>TOTAL PRICE : {this.props.totalPrice}</div>
+        <div><TotalPriceContainer/></div>
       </div>
     )
   }
@@ -31,7 +32,6 @@ let mapStateToProps = (state: any) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts,
     selectedCurrency: state.categoryPage.selectedCurrency,
-    totalPrice: state.cartPage.totalPrice,
   }
 }
 const CartPageContainer = connect(mapStateToProps, {

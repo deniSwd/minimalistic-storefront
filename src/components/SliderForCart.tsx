@@ -35,7 +35,7 @@ export class SliderForCart extends Component<any, any> {
           <img
             src={sliderButtonLeft}
             onClick={() => this.imageDown(imageIndex)}
-          />{' '}
+          />
           {/*передать сюда индекс текущей фото*/}
           <img
             src={sliderButtonRight}
