@@ -1,23 +1,23 @@
-import { BaseThunkType, InferActionsTypes } from './redux-store'
+import { InferActionsTypes } from './redux-store'
+import { SelectedProductType } from '../MainTypes'
 
-type ActionsType = InferActionsTypes<typeof actions>
-export type InitialsStateType = typeof initialsState
+export type ActionsType = InferActionsTypes<typeof actions>
+export type initialsStateType = typeof initialsState
 
 let initialsState = {
   currentCart: {
-    selectedProducts: []
+    selectedProducts: [] as Array<SelectedProductType>
   }
 }
 
-const cartReducer = (state = initialsState, action: ActionsType): any => {
+const cartReducer = (state = initialsState, action: ActionsType): initialsStateType => {
   switch (action.type) {
     case 'ADD_PRODUCTS_IN_CART':
-      const currentCartProductsForAdd: any = [
+      const currentCartProductsForAdd = [
         ...state.currentCart.selectedProducts
       ]
       const copyOfProduct = currentCartProductsForAdd.find(
-        (v: any) =>
-          v.product.id === action.selectedProduct.product.id &&
+        v => v.product.id === action.selectedProduct.product.id &&
           JSON.stringify(v.currentItem) ===
           JSON.stringify(action.selectedProduct.currentItem)
       )
@@ -35,13 +35,14 @@ const cartReducer = (state = initialsState, action: ActionsType): any => {
         }
       }
     case 'SET_CURRENT_AMOUNT_DOWN':
-      const currentCartProducts: any = [...state.currentCart.selectedProducts]
+      const currentCartProducts = [...state.currentCart.selectedProducts]
       const currentProduct = currentCartProducts.find(
-        (v: any) => v.product.id === action.productId
-      )
-      currentProduct.amount > 0
-        ? (currentProduct.amount = action.amountOfProduct - 1)
-        : (currentProduct.amount = 0)
+        v => v.product.id === action.productId)
+      if (currentProduct) {
+        currentProduct.amount > 0
+          ? (currentProduct.amount = action.amountOfProduct - 1)
+          : (currentProduct.amount = 0)
+      }
       return {
         ...state,
         currentCart: {
@@ -50,13 +51,16 @@ const cartReducer = (state = initialsState, action: ActionsType): any => {
         }
       }
     case 'SET_CURRENT_AMOUNT_UP':
-      const currentCartProductsInUp: any = [
+      const currentCartProductsInUp = [
         ...state.currentCart.selectedProducts
       ]
       const currentProductInUp = currentCartProductsInUp.find(
-        (v: any) => v.product.id === action.productId
+        v => v.product.id === action.productId
       )
-      currentProductInUp.amount = action.amountOfProduct + 1
+      if (currentProductInUp) {
+        currentProductInUp.amount = action.amountOfProduct + 1
+      }
+
       return {
         ...state,
         currentCart: {
@@ -69,11 +73,11 @@ const cartReducer = (state = initialsState, action: ActionsType): any => {
   }
 }
 export const actions = {
-  addProductInCart: (selectedProduct: any) =>
+  addProductInCart: (selectedProduct: SelectedProductType) =>
     ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
-  setCurrentAmountDown: (amountOfProduct: number, productId: number) =>
+  setCurrentAmountDown: (amountOfProduct: number, productId: string) =>
     ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId } as const),
-  setCurrentAmountUp: (amountOfProduct: number, productId: number) =>
+  setCurrentAmountUp: (amountOfProduct: number, productId: string) =>
     ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId } as const)
 }
 

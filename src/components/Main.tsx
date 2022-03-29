@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import CartPageContainer from './Cart/CartPage'
 import CategoryPageContainer from './Categories/CategoryPage'
-import ProductPageContainer from './Product/ProductPage'
+import WithRouterDataContainer from './Product/ProductPage'
 
 export class Main extends Component {
   render() {
@@ -19,7 +19,7 @@ export class Main extends Component {
         />
         <Route
           path="/productPage/:id"
-          render={() => <ProductPageContainer />}
+          render={() => <WithRouterDataContainer />}
         />
         <Route path="/cartPage" render={() => <CartPageContainer />} />
       </div>

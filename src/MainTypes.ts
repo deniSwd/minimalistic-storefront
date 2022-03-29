@@ -28,8 +28,8 @@ export type ProductType = {
   gallery: galleryType
   description?: string
   category: string
-  attributes?: AttributeSetType
-  prices?: PriceType
+  attributes?: Array<AttributeSetType>
+  prices?: Array<PriceType>
   brand?: string
   amount?: number
 }
@@ -39,3 +39,13 @@ export type CategoryType = {
   selectedCurrency: CurrencyType
 }
 export type Categories = Array<CategoryType>
+
+export type SelectedProductType = {
+  product: ProductType
+  productMainPhoto: string
+  currentItem: AttributeSetType
+  attributeId: string
+  amount: number
+}
+
+export type PartialSelectedProductType = Partial<SelectedProductType>

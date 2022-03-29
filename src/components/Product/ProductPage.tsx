@@ -1,33 +1,32 @@
 import React, { Component } from 'react'
 import s from './productPage.module.scss'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { connect, ConnectedProps } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../../API/api'
-import { AttributeType, PriceType } from '../../MainTypes'
+import { AttributeSetType, AttributeType, PartialSelectedProductType, PriceType } from '../../MainTypes'
 import { AttributeBox } from './AttributeBox'
 import { actions } from '../../redux/cartReducer'
+import Preloader from '../../utilities/Preloader'
 
-export class ProductPage extends Component<any,any > {
-  constructor(props: any) {
+
+type ProductPagePropsType = TProps & RouteComponentProps<{ id: string }>
+
+export class ProductPage extends Component<ProductPagePropsType, PartialSelectedProductType> {
+  constructor(props: ProductPagePropsType) {
     super(props)
-    this.state = {
-      product: null,
-      productMainPhoto: '',
-      currentItem: {},
-      attributeId: '',
-    }
+    this.state = {}
   }
 
 
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
-    this.setState({ ...this.state, product: result })
+    this.setState({ product: result })
   }
 
 
-  getPrice(): PriceType {
-    return this.state.product.prices.find(
+  getPrice(): PriceType | undefined {
+    return this.state?.product?.prices?.find(
       (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
     ) /*повторяется 3 раза оптимизировать*/
   }
@@ -43,7 +42,7 @@ export class ProductPage extends Component<any,any > {
     })
   }
 
-  getProduct = () => {
+  addProduct = () => {
     this.props.addProductInCart(this.state)
   }
 
@@ -51,9 +50,9 @@ export class ProductPage extends Component<any,any > {
     if (!this.state.product) {
       return <div>LOADING....</div>
     }
-
+    console.log(this.props)
     const currentAttributes = this.state.product.attributes.map(
-      (attribute: any, i: number) => (
+      (attribute: AttributeSetType, i: number) => (
         <AttributeBox
           attribute={attribute}
           getProductItem={this.getProductItem}
@@ -70,7 +69,7 @@ export class ProductPage extends Component<any,any > {
         {this.state.product && (
           <div className={s.productPage}>
             <div>
-              {this.state.product.gallery.map((mainPhoto: any, i: number) => (
+              {this.state.product.gallery.map((mainPhoto: string, i: number) => (
                 <div key={i}>
                   <img
                     src={mainPhoto}
@@ -99,12 +98,12 @@ export class ProductPage extends Component<any,any > {
               <div>{currentAttributes}</div>
               <div>PRICE:</div>
               <div>
-                {currentPrice.currency.symbol} {currentPrice.amount}
+                {currentPrice ? currentPrice.currency.symbol : <Preloader />} {currentPrice ? currentPrice.amount : <Preloader />}
               </div>
-              <button className={s.button} onClick={this.getProduct}>
+              <button className={s.button} onClick={this.addProduct}>
                 Add to Cart
               </button>
-              <div>{ReactHtmlParser(this.state.product.description)}</div>
+              <div>{this.state.product.description ? ReactHtmlParser(this.state.product.description) : <Preloader />}</div>
             </div>
           </div>
         )}
@@ -120,8 +119,12 @@ let mapStateToProps = (state: any) => {
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
-let withRouterDataContainer = withRouter(ProductPage)
-const ProductPageContainer = connect(mapStateToProps, {...actions})(
-  withRouterDataContainer
+const connector = connect(mapStateToProps, { ...actions })
+const ProductPageContainer = connector(
+  ProductPage
 )
-export default ProductPageContainer
+let WithRouterDataContainer = withRouter(ProductPageContainer)
+
+export type TProps = ConnectedProps<typeof connector>
+
+export default WithRouterDataContainer
