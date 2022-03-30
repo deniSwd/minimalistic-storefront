@@ -43,7 +43,7 @@ export type Categories = Array<CategoryType>
 export type SelectedProductType = {
   product: ProductType
   productMainPhoto: string
-  currentItem: AttributeSetType
+  currentItem: Record < string, AttributeType>
   attributeId: string
   amount: number
 }

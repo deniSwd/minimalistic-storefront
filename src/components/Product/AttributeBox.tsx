@@ -14,28 +14,14 @@ export class AttributeBox extends Component<any, any> {
         <div className={s.attributesItem}>
           {this.props.attribute.items.map((item: AttributeType, i: number) =>
             attributeId === 'Color' ? (
-              <div
-                key={i}
-                className={
-                  Object.keys(currentItem).length > 0 &&
-                  currentItemAttribute === item
-                    ? s.currentItemElement
-                    : s.itemElement
-                }
+              <div key={i} className={Object.keys(currentItem).length > 0 &&
+                  currentItemAttribute === item ? s.currentItemElement : s.itemElement}
                 style={{ backgroundColor: item.value }}
-                onClick={() => this.props.getProductItem(item, attributeId)}
-              />
+                onClick={() => this.props.getProductItem(item, attributeId)} />
             ) : (
-              <div
-                key={i}
-                className={
-                  Object.keys(currentItem).length > 0 &&
-                  currentItemAttribute === item
-                    ? s.currentItemElement
-                    : s.itemElement
-                }
-                onClick={() => this.props.getProductItem(item, attributeId)}
-              >
+              <div key={i} className={Object.keys(currentItem).length > 0 &&
+              currentItemAttribute === item ? s.currentItemElement : s.itemElement}
+                   onClick={() => this.props.getProductItem(item, attributeId)}>
                 {item.value}
               </div>
             )

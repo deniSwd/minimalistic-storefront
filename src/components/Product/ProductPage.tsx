@@ -4,10 +4,17 @@ import { connect, ConnectedProps } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../../API/api'
-import { AttributeSetType, AttributeType, PartialSelectedProductType, PriceType } from '../../MainTypes'
+import {
+  AttributeSetType,
+  AttributeType,
+  PartialSelectedProductType,
+  PriceType,
+  SelectedProductType
+} from '../../MainTypes'
 import { AttributeBox } from './AttributeBox'
 import { actions } from '../../redux/cartReducer'
 import Preloader from '../../utilities/Preloader'
+import { AppStateType } from '../../redux/redux-store'
 
 
 type ProductPagePropsType = TProps & RouteComponentProps<{ id: string }>
@@ -26,12 +33,12 @@ export class ProductPage extends Component<ProductPagePropsType, PartialSelected
 
 
   getPrice(): PriceType | undefined {
-    return this.state?.product?.prices?.find(
+    return this.state.product?.prices?.find(
       (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
     ) /*повторяется 3 раза оптимизировать*/
   }
 
-  getProductMainPhoto(mainPhoto: any) {
+  getProductMainPhoto(mainPhoto: string) {
     this.setState({ ...this.state, productMainPhoto: mainPhoto })
   }
 
@@ -43,15 +50,22 @@ export class ProductPage extends Component<ProductPagePropsType, PartialSelected
   }
 
   addProduct = () => {
-    this.props.addProductInCart(this.state)
+    const notPartialState = this.stateIsNotPartial(this.state)
+    if (notPartialState) this.props.addProductInCart(notPartialState)
+  }
+
+  stateIsNotPartial(state: PartialSelectedProductType): SelectedProductType | undefined {
+    for (const key of Object.keys(state)) {
+      if (!(key in state) || !state[key as keyof PartialSelectedProductType]) return
+    }
+    return state as SelectedProductType
   }
 
   render() {
     if (!this.state.product) {
-      return <div>LOADING....</div>
+      return <div><Preloader/></div>
     }
-    console.log(this.props)
-    const currentAttributes = this.state.product.attributes.map(
+    const currentAttributes = this.state.product.attributes?.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
           attribute={attribute}
@@ -95,15 +109,17 @@ export class ProductPage extends Component<ProductPagePropsType, PartialSelected
             <div className={s.info}>
               <div>{this.state.product.brand}</div>
               <div>{this.state.product.name}</div>
-              <div>{currentAttributes}</div>
+              <div>{currentAttributes ?? <Preloader/> }</div>
               <div>PRICE:</div>
               <div>
-                {currentPrice ? currentPrice.currency.symbol : <Preloader />} {currentPrice ? currentPrice.amount : <Preloader />}
+                {currentPrice ? currentPrice.currency.symbol : <Preloader />} {currentPrice ? currentPrice.amount :
+                <Preloader />}
               </div>
               <button className={s.button} onClick={this.addProduct}>
                 Add to Cart
               </button>
-              <div>{this.state.product.description ? ReactHtmlParser(this.state.product.description) : <Preloader />}</div>
+              <div>{this.state.product.description ? ReactHtmlParser(this.state.product.description) :
+                <Preloader />}</div>
             </div>
           </div>
         )}
@@ -112,7 +128,7 @@ export class ProductPage extends Component<ProductPagePropsType, PartialSelected
   }
 }
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,
