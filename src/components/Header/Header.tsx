@@ -6,7 +6,7 @@ import setCurrencyOff from '../../assets/setCurrencyOff.png'
 import logoImg from '../../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
-import { CurrencyType } from '../../MainTypes'
+import { CurrencyType, PriceType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
@@ -83,7 +83,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             )}
             {this.state.showCurrency && (
               <div>
-                {this.props.products[0].prices && this.props.products[0].prices.map((u: any, i: number) => (
+                {this.props.products[0].prices.map((u: PriceType, i: number) => (
                   <div
                     key={i}
                     onClick={() => this.getCurrencyOnPage(u.currency)}
@@ -132,6 +132,6 @@ let mapStateToProps = (state: AppStateType) => {
 const connector = connect(mapStateToProps, {...actions})
 const HeaderPageContainer = connector(Header)
 
-export type HeaderPropsType = ConnectedProps<typeof connector>
+type HeaderPropsType = ConnectedProps<typeof connector>
 
 export default HeaderPageContainer

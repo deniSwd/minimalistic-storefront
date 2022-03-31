@@ -8,7 +8,7 @@ export class Main extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" render={() => <CategoryPageContainer />} />
+        <Route exact path="/" render={() => <CategoryPageContainer category=""/>} />
         <Route
           path="/clothes"
           render={() => <CategoryPageContainer category="clothes" />}

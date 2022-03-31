@@ -24,17 +24,17 @@ export type PriceType = {
 export type ProductType = {
   id: string
   name: string
-  inStock?: boolean
+  inStock: boolean
   gallery: galleryType
-  description?: string
+  description: string
   category: string
-  attributes?: Array<AttributeSetType>
-  prices?: Array<PriceType>
-  brand?: string
-  amount?: number
+  attributes: Array<AttributeSetType>
+  prices: Array<PriceType>
+  brand: string
+  amount: number
 }
 export type CategoryType = {
-  name?: string
+  name: string
   products: Array<ProductType>
   selectedCurrency: CurrencyType
 }

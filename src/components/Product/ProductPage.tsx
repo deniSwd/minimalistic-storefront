@@ -33,9 +33,12 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
 
 
   getPrice(): PriceType | undefined {
-    return this.state.product?.prices?.find(
-      (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
-    )
+    if (this.state.product != null && this.state.product.prices) {
+      return this.state.product.prices.find(
+        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
+      )
+    }
+
   }
 
   getProductMainPhoto(mainPhoto: string) {
@@ -133,6 +136,6 @@ const ProductPageContainer = connector(ProductPage)
 
 let WithRouterDataContainer = withRouter(ProductPageContainer)
 
-export type TProps = ConnectedProps<typeof connector>
+type TProps = ConnectedProps<typeof connector>
 
 export default WithRouterDataContainer

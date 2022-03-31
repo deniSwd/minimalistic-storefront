@@ -1,4 +1,5 @@
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloQueryResult, gql, InMemoryCache } from '@apollo/client'
+import { CategoryType, ProductType } from '../MainTypes'
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/',
@@ -6,8 +7,8 @@ export const client = new ApolloClient({
 })
 
 export const productAPI = {
-  async getAllProducts() {
-    return client
+  async getAllProducts(): Promise<CategoryType> {
+    const resultGetAllProducts = await client
       .query({
         query: gql`
           query {
@@ -33,9 +34,13 @@ export const productAPI = {
         `,
       })
       .then(res => res.data.category)
+    if(!resultGetAllProducts) {
+      throw new Error('Data not found')
+    }
+    return resultGetAllProducts
   },
-  async getProduct(idProduct: string) {
-    return client
+  async getProduct(idProduct: string): Promise<ProductType> {
+    const resultGetProduct = await client
       .query({
         query: gql`
           query {
@@ -69,5 +74,9 @@ export const productAPI = {
       `,
       })
       .then(res => res.data.product)
+    if(!resultGetProduct) {
+      throw new Error('Data not found')
+    }
+    return resultGetProduct
   },
 }

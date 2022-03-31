@@ -1,31 +1,45 @@
 import React, { Component } from 'react'
-import { PriceType } from '../../MainTypes'
+import { CurrencyType, PriceType, SelectedProductType } from '../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
+import Preloader from '../../utilities/Preloader'
 
-export class ProductForCart extends Component<any, any> {
-  amountDown = (amountOfProduct: number, productId: number) => {
+type ProductForCartPropsType = {
+  productInCart: SelectedProductType
+  currentAmountDown: (amountOfProduct: number, productId: string) => void
+  currentAmountUp: (amountOfProduct: number, productId: string) => void
+  selectedCurrency: CurrencyType
+}
+
+export class ProductForCart extends Component<ProductForCartPropsType> {
+  amountDown = (amountOfProduct: number, productId: string) => {
     this.props.currentAmountDown(amountOfProduct, productId)
   }
-  amountUp = (amountOfProduct: number, productId: number) => {
+  amountUp = (amountOfProduct: number, productId: string) => {
     this.props.currentAmountUp(amountOfProduct, productId)
   }
 
-  getPrice(): PriceType {
-    return this.props.productInCart.product.prices.find(
-      (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
-    )
+  getPrice(): PriceType | undefined {
+    if (this.props.productInCart.product != null) {
+      return this.props.productInCart.product.prices.find(
+        (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
+      )
+    }
+
   }
 
   render() {
     const currentPrice = this.getPrice()
+    if (!this.props.productInCart.product ) {
+      return <Preloader />
+    }
     return (
       <div className={s.selectedProduct}>
         <div>
           <div>{this.props.productInCart.product.brand}</div>
           <div>{this.props.productInCart.product.name}</div>
           <div>
-            {currentPrice.currency.symbol} {currentPrice.amount}
+            {currentPrice && currentPrice.currency.symbol} {currentPrice && currentPrice.amount}
           </div>
           <div>Attribute</div>
           {Object.entries(this.props.productInCart.currentItem).map(
@@ -33,33 +47,25 @@ export class ProductForCart extends Component<any, any> {
               <div className={s.currentAttributes} key={i}>
                 <div>{attribute}:</div>
                 {attribute === 'Color' ? (
-                  <div
-                    className={s.attributeBoxForColor}
-                    style={{ backgroundColor: itemValues.value }}
-                  />
+                  <div className={s.attributeBoxForColor}
+                    style={{ backgroundColor: itemValues.value }} />
                 ) : (
-                  <div className={s.attributeBox}>{itemValues.value}</div>
-                )}
+                  <div className={s.attributeBox}>{itemValues.value}</div>)}
               </div>
             )
           )}
         </div>
         <div className={s.amountAndGallery}>
           <div className={s.amount}>
-            <button
-              onClick={() =>
-                this.amountUp(
+            <button onClick={() => this.props.productInCart.product && this.amountUp(
                   this.props.productInCart.amount,
-                  this.props.productInCart.product.id
-                )
+                  this.props.productInCart.product.id)
               }
             >
               +
             </button>
             <div>{this.props.productInCart.amount}</div>
-            <button
-              onClick={() =>
-                this.amountDown(
+            <button onClick={() => this.props.productInCart.product && this.amountDown(
                   this.props.productInCart.amount,
                   this.props.productInCart.product.id
                 )
