@@ -5,13 +5,19 @@ import setCurrencyOn from '../../assets/setCurrencyOn.png'
 import setCurrencyOff from '../../assets/setCurrencyOff.png'
 import logoImg from '../../assets/Logo.svg'
 import s from './header.module.scss'
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
 import { CurrencyType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage'
 import { actions } from '../../redux/categoryReducer'
+import { AppStateType } from '../../redux/redux-store'
 
-export class Header extends Component<any, any> {
-  constructor(props: any) {
+type HeaderStateType ={
+  showCurrency: boolean
+  showCart: boolean
+}
+
+export class Header extends Component<HeaderPropsType, HeaderStateType> {
+  constructor(props: HeaderPropsType) {
     super(props)
     this.state = {
       showCurrency: false,
@@ -77,7 +83,7 @@ export class Header extends Component<any, any> {
             )}
             {this.state.showCurrency && (
               <div>
-                {this.props.products[0].prices.map((u: any, i: number) => (
+                {this.props.products[0].prices && this.props.products[0].prices.map((u: any, i: number) => (
                   <div
                     key={i}
                     onClick={() => this.getCurrencyOnPage(u.currency)}
@@ -100,10 +106,6 @@ export class Header extends Component<any, any> {
             {this.state.showCart && (
               <div className={s.cartOverlay}>
                 <CartPageContainer />
-                {/*<div className={s.totalPrice}>
-                <div>Total:</div>
-                <div> {this.props.totalPrice}</div>
-              </div>*/}
                 <div className={s.button}>
                   <NavLink to={'/cartPage'}>
                     <button>VIEW BAG</button>
@@ -119,14 +121,17 @@ export class Header extends Component<any, any> {
   }
 }
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     selectedCurrency: state.categoryPage.selectedCurrency,
-    selectedProducts: state.cartPage.currentCart.selectedProducts,
-    totalPrice: state.cartPage.totalPrice,
+    selectedProducts: state.cartPage.currentCart.selectedProducts
   }
 }
 
-const HeaderPageContainer = connect(mapStateToProps, {...actions})(Header)
+const connector = connect(mapStateToProps, {...actions})
+const HeaderPageContainer = connector(Header)
+
+export type HeaderPropsType = ConnectedProps<typeof connector>
+
 export default HeaderPageContainer

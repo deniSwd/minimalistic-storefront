@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import s from './attributeBox.module.scss'
-import { AttributeType } from '../../MainTypes'
+import { AttributeSetType, AttributeType } from '../../MainTypes'
 
-export class AttributeBox extends Component<any, any> {
+type  AttributeBoxPropsType = {
+  attribute: AttributeSetType
+  getProductItem: (item: AttributeType, attributeId: string) => void
+  currentItem: Record < string, AttributeType>
+}
+export class AttributeBox extends Component<AttributeBoxPropsType> {
   render() {
+
     const attributeId: string = this.props.attribute.id
     const currentItem = this.props.currentItem
     const currentItemAttribute = this.props.currentItem[attributeId]
@@ -12,7 +18,7 @@ export class AttributeBox extends Component<any, any> {
       <div>
         <div>{this.props.attribute.name}:</div>
         <div className={s.attributesItem}>
-          {this.props.attribute.items.map((item: AttributeType, i: number) =>
+          {this.props.attribute.items.map((item, i) =>
             attributeId === 'Color' ? (
               <div key={i} className={Object.keys(currentItem).length > 0 &&
                   currentItemAttribute === item ? s.currentItemElement : s.itemElement}

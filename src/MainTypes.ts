@@ -9,7 +9,7 @@ export type AttributeSetType = {
   id: string
   name: string
   type: string
-  items: AttributeType
+  items: Array<AttributeType>
 }
 export type CurrencyType = {
   label: string
@@ -41,11 +41,10 @@ export type CategoryType = {
 export type Categories = Array<CategoryType>
 
 export type SelectedProductType = {
-  product: ProductType
+  product: ProductType | null
   productMainPhoto: string
   currentItem: Record < string, AttributeType>
   attributeId: string
   amount: number
 }
 
-export type PartialSelectedProductType = Partial<SelectedProductType>

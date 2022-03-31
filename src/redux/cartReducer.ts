@@ -17,7 +17,8 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
         ...state.currentCart.selectedProducts
       ]
       const copyOfProduct = currentCartProductsForAdd.find(
-        v => v.product.id === action.selectedProduct.product.id &&
+        v => v.product != null && action.selectedProduct.product != null
+          && v.product.id === action.selectedProduct.product.id &&
           JSON.stringify(v.currentItem) ===
           JSON.stringify(action.selectedProduct.currentItem)
       )
@@ -37,7 +38,7 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
     case 'SET_CURRENT_AMOUNT_DOWN':
       const currentCartProducts = [...state.currentCart.selectedProducts]
       const currentProduct = currentCartProducts.find(
-        v => v.product.id === action.productId)
+        v => v.product != null && v.product.id === action.productId)
       if (currentProduct) {
         currentProduct.amount > 0
           ? (currentProduct.amount = action.amountOfProduct - 1)
@@ -55,7 +56,7 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
         ...state.currentCart.selectedProducts
       ]
       const currentProductInUp = currentCartProductsInUp.find(
-        v => v.product.id === action.productId
+        v => v.product != null && v.product.id === action.productId
       )
       if (currentProductInUp) {
         currentProductInUp.amount = action.amountOfProduct + 1

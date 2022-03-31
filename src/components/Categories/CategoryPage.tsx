@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Product } from './Product'
-import { ApolloQueryResult } from '@apollo/client'
 import s from './categoryPage.module.scss'
 import { connect } from 'react-redux'
 import { getAllProducts } from '../../redux/categoryReducer'
+import { AppStateType } from '../../redux/redux-store'
 
 export class CategoryPage extends Component<any> {
   async componentDidMount() {
@@ -47,7 +47,7 @@ export class CategoryPage extends Component<any> {
   }
 }
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,
