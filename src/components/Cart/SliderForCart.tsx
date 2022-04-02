@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import sliderButtonLeft from '../../assets/sliderButtonLeft.png'
 import sliderButtonRight from '../../assets/sliderButtonRight.png'
+import { GalleryType } from '../../MainTypes'
 import s from './slider.module.scss'
 
-export class SliderForCart extends Component<any, any> {
-  constructor(props: any) {
+type SliderForCartStateType = {
+  currentImageIndex: number
+}
+type OutsideProps = {
+  gallery: GalleryType
+}
+
+export class SliderForCart extends Component<OutsideProps, SliderForCartStateType> {
+  constructor(props:OutsideProps) {
     super(props)
     this.state = {
       currentImageIndex: 0,
@@ -36,7 +44,6 @@ export class SliderForCart extends Component<any, any> {
             src={sliderButtonLeft}
             onClick={() => this.imageDown(imageIndex)}
           />
-          {/*передать сюда индекс текущей фото*/}
           <img
             src={sliderButtonRight}
             onClick={() => this.imageUp(imageIndex)}

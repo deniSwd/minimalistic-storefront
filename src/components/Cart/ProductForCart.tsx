@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CurrencyType, PriceType, SelectedProductType } from '../../MainTypes'
+import { AttributeType, CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
 import Preloader from '../../utilities/Preloader'
@@ -22,7 +22,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
   getPrice(): PriceType | undefined {
     if (this.props.productInCart.product != null) {
       return this.props.productInCart.product.prices.find(
-        (u: any) => u.currency.symbol === this.props.selectedCurrency.symbol
+        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
       )
     }
 
@@ -33,6 +33,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     if (!this.props.productInCart.product ) {
       return <Preloader />
     }
+    console.log(this.props.productInCart)
     return (
       <div className={s.selectedProduct}>
         <div>
@@ -43,7 +44,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           </div>
           <div>Attribute</div>
           {Object.entries(this.props.productInCart.currentItem).map(
-            ([attribute, itemValues]: any, i: number) => (
+            ([attribute, itemValues], i: number) => (
               <div className={s.currentAttributes} key={i}>
                 <div>{attribute}:</div>
                 {attribute === 'Color' ? (

@@ -1,4 +1,4 @@
-export type galleryType = Array<string>
+export type GalleryType = Array<string>
 
 export type AttributeType = {
   displayValue: string
@@ -25,7 +25,7 @@ export type ProductType = {
   id: string
   name: string
   inStock: boolean
-  gallery: galleryType
+  gallery: GalleryType
   description: string
   category: string
   attributes: Array<AttributeSetType>
@@ -40,10 +40,13 @@ export type CategoryType = {
 }
 export type Categories = Array<CategoryType>
 
+export type CurrentItemType = Record < string, AttributeType>
+
+
 export type SelectedProductType = {
   product: ProductType | null
   productMainPhoto: string
-  currentItem: Record < string, AttributeType>
+  currentItem: CurrentItemType
   attributeId: string
   amount: number
 }
