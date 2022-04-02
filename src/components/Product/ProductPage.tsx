@@ -111,7 +111,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                 currentPrice ? currentPrice.amount : <Preloader />}
               </div>
               <button className={s.button} onClick={this.addProduct}>
-                Add to Cart
+                ADD TO CART
               </button>
               <div>{this.state.product.description ?
                 ReactHtmlParser(this.state.product.description) : <Preloader />}

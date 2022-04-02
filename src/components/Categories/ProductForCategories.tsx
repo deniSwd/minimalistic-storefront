@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import s from './product.module.scss'
+import s from './productForCategories.module.scss'
 import { NavLink } from 'react-router-dom'
 import { CurrencyType, PriceType } from '../../MainTypes'
 
