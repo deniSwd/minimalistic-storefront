@@ -47,20 +47,17 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
   }
 
   render() {
-    if (!this.props.products) {
-      return <div>LOADING....</div>
-    }
     return (
       <div className={s.header}>
         <nav className={s.nav}>
           <div>
-            <NavLink to="/">All</NavLink>
+            <NavLink exact to="/" className={s.navItem} activeClassName={s.activeNavItem}>ALL</NavLink>
           </div>
-          <div>
-            <NavLink to="/clothes">Clothes</NavLink>
+          <div >
+            <NavLink to="/clothes" className={s.navItem} activeClassName={s.activeNavItem}>CLOTHES</NavLink>
           </div>
-          <div>
-            <NavLink to="/tech">Tech</NavLink>
+          <div >
+            <NavLink to="/tech" className={s.navItem} activeClassName={s.activeNavItem}>TECH</NavLink>
           </div>
         </nav>
         <div className={s.logo}>
