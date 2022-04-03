@@ -21,8 +21,10 @@ export class CategoryPage extends Component<CategoryPagePropsType> {
     const renderCategory: Array<ProductType> = this.props.products.filter(
       (u: ProductType) => u.category === categoryName)
     return (
-      <div>
-        {categoryName ? categoryName : 'All'}
+      <div className={s.categoryPage}>
+        <div className={s.title}>
+          {categoryName ? categoryName : 'all'}
+        </div>
         <div className={s.products}>
           {this.props.products && categoryName
             ? renderCategory.map((u: ProductType, i: number) => (

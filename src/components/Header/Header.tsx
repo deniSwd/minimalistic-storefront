@@ -63,7 +63,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             <NavLink to="/tech">Tech</NavLink>
           </div>
         </nav>
-        <div>
+        <div className={s.logo}>
           <img src={logoImg} />
         </div>
         <div className={s.cart}>

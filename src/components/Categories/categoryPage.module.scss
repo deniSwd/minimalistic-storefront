@@ -1,8 +1,26 @@
-.products {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: Raleway;
+@import './src/app.module';
+
+.categoryPage {
+  position: relative;
+  width: 100%;
+
+  .title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 42px;
+    color: $black;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .products {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 100px;
+  }
 }
+
+
+

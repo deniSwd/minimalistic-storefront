@@ -27,12 +27,14 @@ export class ProductForCategories extends Component<ProductForCategoriesType> {
           <div>
             <img src={this.props.image} className={s.img} alt='' />
           </div>
-          <div>
-            {this.props.brand} {this.props.name}
-          </div>
-          <div>
-            {currentPrice && currentPrice.currency.symbol}
-            {currentPrice && currentPrice.amount}
+          <div className={s.content}>
+            <div className={s.name}>
+              {this.props.brand} {this.props.name}
+            </div>
+            <div className={s.price}>
+                {currentPrice && currentPrice.currency.symbol}
+                {currentPrice && currentPrice.amount}
+            </div>
           </div>
         </NavLink>
       </div>
