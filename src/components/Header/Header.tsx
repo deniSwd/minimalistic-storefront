@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import cartImg from '../../assets/cart.png'
+import cartImg from '../../assets/cart.svg'
 import setCurrencyOn from '../../assets/setCurrencyOn.png'
 import setCurrencyOff from '../../assets/setCurrencyOff.png'
 import logoImg from '../../assets/Logo.svg'
@@ -11,7 +11,7 @@ import CartPageContainer from '../Cart/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
 
-type HeaderStateType ={
+type HeaderStateType = {
   showCurrency: boolean
   showCart: boolean
 }
@@ -21,7 +21,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     super(props)
     this.state = {
       showCurrency: false,
-      showCart: false,
+      showCart: false
     }
   }
 
@@ -53,33 +53,32 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
           <div>
             <NavLink exact to="/" className={s.navItem} activeClassName={s.activeNavItem}>ALL</NavLink>
           </div>
-          <div >
+          <div>
             <NavLink to="/clothes" className={s.navItem} activeClassName={s.activeNavItem}>CLOTHES</NavLink>
           </div>
-          <div >
+          <div>
             <NavLink to="/tech" className={s.navItem} activeClassName={s.activeNavItem}>TECH</NavLink>
           </div>
         </nav>
         <div className={s.logo}>
           <img src={logoImg} />
         </div>
-        <div className={s.cart}>
-          <div
-            onMouseEnter={this.showCurrencyOnPage}
-            onMouseLeave={this.hideCurrencyOnPage}
-          >
+        <div className={s.actions}>
+          <div className={s.currencySelector}
+               onMouseEnter={this.showCurrencyOnPage}
+               onMouseLeave={this.hideCurrencyOnPage}>
             <div>{this.props.selectedCurrency.symbol}</div>
             {!this.state.showCurrency ? (
-              <div>
+              <div className={s.arrow}>
                 <img src={setCurrencyOn} />
               </div>
             ) : (
-              <div>
+              <div className={s.arrow}>
                 <img src={setCurrencyOff} />
               </div>
             )}
             {this.state.showCurrency && (
-              <div>
+              <div className={s.currencyList}>
                 {this.props.products[0].prices.map((u: PriceType, i: number) => (
                   <div
                     key={i}
@@ -91,11 +90,9 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
               </div>
             )}
           </div>
-
-          <div
-            onMouseEnter={this.showCartOnPage}
-            onMouseLeave={this.hideCartOnPage}
-          >
+          <div className={s.cart}
+               onMouseEnter={this.showCartOnPage}
+               onMouseLeave={this.hideCartOnPage}>
             <img src={cartImg} />
             <div className={s.counterProducts}>
               {this.props.selectedProducts.length}
@@ -126,7 +123,7 @@ let mapStateToProps = (state: AppStateType) => {
   }
 }
 
-const connector = connect(mapStateToProps, {...actions})
+const connector = connect(mapStateToProps, { ...actions })
 const HeaderPageContainer = connector(Header)
 
 type HeaderPropsType = ConnectedProps<typeof connector>

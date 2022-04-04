@@ -22,35 +22,90 @@
       border-bottom: 2px solid $green;
     }
   }
-}
-
-
-
-.cart {
-  display: flex;
-  justify-content: space-between;
-  width: 204px;
-}
-
-.cartOverlay {
-  width: 325px;
-  height: 540px;
-  position: absolute;
-  border: 1px solid black;
-  left: 1150px;
-  background: #ffffff;
-  z-index: 100;
-  .totalPrice,
-  .button {
+  .logo{
+    position: absolute;
+    top:24px;
+    left: 604px;
+    width: 32px;
+  }
+  .actions {
+    width: 204px;
+    height: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+    .currencySelector {
+      width: 38px;
+      height: 29px;
+      display: flex;
+      font-family: 'Raleway',sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 28px;
+      margin-right: 22px;
+      color: $black;
+      .arrow {
+        width: 8px;
+        height: 80px;
+        margin-left: 10px;
+      }
+      .currencyList {
+        position: absolute;
+        left: 1140px;
+        top: 65px;
+        width: 114px;
+        padding: 20px;
+        font-family: 'Raleway',sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        color: $black;
+        z-index: 90;
+        box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
+      }
+    }
+    .cart {
+      width: 20px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      .counterProducts {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 1230px;
+        top: 20px;
+        background-color: $black;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        font-family: 'Roboto',sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+      }
+      .cartOverlay {
+        position: absolute;
+        width: 325px;
+        height: 540px;
+        left: 925px;
+        top: 80px;
+        padding: 16px;
+        background: #ffffff;
+        z-index: 100;
+        border: 1px solid lightsteelblue;
+        .totalPrice,
+        .button {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
   }
 }
-.counterProducts {
-  width: 20px;
-  height: 20px;
-  background-color: black;
-  color: #ffffff;
-  border-radius: 10px;
-  text-align: center;
-}
+
+
+
+
+
+
+
