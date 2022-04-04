@@ -79,11 +79,11 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
           <div className={s.productPage}>
             <div>
               {this.state.product.gallery.map((mainPhoto: string, i: number) => (
-                <div key={i}>
+                <div key={i} >
                   <img
                     src={mainPhoto}
-                    className={s.productPhotos}
                     onClick={() => this.getProductMainPhoto(mainPhoto)}
+                    className={s.productPhotos}
                   />
                 </div>
               ))}
@@ -113,7 +113,8 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
               <button className={s.button} onClick={this.addProduct}>
                 ADD TO CART
               </button>
-              <div>{this.state.product.description ?
+              <div className={s.description}>
+                {this.state.product.description ?
                 ReactHtmlParser(this.state.product.description) : <Preloader />}
               </div>
             </div>
