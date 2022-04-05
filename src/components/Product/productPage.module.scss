@@ -7,12 +7,13 @@
 
   .productPhotos {
     overflow-y: auto;
+    overflow-x: hidden;
 
     .productPhoto {
       height: 80px;
       width: 80px;
       object-fit: cover;
-      margin: 0 40px 40px 0;
+      margin-bottom: 40px;
       border: 1px solid grey;
       cursor: pointer;
     }
@@ -22,7 +23,7 @@
     height: 511px;
     width: 610px;
     object-fit: contain;
-    margin-right: 100px;
+    margin: 0 100px 0 40px;
     border: 1px solid grey;
   }
 
