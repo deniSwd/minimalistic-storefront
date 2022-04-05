@@ -1,5 +1,17 @@
 @import './src/app.module';
 
+%attribute-box {
+  margin: 8px 12px 16px 0;
+  width: 63px;
+  height: 45px;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
 .attributeName{
   font-family: 'Roboto Condensed',sans-serif;
   font-weight: 700;
@@ -12,33 +24,17 @@
 .attributesItem {
   display: flex;
   .itemElement {
-    margin: 8px 12px 16px 0;
-    width: 63px;
-    height: 45px;
+    @extend %attribute-box;
     border: 1px solid $black;
-    cursor: pointer;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
     line-height: 44px;
-    text-align: center;
-    letter-spacing: 0.05em;
     color: #292929;
   }
   .currentItemElement {
-    margin: 8px 12px 16px 0;
-    width: 63px;
-    height: 45px;
+    @extend %attribute-box;
     background-color: $black;
     border: 5px solid $black;
     color: white;
-    cursor: pointer;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
     line-height: 35px;
-    text-align: center;
-    letter-spacing: 0.05em;
   }
 }
 
