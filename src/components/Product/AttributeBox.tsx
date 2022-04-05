@@ -16,7 +16,9 @@ export class AttributeBox extends Component<AttributeBoxPropsType> {
     console.log(currentItemAttribute)
     return (
       <div>
-        <div>{this.props.attribute.name}:</div>
+        <div className={s.attributeName}>
+          {this.props.attribute.name}:
+        </div>
         <div className={s.attributesItem}>
           {this.props.attribute.items.map((item, i) =>
             attributeId === 'Color' ? (
