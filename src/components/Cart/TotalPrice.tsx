@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { AppStateType } from '../../redux/redux-store'
+import s from './cartPage.module.scss'
 
 export class TotalPrice extends Component<TotalPriceProps> {
 
@@ -14,7 +15,7 @@ export class TotalPrice extends Component<TotalPriceProps> {
 
   render() {
     return (
-      <div>
+      <div className={s.totalPrice}>
         Total Price: {this.props.selectedCurrency.symbol} { this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
       </div>
     )

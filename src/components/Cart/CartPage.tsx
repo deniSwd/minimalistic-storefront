@@ -5,15 +5,16 @@ import { ProductForCart } from './ProductForCart'
 import TotalPriceContainer from './TotalPrice'
 import { AppStateType } from '../../redux/redux-store'
 import { SelectedProductType } from '../../MainTypes'
+import s from './cartPage.module.scss'
 
 export class Cart extends Component<CartPageProps> {
   render() {
     if (this.props.selectedProducts.length === 0) {
-      return <div>CART EMPTY....</div>
+      return <div className={s.cartEmpty}>CART EMPTY...</div>
     }
     return (
       <div>
-        <div>MY CART, {this.props.selectedProducts.length} items</div>
+        <div className={s.cartTitle}>MY CART, {this.props.selectedProducts.length} items</div>
         {this.props.selectedProducts.map((productInCart: SelectedProductType, i: number) => (
           <ProductForCart
             key={i}

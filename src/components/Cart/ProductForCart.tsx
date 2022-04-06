@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AttributeType, CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../MainTypes'
+import { CurrencyType, PriceType, SelectedProductType } from '../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
 import Preloader from '../../utilities/Preloader'
@@ -33,12 +33,15 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     if (!this.props.productInCart.product ) {
       return <Preloader />
     }
-    console.log(this.props.productInCart)
     return (
       <div className={s.selectedProduct}>
         <div>
-          <div>{this.props.productInCart.product.brand}</div>
-          <div>{this.props.productInCart.product.name}</div>
+          <div className={s.brand}>
+            {this.props.productInCart.product.brand}
+          </div>
+          <div className={s.name}>
+            {this.props.productInCart.product.name}
+          </div>
           <div>
             {currentPrice && currentPrice.currency.symbol} {currentPrice && currentPrice.amount}
           </div>
@@ -48,10 +51,10 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
               <div className={s.currentAttributes} key={i}>
                 <div>{attribute}:</div>
                 {attribute === 'Color' ? (
-                  <div className={s.attributeBoxForColor}
+                  <div className={s.currentItemElement}
                     style={{ backgroundColor: itemValues.value }} />
                 ) : (
-                  <div className={s.attributeBox}>{itemValues.value}</div>)}
+                  <div className={s.currentItemElement}>{itemValues.value}</div>)}
               </div>
             )
           )}
