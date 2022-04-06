@@ -95,8 +95,10 @@
         background: #ffffff;
         z-index: 100;
         border: 1px solid lightsteelblue;
-        .totalPrice,
-        .button {
+        .totalPrice{
+
+        }
+        .buttons {
           display: flex;
           justify-content: space-between;
         }
