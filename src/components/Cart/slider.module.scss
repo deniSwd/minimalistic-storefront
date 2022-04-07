@@ -1,5 +1,8 @@
 .slider {
   position: relative;
+  width: 268px;
+  height: 268px;
+  border: 1px solid grey;
   .sliderButtons {
     display: flex;
     justify-content: space-between;
@@ -8,7 +11,7 @@
     top: 50%;
     width: 100%;
   }
+  .galleryInCart {
+  }
 }
-.galleryInCart {
-  max-height: 185px;
-}
+

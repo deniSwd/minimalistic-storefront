@@ -16,13 +16,14 @@
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #E5E5E5;
+  padding: 20px 0;
   .brand{
     font-family: 'Raleway',sans-serif;
     font-weight: 600;
     font-size: 30px;
     line-height: 27px;
     color: $black;
-    margin: 20px 0 16px 0;
+    margin-bottom: 16px;
   }
   .name{
     font-family: 'Raleway',sans-serif;
@@ -32,9 +33,24 @@
     color: $black;
     margin-bottom: 12px;
   }
+  .price {
+    height: 46px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 46px;
+    color: $black;
+    margin-bottom: 12px;
+  }
   .currentAttributes {
-    display: flex;
-    width: 200px;
+    .attributeName{
+      font-family: 'Roboto Condensed',sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 18px;
+      color: $black;
+      text-transform: uppercase;
+    }
     .currentItemElement {
       @extend %attribute-box;
       background-color: $black;
@@ -43,30 +59,40 @@
       line-height: 35px;
     }
   }
+  .amountAndGallery {
+    display: flex;
+    justify-content: space-between;
+    margin: auto 0;
+    .amount {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 268px;
+      margin-right: 12px;
+      button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border: 1px solid $black;
+        font-size: 30px;
+        cursor: pointer;
+      }
+      .amountNumber{
+        font-family: 'Raleway',sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 26px;
+        text-align: center;
+        color: $black;
+      }
+    }
+  }
 }
 
 
 
-.attributeBox {
-  width: 63px;
-  height: 45px;
-  border: 3px solid red;
-  text-align: center;
-}
-
-.attributeBoxForColor {
-  width: 63px;
-  height: 45px;
-}
 
 
-.amountAndGallery {
-  display: flex;
-  justify-content: space-between;
-}
 
-.amount {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}

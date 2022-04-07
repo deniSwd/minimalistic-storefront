@@ -42,14 +42,13 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           <div className={s.name}>
             {this.props.productInCart.product.name}
           </div>
-          <div>
+          <div className={s.price}>
             {currentPrice && currentPrice.currency.symbol} {currentPrice && currentPrice.amount}
           </div>
-          <div>Attribute</div>
           {Object.entries(this.props.productInCart.currentItem).map(
             ([attribute, itemValues], i: number) => (
               <div className={s.currentAttributes} key={i}>
-                <div>{attribute}:</div>
+                <div className={s.attributeName}>{attribute}:</div>
                 {attribute === 'Color' ? (
                   <div className={s.currentItemElement}
                     style={{ backgroundColor: itemValues.value }} />
@@ -68,14 +67,14 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
             >
               +
             </button>
-            <div>{this.props.productInCart.amount}</div>
+            <div className={s.amountNumber}>{this.props.productInCart.amount}</div>
             <button onClick={() => this.props.productInCart.product && this.amountDown(
                   this.props.productInCart.amount,
                   this.props.productInCart.product.id
                 )
               }
             >
-              -
+              –
             </button>
           </div>
           <div>
