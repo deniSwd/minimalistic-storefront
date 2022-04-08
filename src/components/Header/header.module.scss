@@ -88,13 +88,16 @@
       .cartOverlay {
         position: absolute;
         width: 325px;
-        height: 540px;
+        max-height: 540px;
+        min-height: 200px;
         left: 925px;
-        top: 80px;
+        top: 75px;
         padding: 16px;
         background: #ffffff;
         z-index: 100;
         border: 1px solid lightsteelblue;
+        overflow-y: auto;
+        overflow-x: hidden;
         .totalPrice{
 
         }

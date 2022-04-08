@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { actions, ActionsType } from '../../redux/cartReducer'
+import { actions } from '../../redux/cartReducer'
 import { ProductForCart } from './ProductForCart'
 import TotalPriceContainer from './TotalPrice'
 import { AppStateType } from '../../redux/redux-store'

@@ -10,6 +10,7 @@ import { CurrencyType, PriceType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
+import CartOverlayContainer from '../CartOverlay/CartOverlay'
 
 type HeaderStateType = {
   showCurrency: boolean
@@ -99,13 +100,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             </div>
             {this.state.showCart && (
               <div className={s.cartOverlay}>
-                <CartPageContainer />
-                <div className={s.buttons}>
-                  <NavLink to={'/cartPage'}>
-                    <button>VIEW BAG</button>
-                  </NavLink>
-                  <button>CHECK OUT</button>
-                </div>
+                <CartOverlayContainer />
               </div>
             )}
           </div>
