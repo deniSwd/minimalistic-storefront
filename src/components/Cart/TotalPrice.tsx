@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { AppStateType } from '../../redux/redux-store'
 import s from './cartPage.module.scss'
+import v from './cartOverlay.module.scss'
 
-export class TotalPrice extends Component<TotalPriceProps> {
+type OutsideProps = {
+  anotherStyle: boolean
+}
+export type TotalPricePropsType = OutsideProps & ConnectPropsType
+
+export class TotalPrice extends Component<TotalPricePropsType> {
 
   getTotalPrice = (): number => {
     const currentProductPrice = this.props.selectedProducts.map((product) => {
@@ -14,9 +20,16 @@ export class TotalPrice extends Component<TotalPriceProps> {
   }
 
   render() {
+    let style = s
+    this.props.anotherStyle ? style = v : style
     return (
-      <div className={s.totalPrice}>
-        Total Price: {this.props.selectedCurrency.symbol} { this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
+      <div className={style.totalPrice}>
+        <div className={style.total}>
+          Total Price:
+        </div>
+        <div className={style.price}>
+          {this.props.selectedCurrency.symbol} { this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
+        </div>
       </div>
     )
   }
@@ -32,7 +45,7 @@ let mapStateToProps = (state: AppStateType) => {
 const connector = connect(mapStateToProps)
 const TotalPriceContainer = connector(TotalPrice)
 
-type TotalPriceProps = ConnectedProps<typeof connector>
+type ConnectPropsType = ConnectedProps<typeof connector>
 
 
 export default TotalPriceContainer

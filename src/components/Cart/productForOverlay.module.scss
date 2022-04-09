@@ -1,0 +1,102 @@
+@import './src/app.module';
+
+%brandName-font {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: $black;
+}
+
+.selectedProduct {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #E5E5E5;
+  padding: 20px 0;
+  width: 100%;
+
+  .brand {
+    @extend %brandName-font;
+    height: 26px;
+    white-space: nowrap;
+  }
+
+  .name {
+    @extend %brandName-font;
+    height: 26px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+  }
+
+  .price {
+    height: 26px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    color: $black;
+    margin-bottom: 27px;
+  }
+
+  .currentAttributes {
+    .attributeName {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
+      color: $black;
+      text-transform: uppercase;
+    }
+
+    .currentItemElement {
+      margin-top: 5px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      text-align: center;
+      letter-spacing: 0.05em;
+      background-color: $black;
+      border: 5px solid $black;
+      color: white;
+      line-height: 14px;
+    }
+  }
+
+  .amountAndGallery {
+    display: flex;
+    justify-content: space-between;
+    margin: auto 0;
+    flex-shrink: 0;
+
+    .amount {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 137px;
+      margin-right: 10px;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $black;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .amountNumber {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+        color: $black;
+      }
+    }
+  }
+}

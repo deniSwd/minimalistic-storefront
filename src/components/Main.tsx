@@ -21,7 +21,7 @@ export class Main extends Component {
           path="/productPage/:id"
           render={() => <WithRouterDataContainer />}
         />
-        <Route path="/cartPage" render={() => <CartPageContainer />} />
+        <Route path="/cartPage" render={() => <CartPageContainer anotherStyle ={false} />} />
       </div>
     )
   }
