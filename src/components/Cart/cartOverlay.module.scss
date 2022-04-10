@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   height: 26px;
-  margin: 42px 0 37px 0;
+  margin: 35px 16px 35px 0;
 
   .total {
     font-family: 'Roboto', sans-serif;
@@ -45,4 +45,9 @@
   .numberItems {
     margin-left: 5px;
   }
+}
+.productsBlock {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

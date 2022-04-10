@@ -26,16 +26,18 @@ export class Cart extends Component<CartPagePropsType> {
           <div>MY CART,</div>
           <div className={style.numberItems}>{this.props.selectedProducts.length} items</div>
         </div>
-        {this.props.selectedProducts.map((productInCart: SelectedProductType, i: number) => (
-          <ProductForCart
-            key={i}
-            productInCart={productInCart}
-            currentAmountDown={this.props.setCurrentAmountDown}
-            currentAmountUp={this.props.setCurrentAmountUp}
-            selectedCurrency={this.props.selectedCurrency}
-            anotherStyle ={this.props.anotherStyle}
-          />
-        ))}
+        <div className={style.productsBlock}>
+          {this.props.selectedProducts.map((productInCart: SelectedProductType, i: number) => (
+            <ProductForCart
+              key={i}
+              productInCart={productInCart}
+              currentAmountDown={this.props.setCurrentAmountDown}
+              currentAmountUp={this.props.setCurrentAmountUp}
+              selectedCurrency={this.props.selectedCurrency}
+              anotherStyle ={this.props.anotherStyle}
+            />
+          ))}
+        </div>
         <div><TotalPriceContainer  anotherStyle ={this.props.anotherStyle}/></div>
       </div>
     )

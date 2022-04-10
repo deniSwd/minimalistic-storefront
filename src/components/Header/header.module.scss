@@ -10,7 +10,6 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 120%;
-  margin: 0 20px;
 }
 
 .header {
@@ -19,6 +18,7 @@
   position: relative;
   height: 80px;
   align-items: center;
+  background-color: #FFFFFF;
   .nav {
     display: flex;
     .navItem {
@@ -104,16 +104,12 @@
         max-height: 540px;
         min-height: 200px;
         right: 0;
-        top: 75px;
-        padding: 16px;
+        top: 80px;
+        padding: 16px 0 16px 16px;
         background: #ffffff;
         z-index: 100;
         border: 1px solid lightsteelblue;
-        overflow-y: auto;
-        overflow-x: hidden;
-        .totalPrice{
-
-        }
+        box-shadow: 0 0 0 2000px rgba(57, 55, 72, 0.22);
         .buttons {
           display: flex;
           justify-content: center;
@@ -121,12 +117,13 @@
             @extend %button;
             background: #FFFFFF;
             border: 1px solid $black;
-
+            margin: 0 20px;
           }
           .greenButton{
             @extend %button;
             background: $green;
             color: #FFFFFF;
+            margin: 0 36px 0 20px;
           }
         }
       }

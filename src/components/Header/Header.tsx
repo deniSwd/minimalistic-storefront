@@ -99,7 +99,6 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             </div>
             {this.state.showCart && (
               <div className={s.cartOverlay}>
-                {/*<div className={s.background}/>*/}
                 <CartPageContainer anotherStyle ={true}/>
                 <div className={s.buttons}>
                   <NavLink to={'/cartPage'}>
