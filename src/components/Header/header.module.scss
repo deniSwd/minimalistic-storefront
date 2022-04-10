@@ -1,5 +1,18 @@
 @import './src/app.module';
 
+%button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 145px;
+  height: 43px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  margin: 0 20px;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -87,9 +100,10 @@
       }
       .cartOverlay {
         position: absolute;
+        width: auto;
         max-height: 540px;
         min-height: 200px;
-        left: 925px;
+        right: 0;
         top: 75px;
         padding: 16px;
         background: #ffffff;
@@ -97,21 +111,23 @@
         border: 1px solid lightsteelblue;
         overflow-y: auto;
         overflow-x: hidden;
-        //.background {
-        //  position: fixed;
-        //  width: 100%;
-        //  height: 100%;
-        //  top: 0;
-        //  left: 0;
-        //  background: rgba(57, 55, 72, 0.22);
-        //  z-index: -1;
-        //}
         .totalPrice{
 
         }
         .buttons {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
+          .whiteButton{
+            @extend %button;
+            background: #FFFFFF;
+            border: 1px solid $black;
+
+          }
+          .greenButton{
+            @extend %button;
+            background: $green;
+            color: #FFFFFF;
+          }
         }
       }
     }

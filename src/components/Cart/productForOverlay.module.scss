@@ -5,27 +5,26 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 26px;
+  height: 26px;
+  white-space: nowrap;
   color: $black;
 }
 
 .selectedProduct {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   border-top: 1px solid #E5E5E5;
-  padding: 20px 0;
-  width: 100%;
+  padding: 20px 0 ;
+
 
   .brand {
     @extend %brandName-font;
-    height: 26px;
-    white-space: nowrap;
   }
 
   .name {
     @extend %brandName-font;
-    height: 26px;
     margin-bottom: 5px;
-    white-space: nowrap;
   }
 
   .price {
@@ -35,7 +34,7 @@
     font-size: 16px;
     line-height: 26px;
     color: $black;
-    margin-bottom: 27px;
+    margin-bottom: 10px;
   }
 
   .currentAttributes {
@@ -49,19 +48,19 @@
     }
 
     .currentItemElement {
-      margin-top: 5px;
-      width: 24px;
-      height: 24px;
+      margin: 5px 0;
+      width: 48px;
+      height: 34px;
       cursor: pointer;
       font-family: 'Source Sans Pro', sans-serif;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 12px;
+      line-height: 24px;
       text-align: center;
       letter-spacing: 0.05em;
       background-color: $black;
       border: 5px solid $black;
       color: white;
-      line-height: 14px;
     }
   }
 
@@ -71,12 +70,13 @@
     margin: auto 0;
     flex-shrink: 0;
 
+
     .amount {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 137px;
-      margin-right: 10px;
+      margin: 0 10px 0 20px;
 
       button {
         display: flex;

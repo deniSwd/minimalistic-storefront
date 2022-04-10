@@ -103,9 +103,9 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
                 <CartPageContainer anotherStyle ={true}/>
                 <div className={s.buttons}>
                   <NavLink to={'/cartPage'}>
-                    <button>VIEW BAG</button>
+                    <button className={s.whiteButton}>VIEW BAG</button>
                   </NavLink>
-                  <button>CHECK OUT</button>
+                  <button className={s.greenButton}>CHECK OUT</button>
                 </div>
               </div>
             )}
