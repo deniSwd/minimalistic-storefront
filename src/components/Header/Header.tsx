@@ -98,15 +98,19 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
               {this.props.selectedProducts.length}
             </div>
             {this.state.showCart && (
-              <div className={s.cartOverlay}>
-                <CartPageContainer anotherStyle ={true}/>
-                <div className={s.buttons}>
-                  <NavLink to={'/cartPage'}>
-                    <button className={s.whiteButton}>VIEW BAG</button>
-                  </NavLink>
-                  <button className={s.greenButton}>CHECK OUT</button>
+              <div>
+                <div className={s.overlayBackground} > </div>
+                <div className={s.cartOverlay}>
+                  <CartPageContainer anotherStyle ={true}/>
+                  <div className={s.buttons}>
+                    <NavLink to={'/cartPage'}>
+                      <button className={s.whiteButton}>VIEW BAG</button>
+                    </NavLink>
+                    <button className={s.greenButton}>CHECK OUT</button>
+                  </div>
                 </div>
               </div>
+
             )}
           </div>
         </div>

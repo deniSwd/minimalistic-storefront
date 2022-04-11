@@ -49,13 +49,12 @@
     align-items: center;
     .currencySelector {
       width: 38px;
-      height: 29px;
+      height: 80px;
       display: flex;
       font-family: 'Raleway',sans-serif;
       font-weight: 500;
       font-size: 18px;
-      line-height: 28px;
-      margin-right: 22px;
+      line-height: 80px;
       color: $black;
       .arrow {
         width: 8px;
@@ -71,6 +70,7 @@
         font-family: 'Raleway',sans-serif;
         font-weight: 500;
         font-size: 18px;
+        line-height: 28px;
         color: $black;
         background-color: white;
         z-index: 90;
@@ -79,10 +79,11 @@
       }
     }
     .cart {
-      width: 20px;
+      width: 42px;
       height: 80px;
       display: flex;
       align-items: center;
+      justify-content: right;
       .counterProducts {
         position: absolute;
         width: 20px;
@@ -98,6 +99,16 @@
         font-size: 14px;
         line-height: 19px;
       }
+      .overlayBackground{
+        position: fixed;
+        top: 80px;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 500;
+        background-color: rgba(57, 55, 72, 0.22);
+        pointer-events: none;
+      }
       .cartOverlay {
         position: absolute;
         width: auto;
@@ -107,24 +118,22 @@
         top: 80px;
         padding: 16px 0 16px 16px;
         background: #ffffff;
-        z-index: 100;
-        border: 1px solid lightsteelblue;
-        box-shadow: 0 0 0 2000px rgba(57, 55, 72, 0.22);
-        .buttons {
-          display: flex;
-          justify-content: center;
-          .whiteButton{
-            @extend %button;
-            background: #FFFFFF;
-            border: 1px solid $black;
-            margin: 0 20px;
-          }
-          .greenButton{
-            @extend %button;
-            background: $green;
-            color: #FFFFFF;
-            margin: 0 36px 0 20px;
-          }
+        z-index: 1000;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        .whiteButton{
+          @extend %button;
+          background: #FFFFFF;
+          border: 1px solid $black;
+          margin: 0 20px;
+        }
+        .greenButton{
+          @extend %button;
+          background: $green;
+          color: #FFFFFF;
+          margin: 0 36px 0 20px;
         }
       }
     }
