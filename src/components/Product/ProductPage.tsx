@@ -57,6 +57,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   }
 
   render() {
+    console.log(this.state.currentItem)
     if (!this.state.product) {
       return <div><Preloader /></div>
     }
@@ -114,9 +115,12 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                 {currentPrice ? currentPrice.currency.symbol : <Preloader />} {
                 currentPrice ? currentPrice.amount : <Preloader />}
               </div>
-              <button className={s.button} onClick={this.addProduct}>
+              {this.state.product.inStock ?
+                <button className={s.button} onClick={this.addProduct}>
                 ADD TO CART
-              </button>
+                </button>
+                :
+                <div className={s.outOfStock}>OUT OF STOCK</div>}
               <div className={s.description}>
                 {this.state.product.description ?
                   ReactHtmlParser(this.state.product.description) : <Preloader />}

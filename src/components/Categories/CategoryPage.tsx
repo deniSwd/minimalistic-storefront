@@ -34,6 +34,7 @@ export class CategoryPage extends Component<CategoryPagePropsType> {
                   image={u.gallery[0]}
                   id={u.id}
                   brand={u.brand}
+                  inStock={u.inStock}
                   prices={u.prices}
                   selectedCurrency={this.props.selectedCurrency}
                 />
@@ -45,6 +46,7 @@ export class CategoryPage extends Component<CategoryPagePropsType> {
                   image={u.gallery[0]}
                   id={u.id}
                   brand={u.brand}
+                  inStock={u.inStock}
                   prices={u.prices}
                   selectedCurrency={this.props.selectedCurrency}
                 />

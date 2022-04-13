@@ -8,12 +8,13 @@ type ProductForCategoriesType = {
   image: string
   id: string
   brand: string
+  inStock: boolean
   prices: Array<PriceType>
   selectedCurrency: CurrencyType
 }
 
 export class ProductForCategories extends Component<ProductForCategoriesType> {
-  getPrice(): PriceType | undefined{
+  getPrice(): PriceType | undefined {
     return this.props.prices.find(
       (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
     )
@@ -24,6 +25,12 @@ export class ProductForCategories extends Component<ProductForCategoriesType> {
     return (
       <div className={s.productStyle}>
         <NavLink to={`/productPage/${this.props.id}`}>
+        {!this.props.inStock &&
+        <div className={s.outOfStock}>
+          <div className={s.text}>
+            OUT OF STOCK
+          </div>
+        </div>}
           <div>
             <img src={this.props.image} className={s.img} alt='' />
           </div>
@@ -32,8 +39,8 @@ export class ProductForCategories extends Component<ProductForCategoriesType> {
               {this.props.brand} {this.props.name}
             </div>
             <div className={s.price}>
-                {currentPrice && currentPrice.currency.symbol}
-                {currentPrice && currentPrice.amount}
+              {currentPrice && currentPrice.currency.symbol}
+              {currentPrice && currentPrice.amount}
             </div>
           </div>
         </NavLink>
