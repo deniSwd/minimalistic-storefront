@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CurrencyType, PriceType, SelectedProductType } from '../../MainTypes'
+import { CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
 import Preloader from '../../utilities/Preloader'
@@ -7,18 +7,22 @@ import v from './productForOverlay.module.scss'
 
 type ProductForCartPropsType = {
   productInCart: SelectedProductType
-  currentAmountDown: (amountOfProduct: number, productId: string) => void
-  currentAmountUp: (amountOfProduct: number, productId: string) => void
+  currentAmountDown: (amountOfProduct: number,
+                      productId: string,
+                      currentItemProduct: CurrentItemType) => void
+  currentAmountUp: (amountOfProduct: number,
+                    productId: string,
+                    currentItemProduct: CurrentItemType) => void
   selectedCurrency: CurrencyType
   anotherStyle:boolean
 }
 
 export class ProductForCart extends Component<ProductForCartPropsType> {
-  amountDown = (amountOfProduct: number, productId: string) => {
-    this.props.currentAmountDown(amountOfProduct, productId)
+  amountDown = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
+    this.props.currentAmountDown(amountOfProduct, productId,currentItemProduct)
   }
-  amountUp = (amountOfProduct: number, productId: string) => {
-    this.props.currentAmountUp(amountOfProduct, productId)
+  amountUp = (amountOfProduct: number, productId: string,currentItemProduct: CurrentItemType) => {
+    this.props.currentAmountUp(amountOfProduct, productId,currentItemProduct)
   }
 
   getPrice(): PriceType | undefined {
@@ -31,6 +35,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
   }
 
   render() {
+    console.log(this.props.productInCart.currentItem)
     let style = s
     this.props.anotherStyle ? style = v : style
     const currentPrice = this.getPrice()
@@ -66,7 +71,8 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           <div className={style.amount}>
             <button onClick={() => this.props.productInCart.product && this.amountUp(
                   this.props.productInCart.amount,
-                  this.props.productInCart.product.id)
+                  this.props.productInCart.product.id,
+              this.props.productInCart.currentItem)
               }
             >
               +
@@ -74,7 +80,8 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
             <div className={style.amountNumber}>{this.props.productInCart.amount}</div>
             <button onClick={() => this.props.productInCart.product && this.amountDown(
                   this.props.productInCart.amount,
-                  this.props.productInCart.product.id
+                  this.props.productInCart.product.id,
+              this.props.productInCart.currentItem
                 )
               }
             >

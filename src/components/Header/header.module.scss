@@ -128,12 +128,14 @@
           background: #FFFFFF;
           border: 1px solid $black;
           margin: 0 20px;
+          cursor: pointer;
         }
         .greenButton{
           @extend %button;
           background: $green;
           color: #FFFFFF;
           margin: 0 36px 0 20px;
+          cursor: pointer;
         }
       }
     }

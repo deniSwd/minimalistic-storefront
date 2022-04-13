@@ -1,5 +1,5 @@
 import { InferActionsTypes } from './redux-store'
-import { SelectedProductType } from '../MainTypes'
+import { CurrentItemType, SelectedProductType } from '../MainTypes'
 
 export type ActionsType = InferActionsTypes<typeof actions>
 export type initialsStateType = typeof initialsState
@@ -38,7 +38,9 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
     case 'SET_CURRENT_AMOUNT_DOWN':
       const currentCartProducts = [...state.currentCart.selectedProducts]
       const currentProduct = currentCartProducts.find(
-        v => v.product != null && v.product.id === action.productId)
+        v => v.product != null && v.product.id === action.productId &&
+          JSON.stringify(v.currentItem) ===
+          JSON.stringify(action.currentItemProduct))
       if (currentProduct) {
         currentProduct.amount > 0
           ? (currentProduct.amount = action.amountOfProduct - 1)
@@ -56,7 +58,9 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
         ...state.currentCart.selectedProducts
       ]
       const currentProductInUp = currentCartProductsInUp.find(
-        v => v.product != null && v.product.id === action.productId
+        v => v.product != null && v.product.id === action.productId &&
+          JSON.stringify(v.currentItem) ===
+          JSON.stringify(action.currentItemProduct)
       )
       if (currentProductInUp) {
         currentProductInUp.amount = action.amountOfProduct + 1
@@ -76,10 +80,10 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
 export const actions = {
   addProductInCart: (selectedProduct: SelectedProductType) =>
     ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
-  setCurrentAmountDown: (amountOfProduct: number, productId: string) =>
-    ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId } as const),
-  setCurrentAmountUp: (amountOfProduct: number, productId: string) =>
-    ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId } as const)
+  setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+    ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
+  setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+    ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const)
 }
 
 

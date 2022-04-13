@@ -94,9 +94,10 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
                onMouseEnter={this.showCartOnPage}
                onMouseLeave={this.hideCartOnPage}>
             <img src={cartImg} />
+            {this.props.selectedProducts.length > 0 &&
             <div className={s.counterProducts}>
               {this.props.selectedProducts.length}
-            </div>
+            </div>}
             {this.state.showCart && (
               <div>
                 <div className={s.overlayBackground} > </div>
