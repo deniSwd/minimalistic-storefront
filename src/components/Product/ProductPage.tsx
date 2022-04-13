@@ -21,7 +21,8 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
       productMainPhoto: '',
       currentItem: {},
       attributeId: '',
-      amount: 0
+      amount: 0,
+      wasAdded: false
     }
   }
 
@@ -53,15 +54,26 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   }
 
   addProduct = () => {
+    this.setState({ ...this.state, wasAdded: true })
     this.props.addProductInCart(this.state)
+  }
+  wasAdded =()=> {
+    let productWasAdded = () => {
+      this.setState({ ...this.state, wasAdded: false })
+    }
+    setTimeout(productWasAdded, 1000)
+  }
+  buttonOnClick = () => {
+    if(this.state.wasAdded) return
+    this.wasAdded()
+    this.addProduct()
   }
 
   render() {
-    console.log(this.state.currentItem)
     if (!this.state.product) {
       return <div><Preloader /></div>
     }
-    const currentAttributes = this.state.product.attributes?.map(
+    const currentAttributes = this.state.product.attributes.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
           attribute={attribute}
@@ -116,8 +128,8 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                 currentPrice ? currentPrice.amount : <Preloader />}
               </div>
               {this.state.product.inStock ?
-                <button className={s.button} onClick={this.addProduct}>
-                ADD TO CART
+                <button className={s.button} onClick={this.buttonOnClick}>
+                  {this.state.wasAdded ? 'WAS ADDED' : 'ADD TO CART'}
                 </button>
                 :
                 <div className={s.outOfStock}>OUT OF STOCK</div>}
