@@ -1,5 +1,6 @@
 import { InferActionsTypes } from './redux-store'
 import { CurrentItemType, SelectedProductType } from '../MainTypes'
+import { isEqual } from '../utilities/isEqual'
 
 export type ActionsType = InferActionsTypes<typeof actions>
 export type initialsStateType = typeof initialsState
@@ -19,8 +20,7 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
       const copyOfProduct = currentCartProductsForAdd.find(
         v => v.product != null && action.selectedProduct.product != null
           && v.product.id === action.selectedProduct.product.id &&
-          JSON.stringify(v.currentItem) ===
-          JSON.stringify(action.selectedProduct.currentItem)
+        isEqual(v.currentItem, action.selectedProduct.currentItem)
       )
       if (copyOfProduct) ++copyOfProduct.amount
       return {
