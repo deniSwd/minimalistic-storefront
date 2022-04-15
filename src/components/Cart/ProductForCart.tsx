@@ -4,6 +4,7 @@ import s from './productForCart.module.scss'
 import { SliderForCart } from './SliderForCart'
 import Preloader from '../../utilities/Preloader'
 import v from './productForOverlay.module.scss'
+import deleteImg from '../../assets/delete.png'
 
 type ProductForCartPropsType = {
   productInCart: SelectedProductType
@@ -15,6 +16,7 @@ type ProductForCartPropsType = {
                     currentItemProduct: CurrentItemType) => void
   selectedCurrency: CurrencyType
   anotherStyle:boolean
+  deleteProductInCart: (deletedProduct: SelectedProductType) => void
 }
 
 export class ProductForCart extends Component<ProductForCartPropsType> {
@@ -25,6 +27,9 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     this.props.currentAmountUp(amountOfProduct, productId,currentItemProduct)
   }
 
+  deleteProduct = () => {
+    this.props.deleteProductInCart(this.props.productInCart)
+  }
   getPrice(): PriceType | undefined {
     if (this.props.productInCart.product != null) {
       return this.props.productInCart.product.prices.find(
@@ -68,6 +73,9 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           )}
         </div>
         <div className={style.amountAndGallery}>
+          <div className={style.deleteButton} onClick={this.deleteProduct}>
+            <img src={deleteImg} alt=''/>
+          </div>
           <div className={style.amount}>
             <button onClick={() => this.props.productInCart.product && this.amountUp(
                   this.props.productInCart.amount,

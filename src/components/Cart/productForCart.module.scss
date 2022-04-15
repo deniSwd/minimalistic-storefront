@@ -63,6 +63,15 @@
     display: flex;
     justify-content: space-between;
     margin: auto 0;
+    .deleteButton{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 45px;
+      margin-right: 32px;
+      opacity: .2;
+      cursor: pointer;
+    }
     .amount {
       display: flex;
       flex-direction: column;

@@ -20,7 +20,7 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
       const copyOfProduct = currentCartProductsForAdd.find(
         v => v.product != null && action.selectedProduct.product != null
           && v.product.id === action.selectedProduct.product.id &&
-        isEqual(v.currentItem, action.selectedProduct.currentItem)
+          isEqual(v.currentItem, action.selectedProduct.currentItem)
       )
       if (copyOfProduct) ++copyOfProduct.amount
       return {
@@ -42,9 +42,9 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
           JSON.stringify(v.currentItem) ===
           JSON.stringify(action.currentItemProduct))
       if (currentProduct) {
-        currentProduct.amount > 0
+        currentProduct.amount > 1
           ? (currentProduct.amount = action.amountOfProduct - 1)
-          : (currentProduct.amount = 0)
+          : (currentProduct.amount = 1)
       }
       return {
         ...state,
@@ -73,20 +73,32 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
           selectedProducts: [...currentCartProductsInUp]
         }
       }
-    default:
-      return state
+    case 'DELETE_PRODUCTS_IN_CART':
+      const newSelectedProducts = state.currentCart.selectedProducts.filter(
+        v => !isEqual(v, action.deletedProduct))
+      return {
+        ...state,
+        currentCart: {
+          ...state.currentCart,
+          selectedProducts: [...newSelectedProducts]
+        }
+      }
+        default:
+        return state
+      }
   }
-}
-export const actions = {
-  addProductInCart: (selectedProduct: SelectedProductType) =>
-    ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
-  setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
-    ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
-  setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
-    ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const)
-}
+  export const actions = {
+    addProductInCart: (selectedProduct: SelectedProductType) =>
+      ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
+    deletedProductInCart: (deletedProduct: SelectedProductType) =>
+      ({ type: 'DELETE_PRODUCTS_IN_CART', deletedProduct } as const),
+    setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+      ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
+    setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+      ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const)
+  }
 
 
-export default cartReducer
+  export default cartReducer
 
 

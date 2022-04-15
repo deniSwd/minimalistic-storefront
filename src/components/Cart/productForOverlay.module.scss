@@ -15,7 +15,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   border-top: 1px solid #E5E5E5;
-  padding: 20px 0 ;
+  padding: 20px 0;
   margin-right: 15px;
 
 
@@ -71,13 +71,21 @@
     margin: auto 0;
     flex-shrink: 0;
 
+    .deleteButton {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 25px;
+      opacity: .2;
+      cursor: pointer;
+    }
 
     .amount {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 137px;
-      margin: 0 10px 0 20px;
+      margin: 0 10px;
 
       button {
         display: flex;
