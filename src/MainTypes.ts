@@ -50,5 +50,6 @@ export type SelectedProductType = {
   attributeId: string
   amount: number
   wasAdded: boolean
+  message: boolean
 }
 

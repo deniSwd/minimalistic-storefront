@@ -100,9 +100,9 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             </div>}
             {this.state.showCart && (
               <div>
-                <div className={s.overlayBackground} > </div>
+                <div className={s.overlayBackground} />
                 <div className={s.cartOverlay}>
-                  <CartPageContainer anotherStyle ={true}/>
+                  <CartPageContainer anotherStyle={true} />
                   <div className={s.buttons}>
                     <NavLink to={'/cartPage'}>
                       <button className={s.whiteButton}>VIEW BAG</button>

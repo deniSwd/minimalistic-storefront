@@ -9,6 +9,7 @@ import { AttributeBox } from './AttributeBox'
 import { actions } from '../../redux/cartReducer'
 import Preloader from '../../utilities/Preloader'
 import { AppStateType } from '../../redux/redux-store'
+import MessageAboutAttributes from './MessageAboutAttributes'
 
 
 type ProductPagePropsType = TProps & RouteComponentProps<{ id: string }>
@@ -22,24 +23,21 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
       currentItem: {},
       attributeId: '',
       amount: 0,
-      wasAdded: false
+      wasAdded: false,
+      message: false
     }
   }
-
 
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
     this.setState({ product: result })
   }
 
-
   getPrice(): PriceType | undefined {
     if (this.state.product != null && this.state.product.prices) {
       return this.state.product.prices.find(
-        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
-      )
+        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol)
     }
-
   }
 
   getProductMainPhoto(mainPhoto: string) {
@@ -57,16 +55,27 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
     this.setState({ ...this.state, wasAdded: true })
     this.props.addProductInCart(this.state)
   }
-  wasAdded =()=> {
+
+  wasAdded = () => {
     let productWasAdded = () => {
       this.setState({ ...this.state, wasAdded: false })
     }
     setTimeout(productWasAdded, 1000)
   }
+
   buttonOnClick = () => {
-    if(this.state.wasAdded) return
+    if (this.state.product &&
+      Object.keys(this.state.currentItem).length < this.state.product.attributes.length) {
+      // return alert('YOU MUST SELECTED ALL ATTRIBUTES!')
+      this.setState({ ...this.state, message: true })
+      return
+    } else if (this.state.wasAdded) return
     this.wasAdded()
     this.addProduct()
+  }
+
+  messageOff = () => {
+    this.setState({ ...this.state, message: false })
   }
 
   render() {
@@ -90,6 +99,8 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
       <>
         {this.state.product && (
           <div className={s.productPage}>
+            {this.state.message &&
+            <MessageAboutAttributes messageOff={this.messageOff} />}
             <div className={s.productPhotos}>
               {this.state.product.gallery.map((mainPhoto: string, i: number) => (
                 <div key={i}>
@@ -124,18 +135,18 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
               <div>{currentAttributes}</div>
               <div className={s.price}>PRICE:</div>
               <div className={s.amount}>
-                {currentPrice ? currentPrice.currency.symbol : <Preloader />} {
-                currentPrice ? currentPrice.amount : <Preloader />}
+                {currentPrice && currentPrice.currency.symbol} {
+                currentPrice && currentPrice.amount}
               </div>
-              {this.state.product.inStock ?
-                <button className={s.button} onClick={this.buttonOnClick}>
+              {this.state.product.inStock
+                ? <button className={s.button} onClick={this.buttonOnClick}>
                   {this.state.wasAdded ? 'WAS ADDED' : 'ADD TO CART'}
                 </button>
                 :
                 <div className={s.outOfStock}>OUT OF STOCK</div>}
               <div className={s.description}>
-                {this.state.product.description ?
-                  ReactHtmlParser(this.state.product.description) : <Preloader />}
+                {this.state.product.description &&
+                ReactHtmlParser(this.state.product.description)}
               </div>
             </div>
           </div>

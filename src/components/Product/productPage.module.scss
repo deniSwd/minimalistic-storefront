@@ -18,17 +18,20 @@
   margin-top: 80px;
   max-height: 620px;
 
+
   .productPhotos {
     overflow-y: auto;
     overflow-x: hidden;
     margin-right: 40px;
     scrollbar-width: thin;
+
     &::-webkit-scrollbar {
       width: 8px;
       background-color: whitesmoke;
     }
+
     &::-webkit-scrollbar-thumb {
-      background: lightgray ;
+      background: lightgray;
     }
 
     .productPhoto {
@@ -37,7 +40,6 @@
       object-fit: cover;
       margin-bottom: 40px;
       cursor: pointer;
-
     }
   }
 
@@ -94,11 +96,12 @@
     }
 
     .button {
-     @extend %button;
+      @extend %button;
       background-color: $green;
       cursor: pointer;
     }
-    .outOfStock{
+
+    .outOfStock {
       @extend %button;
       line-height: 52px;
       background-color: #E5E5E5;
