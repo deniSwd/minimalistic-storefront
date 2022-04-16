@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './redux/redux-store'
 import * as serviceWorker from './serviceWorker'
-import { App } from './App'
+import AppContainer, { App } from './App'
 import './styles/reset.css'
 import './styles/basic.scss'
 import { BrowserRouter } from 'react-router-dom'
@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <AppContainer />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

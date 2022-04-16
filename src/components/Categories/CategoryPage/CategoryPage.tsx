@@ -24,9 +24,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
     }
   }
 
-  async componentDidMount() {
-    await this.props.getAllProducts()
-  }
+
   addProduct = (productId:string) => {
     let productForCart = this.props.products.filter((v) => v.id === productId)
     const newState = { ...this.state, product: productForCart[0] }
@@ -86,7 +84,7 @@ let mapStateToProps = (state: AppStateType) => {
     selectedCurrency: state.categoryPage.selectedCurrency,
   }
 }
-const connector = connect(mapStateToProps, { getAllProducts, addProductInCart: actions.addProductInCart })
+const connector = connect(mapStateToProps, { addProductInCart: actions.addProductInCart })
 const CategoryPageContainer = connector(CategoryPage)
 
 type ConnectPropsType = ConnectedProps<typeof connector>
