@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../MainTypes'
+import { CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../../MainTypes'
 import s from './productForCart.module.scss'
-import { SliderForCart } from './SliderForCart'
-import Preloader from '../../utilities/Preloader'
+import { SliderForCart } from '../SliderForCart/SliderForCart'
+import Preloader from '../../../utilities/Preloader/Preloader'
 import v from './productForOverlay.module.scss'
-import deleteImg from '../../assets/delete.png'
+import deleteImg from '../../../assets/delete.png'
 
 type ProductForCartPropsType = {
   productInCart: SelectedProductType

@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import progress from '../assets/preloader.svg'
+import progress from '../../assets/preloader.svg'
 import s from './preloader.module.scss'
 
 class Preloader extends Component {

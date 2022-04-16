@@ -7,7 +7,7 @@ import logoImg from '../../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
 import { CurrencyType, PriceType } from '../../MainTypes'
-import CartPageContainer from '../Cart/CartPage'
+import CartPageContainer from '../Cart/CartPage/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
 

@@ -1,4 +1,4 @@
-@import './src/app.module';
+@import '../../../app.module';
 
 .productWrapper {
   position: relative;
@@ -9,6 +9,7 @@
     bottom: 70px;
     z-index: 1000;
     cursor: grab;
+    user-select: none;
   }
 
   .productStyle {
@@ -30,6 +31,7 @@
       left: 0;
       background: #FFFFFF;
       opacity: 0.5;
+      user-select: none;
 
       .text {
         width: 386px;
@@ -48,6 +50,7 @@
       width: 354px;
       object-fit: contain;
       margin-bottom: 24px;
+      user-select: none;
     }
 
     .content {

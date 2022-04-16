@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import CartPageContainer from './Cart/CartPage'
-import CategoryPageContainer from './Categories/CategoryPage'
-import WithRouterDataContainer from './Product/ProductPage'
+import CartPageContainer from './Cart/CartPage/CartPage'
+import CategoryPageContainer from './Categories/CategoryPage/CategoryPage'
+import WithRouterDataContainer from './Product/ProductPage/ProductPage'
 
-export class Main extends Component {
+export class RoutePage extends Component {
   render() {
     return (
       <div>

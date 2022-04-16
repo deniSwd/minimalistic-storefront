@@ -1,4 +1,4 @@
-@import './src/app.module';
+@import '../../../app.module';
 
 %attribute-box {
   margin: 8px 12px 16px 0;
@@ -43,6 +43,7 @@
     margin-bottom: 12px;
   }
   .currentAttributes {
+    user-select: none;
     .attributeName{
       font-family: 'Roboto Condensed',sans-serif;
       font-weight: 700;
@@ -63,6 +64,7 @@
     display: flex;
     justify-content: space-between;
     margin: auto 0;
+    user-select: none;
     .deleteButton{
       display: flex;
       flex-direction: column;

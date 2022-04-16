@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import s from './attributeBox.module.scss'
-import { AttributeSetType, AttributeType } from '../../MainTypes'
+import { AttributeSetType, AttributeType } from '../../../MainTypes'
 
 type  AttributeBoxPropsType = {
   attribute: AttributeSetType

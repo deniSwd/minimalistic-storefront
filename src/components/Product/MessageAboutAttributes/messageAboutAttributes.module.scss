@@ -1,4 +1,4 @@
-@import './src/app.module';
+@import '../../../app.module';
 
 .messageBackground {
   position: fixed;
@@ -23,6 +23,7 @@
   line-height: 30px;
   text-align: center;
   background-color: #ffffff;
+  user-select: none;
 
   button {
     width: 150px;

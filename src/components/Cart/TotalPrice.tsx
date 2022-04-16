@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { AppStateType } from '../../redux/redux-store'
-import s from './cartPage.module.scss'
-import v from './cartOverlay.module.scss'
+import s from './CartPage/cartPage.module.scss'
+import v from './CartPage/cartOverlay.module.scss'
 
 type OutsideProps = {
   anotherStyle: boolean

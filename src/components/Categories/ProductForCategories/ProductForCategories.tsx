@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import s from './productForCategories.module.scss'
 import { NavLink } from 'react-router-dom'
-import { AttributeSetType, CurrencyType, PriceType } from '../../MainTypes'
-import cartButtonImg from '../../assets/cartButton.svg'
+import { AttributeSetType, CurrencyType, PriceType } from '../../../MainTypes'
+import cartButtonImg from '../../../assets/cartButton.svg'
 
 type ProductForCategoriesType = {
   name: string

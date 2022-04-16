@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import HeaderPageContainer from './components/Header/Header'
-import { Main } from './components/Main'
+import { RoutePage } from './components/RoutePage'
 import s from './app.module.scss'
 import { AppStateType } from './redux/redux-store'
 
@@ -9,7 +9,7 @@ export class App extends Component<AppStateType> {
     return (
       <div className={s.mainStyle}>
         <HeaderPageContainer />
-        <Main />
+        <RoutePage />
       </div>
     )
   }

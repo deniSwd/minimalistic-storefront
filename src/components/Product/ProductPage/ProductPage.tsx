@@ -3,13 +3,13 @@ import s from './productPage.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
-import { productAPI } from '../../API/api'
-import { AttributeSetType, AttributeType, PriceType, SelectedProductType } from '../../MainTypes'
-import { AttributeBox } from './AttributeBox'
-import { actions } from '../../redux/cartReducer'
-import Preloader from '../../utilities/Preloader'
-import { AppStateType } from '../../redux/redux-store'
-import MessageAboutAttributes from './MessageAboutAttributes'
+import { productAPI } from '../../../API/api'
+import { AttributeSetType, AttributeType, PriceType, SelectedProductType } from '../../../MainTypes'
+import { AttributeBox } from '../AttributeBox/AttributeBox'
+import { actions } from '../../../redux/cartReducer'
+import Preloader from '../../../utilities/Preloader/Preloader'
+import { AppStateType } from '../../../redux/redux-store'
+import MessageAboutAttributes from '../MessageAboutAttributes/MessageAboutAttributes'
 
 
 type ProductPagePropsType = TProps & RouteComponentProps<{ id: string }>
@@ -30,7 +30,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
 
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
-    this.setState({ product: result })
+    this.setState({ ...this.state, product: result })
   }
 
   getPrice(): PriceType | undefined {

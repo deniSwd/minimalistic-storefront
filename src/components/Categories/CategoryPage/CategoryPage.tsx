@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { ProductForCategories } from './ProductForCategories'
+import { ProductForCategories } from '../ProductForCategories/ProductForCategories'
 import s from './categoryPage.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
-import { getAllProducts } from '../../redux/categoryReducer'
-import { AppStateType } from '../../redux/redux-store'
-import { ProductType, SelectedProductType } from '../../MainTypes'
-import { actions } from '../../redux/cartReducer'
+import { getAllProducts } from '../../../redux/categoryReducer'
+import { AppStateType } from '../../../redux/redux-store'
+import { ProductType, SelectedProductType } from '../../../MainTypes'
+import { actions } from '../../../redux/cartReducer'
 
 type OutsideProps = {
   category: string
