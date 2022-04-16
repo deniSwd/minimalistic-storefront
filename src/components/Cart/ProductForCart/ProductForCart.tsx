@@ -5,6 +5,7 @@ import { SliderForCart } from '../SliderForCart/SliderForCart'
 import Preloader from '../../../utilities/Preloader/Preloader'
 import v from './productForOverlay.module.scss'
 import deleteImg from '../../../assets/delete.png'
+import { getPrice } from '../../../utilities/getPrice'
 
 type ProductForCartPropsType = {
   productInCart: SelectedProductType
@@ -15,35 +16,28 @@ type ProductForCartPropsType = {
                     productId: string,
                     currentItemProduct: CurrentItemType) => void
   selectedCurrency: CurrencyType
-  anotherStyle:boolean
+  anotherStyle: boolean
   deleteProductInCart: (deletedProduct: SelectedProductType) => void
 }
 
 export class ProductForCart extends Component<ProductForCartPropsType> {
   amountDown = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
-    this.props.currentAmountDown(amountOfProduct, productId,currentItemProduct)
+    this.props.currentAmountDown(amountOfProduct, productId, currentItemProduct)
   }
-  amountUp = (amountOfProduct: number, productId: string,currentItemProduct: CurrentItemType) => {
-    this.props.currentAmountUp(amountOfProduct, productId,currentItemProduct)
+  amountUp = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
+    this.props.currentAmountUp(amountOfProduct, productId, currentItemProduct)
   }
 
   deleteProduct = () => {
     this.props.deleteProductInCart(this.props.productInCart)
   }
-  getPrice(): PriceType | undefined {
-    if (this.props.productInCart.product != null) {
-      return this.props.productInCart.product.prices.find(
-        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
-      )
-    }
-
-  }
 
   render() {
     let style = s
     this.props.anotherStyle ? style = v : style
-    const currentPrice = this.getPrice()
-    if (!this.props.productInCart.product ) {
+    const currentPrice = this.props.productInCart.product != null
+      && getPrice(this.props.productInCart.product.prices, this.props.selectedCurrency.symbol)
+    if (!this.props.productInCart.product) {
       return <Preloader />
     }
     return (
@@ -64,7 +58,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
                 <div className={style.attributeName}>{attribute}:</div>
                 {attribute === 'Color' ? (
                   <div className={style.currentItemElement}
-                    style={{ backgroundColor: itemValues.value }} />
+                       style={{ backgroundColor: itemValues.value }} />
                 ) : (
                   <div className={style.currentItemElement}>{itemValues.value}</div>)}
               </div>
@@ -73,31 +67,31 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
         </div>
         <div className={style.amountAndGallery}>
           <div className={style.deleteButton} onClick={this.deleteProduct}>
-            <img src={deleteImg} alt=''/>
+            <img src={deleteImg} alt='' />
           </div>
           <div className={style.amount}>
             <button onClick={() => this.props.productInCart.product && this.amountUp(
-                  this.props.productInCart.amount,
-                  this.props.productInCart.product.id,
+              this.props.productInCart.amount,
+              this.props.productInCart.product.id,
               this.props.productInCart.currentItem)
-              }
+            }
             >
               +
             </button>
             <div className={style.amountNumber}>{this.props.productInCart.amount}</div>
             <button onClick={() => this.props.productInCart.product && this.amountDown(
-                  this.props.productInCart.amount,
-                  this.props.productInCart.product.id,
+              this.props.productInCart.amount,
+              this.props.productInCart.product.id,
               this.props.productInCart.currentItem
-                )
-              }
+            )
+            }
             >
               –
             </button>
           </div>
           <div>
             <SliderForCart gallery={this.props.productInCart.product.gallery}
-                           anotherStyle ={this.props.anotherStyle}/>
+                           anotherStyle={this.props.anotherStyle} />
           </div>
         </div>
       </div>

@@ -34,12 +34,14 @@ export class Cart extends Component<CartPagePropsType> {
               currentAmountDown={this.props.setCurrentAmountDown}
               currentAmountUp={this.props.setCurrentAmountUp}
               selectedCurrency={this.props.selectedCurrency}
-              anotherStyle ={this.props.anotherStyle}
+              anotherStyle={this.props.anotherStyle}
               deleteProductInCart={this.props.deletedProductInCart}
             />
           ))}
         </div>
-        <div><TotalPriceContainer  anotherStyle ={this.props.anotherStyle}/></div>
+        <div>
+          <TotalPriceContainer anotherStyle={this.props.anotherStyle} />
+        </div>
       </div>
     )
   }

@@ -14,7 +14,6 @@ export class AttributeBox extends Component<AttributeBoxPropsType> {
     const attributeId: string = this.props.attribute.id
     const currentItem = this.props.currentItem
     const currentItemAttribute = this.props.currentItem[attributeId]
-    console.log(currentItemAttribute)
     return (
       <div>
         <div className={s.attributeName}>

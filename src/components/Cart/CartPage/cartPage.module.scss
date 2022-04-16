@@ -7,24 +7,46 @@
   line-height: 40px;
   color: $black;
 }
-.cartEmpty{
-  @extend %base-font;
+
+%position-center {
   display: flex;
-  height: 10em;
   align-items: center;
   justify-content: center;
 }
+
+.cartEmpty{
+  @extend %base-font;
+  @extend %position-center;
+  height: 10em;
+}
 .totalPrice{
   display: flex;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 32px;
-  color: $black;
-  .price {
-    margin-left: 15px;
+  justify-content: space-between;
+  padding: 50px 0;
+  border-top: 1px solid #E5E5E5;
+  .total{
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 32px;
+    color: $black;
+  }
+  .greenButton {
+  @extend %position-center;
+    width: 292px;
+    height: 43px;
+    font-family: Raleway, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+    background: $green;
+    color: #FFFFFF;
+    cursor: pointer;
+    user-select: none;
   }
 }
+
 .cartTitle{
   @extend %base-font;
   display: flex;

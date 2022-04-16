@@ -13,8 +13,10 @@ export class TotalPrice extends Component<TotalPricePropsType> {
 
   getTotalPrice = (): number => {
     const currentProductPrice = this.props.selectedProducts.map((product) => {
-      if(!product.product) return 0
-      return (product.product.prices.find(v => v.currency.label === this.props.selectedCurrency.label)?.amount ?? 0) * product.amount
+      if (!product.product) return 0
+      return (
+        product.product.prices.find(
+          v => v.currency.label === this.props.selectedCurrency.label)?.amount ?? 0) * product.amount
     })
     return currentProductPrice.reduce((a: number, b: number) => a + b)
   }
@@ -25,11 +27,19 @@ export class TotalPrice extends Component<TotalPricePropsType> {
     return (
       <div className={style.totalPrice}>
         <div className={style.total}>
-          Total Price:
+          <div>
+            Total Price:
+          </div>
+          <div className={style.price}>
+            {this.props.selectedCurrency.symbol} {this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
+          </div>
         </div>
-        <div className={style.price}>
-          {this.props.selectedCurrency.symbol} { this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
-        </div>
+        {!this.props.anotherStyle &&
+        <div>
+          <button className={s.greenButton} onClick={() => alert('Happy End')}>
+            CHECK OUT
+          </button>
+        </div>}
       </div>
     )
   }

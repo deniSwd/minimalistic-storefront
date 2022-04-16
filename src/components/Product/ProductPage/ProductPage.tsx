@@ -10,6 +10,7 @@ import { actions } from '../../../redux/cartReducer'
 import Preloader from '../../../utilities/Preloader/Preloader'
 import { AppStateType } from '../../../redux/redux-store'
 import MessageAboutAttributes from '../MessageAboutAttributes/MessageAboutAttributes'
+import { getPrice } from '../../../utilities/getPrice'
 
 
 type ProductPagePropsType = TProps & RouteComponentProps<{ id: string }>
@@ -31,13 +32,6 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   async componentDidMount() {
     const result = await productAPI.getProduct(this.props.match.params.id)
     this.setState({ ...this.state, product: result })
-  }
-
-  getPrice(): PriceType | undefined {
-    if (this.state.product != null && this.state.product.prices) {
-      return this.state.product.prices.find(
-        (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol)
-    }
   }
 
   getProductMainPhoto(mainPhoto: string) {
@@ -91,7 +85,8 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
         />
       )
     )
-    const currentPrice = this.getPrice()
+    const currentPrice = this.state.product != null &&
+      getPrice(this.state.product.prices, this.props.selectedCurrency.symbol)
 
     return (
       <>

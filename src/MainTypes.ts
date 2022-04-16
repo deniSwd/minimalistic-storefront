@@ -38,10 +38,8 @@ export type CategoryType = {
   products: Array<ProductType>
   selectedCurrency: CurrencyType
 }
-export type Categories = Array<CategoryType>
 
-export type CurrentItemType = Record < string, AttributeType>
-
+export type CurrentItemType = Record<string, AttributeType>
 
 export type SelectedProductType = {
   product: ProductType | null

@@ -3,6 +3,7 @@ import s from './productForCategories.module.scss'
 import { NavLink } from 'react-router-dom'
 import { AttributeSetType, CurrencyType, PriceType } from '../../../MainTypes'
 import cartButtonImg from '../../../assets/cartButton.svg'
+import { getPrice } from '../../../utilities/getPrice'
 
 type ProductForCategoriesType = {
   name: string
@@ -17,18 +18,13 @@ type ProductForCategoriesType = {
 }
 
 export class ProductForCategories extends Component<ProductForCategoriesType> {
-  getPrice(): PriceType | undefined {
-    return this.props.prices.find(
-      (u: PriceType) => u.currency.symbol === this.props.selectedCurrency.symbol
-    )
-  }
 
   render() {
-    const currentPrice = this.getPrice()
+    const currentPrice = getPrice(this.props.prices, this.props.selectedCurrency.symbol)
     return (
       <div className={s.productWrapper}>
         {this.props.inStock && this.props.attributes.length === 0 &&
-        <div className={s.addToCartButton} onClick={() =>this.props.addProduct(this.props.id)}>
+        <div className={s.addToCartButton} onClick={() => this.props.addProduct(this.props.id)}>
           <img src={cartButtonImg} alt='' />
         </div>}
         <div className={s.productStyle}>

@@ -35,7 +35,6 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
   }
 
   render() {
-    console.log(this.state)
     const categoryName = this.props.category
     const renderCategory: Array<ProductType> = this.props.products.filter(
       (u: ProductType) => u.category === categoryName)
