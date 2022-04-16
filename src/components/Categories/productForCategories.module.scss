@@ -1,61 +1,82 @@
 @import './src/app.module';
 
-
-
-.productStyle {
+.productWrapper {
   position: relative;
-  width: 386px;
-  height: 444px;
-  padding: 16px;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
-  }
-  .outOfStock{
+
+  .addToCartButton {
     position: absolute;
+    right: 15px;
+    bottom: 70px;
+    z-index: 1000;
+    cursor: grab;
+  }
+
+  .productStyle {
+    position: relative;
     width: 386px;
     height: 444px;
-    top: 0;
-    left: 0;
-    background: #FFFFFF;
-    opacity: 0.5;
-    .text {
+    padding: 16px;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
+    }
+
+    .outOfStock {
+      position: absolute;
       width: 386px;
-      margin: 166px 0;
-      text-align: center;
-      font-family: 'Raleway',sans-serif;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 30px;
-      color: #8D8F9A;
+      height: 444px;
+      top: 0;
+      left: 0;
+      background: #FFFFFF;
+      opacity: 0.5;
+
+      .text {
+        width: 386px;
+        margin: 166px 0;
+        text-align: center;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #8D8F9A;
+      }
     }
-  }
-  .img {
-    height: 330px;
-    width: 354px;
-    object-fit: contain;
-    margin-bottom: 24px;
-  }
-  .content {
-    display: flex;
-    flex-direction: column;
-    .name {
-      height: 29px;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      color: $black;
+
+    .img {
+      height: 330px;
+      width: 354px;
+      object-fit: contain;
+      margin-bottom: 24px;
+    }
+
+    .content {
       display: flex;
-      align-items: center;
-    }
-    .price {
-      height: 29px;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 18px;
-      color: $black;
-      line-height: 100%;
+      flex-direction: column;
+
+      .name {
+        height: 29px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 300;
+        font-size: 18px;
+        color: $black;
+        display: flex;
+        align-items: center;
+      }
+
+      .price {
+        height: 29px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        color: $black;
+        line-height: 100%;
+      }
     }
   }
+
 }
+
+
+
 

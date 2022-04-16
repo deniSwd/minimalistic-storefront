@@ -66,7 +66,6 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   buttonOnClick = () => {
     if (this.state.product &&
       Object.keys(this.state.currentItem).length < this.state.product.attributes.length) {
-      // return alert('YOU MUST SELECTED ALL ATTRIBUTES!')
       this.setState({ ...this.state, message: true })
       return
     } else if (this.state.wasAdded) return
@@ -92,7 +91,6 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
         />
       )
     )
-
     const currentPrice = this.getPrice()
 
     return (

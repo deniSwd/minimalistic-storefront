@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import s from './productPage.module.scss'
+import s from './messageAboutAttributes.module.scss'
 
 type MessageAboutAttributesPropsType = {
   messageOff: () => void

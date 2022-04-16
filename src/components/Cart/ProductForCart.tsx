@@ -40,7 +40,6 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
   }
 
   render() {
-    console.log(this.props.productInCart.currentItem)
     let style = s
     this.props.anotherStyle ? style = v : style
     const currentPrice = this.getPrice()

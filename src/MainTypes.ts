@@ -49,7 +49,7 @@ export type SelectedProductType = {
   currentItem: CurrentItemType
   attributeId: string
   amount: number
-  wasAdded: boolean
-  message: boolean
+  wasAdded?: boolean
+  message?: boolean
 }
 
