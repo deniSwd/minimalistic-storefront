@@ -10,6 +10,7 @@ import { CurrencyType, PriceType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
+import { getLocalCart, setLocalCart } from '../../redux/cartReducer'
 
 type HeaderStateType = {
   showCurrency: boolean

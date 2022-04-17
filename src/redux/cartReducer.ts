@@ -1,9 +1,11 @@
-import { InferActionsTypes } from './redux-store'
+import { AppStateType, BaseThunkType, InferActionsTypes } from './redux-store'
 import { CurrentItemType, SelectedProductType } from '../MainTypes'
 import { isEqual } from '../utilities/isEqual'
+import { productAPI } from '../API/api'
 
+type ThunkType = BaseThunkType<ActionsType>
 export type ActionsType = InferActionsTypes<typeof actions>
-export type initialsStateType = typeof initialsState
+export type InitialsStateType = typeof initialsState
 
 let initialsState = {
   currentCart: {
@@ -11,7 +13,7 @@ let initialsState = {
   }
 }
 
-const cartReducer = (state = initialsState, action: ActionsType): initialsStateType => {
+const cartReducer = (state = initialsState, action: ActionsType): InitialsStateType => {
   switch (action.type) {
     case 'ADD_PRODUCTS_IN_CART':
       const currentCartProductsForAdd = [
@@ -83,6 +85,8 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
           selectedProducts: [...newSelectedProducts]
         }
       }
+    case 'GET_CURRENT_LOCAL_CART':
+      return  action.localCart
         default:
         return state
       }
@@ -95,9 +99,20 @@ const cartReducer = (state = initialsState, action: ActionsType): initialsStateT
     setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
       ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
     setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
-      ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const)
+      ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const),
+    getCurrentLocalCart: (localCart: InitialsStateType) =>
+      ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const)
   }
 
+export const setLocalCart = (): ThunkType => async ( dispatch, getState ) => {
+ localStorage.setItem('cart',JSON.stringify(getState().cartPage))
+}
+
+export const getLocalCart = (): ThunkType => async (dispatch) => {
+  const cart = localStorage.getItem('cart')
+  const localCart = cart!=null && JSON.parse(cart)
+  dispatch(actions.getCurrentLocalCart(localCart))
+}
 
   export default cartReducer
 

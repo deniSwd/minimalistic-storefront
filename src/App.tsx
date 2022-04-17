@@ -4,13 +4,13 @@ import { RoutePage } from './components/RoutePage'
 import s from './app.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
 import { getAllProducts } from './redux/categoryReducer'
-import { actions } from './redux/cartReducer'
-import { CategoryPage } from './components/Categories/CategoryPage/CategoryPage'
+import { getLocalCart } from './redux/cartReducer'
 
 export class App extends Component<ConnectPropsType> {
 
   async componentDidMount() {
     await this.props.getAllProducts()
+    this.props.getLocalCart()
   }
 
   render() {
@@ -23,7 +23,7 @@ export class App extends Component<ConnectPropsType> {
   }
 }
 
-const connector = connect(null, { getAllProducts })
+const connector = connect(null, { getAllProducts, getLocalCart })
 const AppContainer = connector(App)
 
 type ConnectPropsType = ConnectedProps<typeof connector>

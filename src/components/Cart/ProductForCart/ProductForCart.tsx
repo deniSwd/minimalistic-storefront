@@ -18,18 +18,22 @@ type ProductForCartPropsType = {
   selectedCurrency: CurrencyType
   anotherStyle: boolean
   deleteProductInCart: (deletedProduct: SelectedProductType) => void
+  setLocalCart: () => void
 }
 
 export class ProductForCart extends Component<ProductForCartPropsType> {
   amountDown = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
     this.props.currentAmountDown(amountOfProduct, productId, currentItemProduct)
+    this.props.setLocalCart()
   }
   amountUp = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
     this.props.currentAmountUp(amountOfProduct, productId, currentItemProduct)
+    this.props.setLocalCart()
   }
 
   deleteProduct = () => {
     this.props.deleteProductInCart(this.props.productInCart)
+    this.props.setLocalCart()
   }
 
   render() {

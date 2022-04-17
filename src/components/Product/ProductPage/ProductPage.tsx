@@ -6,7 +6,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../../../API/api'
 import { AttributeSetType, AttributeType, PriceType, SelectedProductType } from '../../../MainTypes'
 import { AttributeBox } from '../AttributeBox/AttributeBox'
-import { actions } from '../../../redux/cartReducer'
+import { actions, setLocalCart } from '../../../redux/cartReducer'
 import Preloader from '../../../utilities/Preloader/Preloader'
 import { AppStateType } from '../../../redux/redux-store'
 import MessageAboutAttributes from '../MessageAboutAttributes/MessageAboutAttributes'
@@ -48,6 +48,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   addProduct = () => {
     this.setState({ ...this.state, wasAdded: true })
     this.props.addProductInCart(this.state)
+    this.props.setLocalCart()
   }
 
   wasAdded = () => {
@@ -156,7 +157,7 @@ let mapStateToProps = (state: AppStateType) => {
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
-const connector = connect(mapStateToProps, { ...actions })
+const connector = connect(mapStateToProps, {setLocalCart, ...actions })
 const ProductPageContainer = connector(ProductPage)
 
 let WithRouterDataContainer = withRouter(ProductPageContainer)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { actions } from '../../../redux/cartReducer'
+import { actions, setLocalCart } from '../../../redux/cartReducer'
 import { ProductForCart } from '../ProductForCart/ProductForCart'
 import TotalPriceContainer from '../TotalPrice'
 import { AppStateType } from '../../../redux/redux-store'
@@ -36,6 +36,7 @@ export class Cart extends Component<CartPagePropsType> {
               selectedCurrency={this.props.selectedCurrency}
               anotherStyle={this.props.anotherStyle}
               deleteProductInCart={this.props.deletedProductInCart}
+              setLocalCart = {this.props.setLocalCart}
             />
           ))}
         </div>
@@ -53,7 +54,7 @@ let mapStateToProps = (state: AppStateType) => {
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
-const connector = connect(mapStateToProps, { ...actions })
+const connector = connect(mapStateToProps, { setLocalCart,  ...actions })
 const CartPageContainer = connector(Cart)
 
 type ConnectPropsType = ConnectedProps<typeof connector>

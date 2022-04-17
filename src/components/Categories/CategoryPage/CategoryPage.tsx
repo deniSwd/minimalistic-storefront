@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { ProductForCategories } from '../ProductForCategories/ProductForCategories'
 import s from './categoryPage.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
-import { getAllProducts } from '../../../redux/categoryReducer'
 import { AppStateType } from '../../../redux/redux-store'
 import { ProductType, SelectedProductType } from '../../../MainTypes'
-import { actions } from '../../../redux/cartReducer'
+import { actions, setLocalCart } from '../../../redux/cartReducer'
 
 type OutsideProps = {
   category: string
@@ -30,6 +29,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
     const newState = { ...this.state, product: productForCart[0] }
     this.setState(newState)
     this.props.addProductInCart(newState)
+    this.props.setLocalCart()
   }
 
   render() {
@@ -84,7 +84,7 @@ let mapStateToProps = (state: AppStateType) => {
     selectedCurrency: state.categoryPage.selectedCurrency,
   }
 }
-const connector = connect(mapStateToProps, { addProductInCart: actions.addProductInCart })
+const connector = connect(mapStateToProps, { setLocalCart, addProductInCart: actions.addProductInCart })
 const CategoryPageContainer = connector(CategoryPage)
 
 type ConnectPropsType = ConnectedProps<typeof connector>
