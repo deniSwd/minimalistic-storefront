@@ -36,7 +36,7 @@ export class Cart extends Component<CartPagePropsType> {
               selectedCurrency={this.props.selectedCurrency}
               anotherStyle={this.props.anotherStyle}
               deleteProductInCart={this.props.deletedProductInCart}
-              setLocalCart = {this.props.setLocalCart}
+              setLocalCart={this.props.setLocalCart}
             />
           ))}
         </div>
@@ -54,7 +54,7 @@ let mapStateToProps = (state: AppStateType) => {
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
-const connector = connect(mapStateToProps, { setLocalCart,  ...actions })
+const connector = connect(mapStateToProps, { setLocalCart, ...actions })
 const CartPageContainer = connector(Cart)
 
 type ConnectPropsType = ConnectedProps<typeof connector>

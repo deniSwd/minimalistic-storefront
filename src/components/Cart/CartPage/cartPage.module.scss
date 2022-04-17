@@ -14,17 +14,19 @@
   justify-content: center;
 }
 
-.cartEmpty{
+.cartEmpty {
   @extend %base-font;
   @extend %position-center;
   height: 10em;
 }
-.totalPrice{
+
+.totalPrice {
   display: flex;
   justify-content: space-between;
   padding: 50px 0;
   border-top: 1px solid #E5E5E5;
-  .total{
+
+  .total {
     display: flex;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -32,8 +34,9 @@
     line-height: 32px;
     color: $black;
   }
+
   .greenButton {
-  @extend %position-center;
+    @extend %position-center;
     width: 292px;
     height: 43px;
     font-family: Raleway, sans-serif;
@@ -47,12 +50,13 @@
   }
 }
 
-.cartTitle{
+.cartTitle {
   @extend %base-font;
   display: flex;
   margin: 80px 0 60px 0;
   user-select: none;
-  .numberItems{
+
+  .numberItems {
     margin-left: 5px;
   }
 }

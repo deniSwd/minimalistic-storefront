@@ -12,46 +12,54 @@
   letter-spacing: 0.05em;
 }
 
-.selectedProduct{
+%base-font {
+  font-family: 'Raleway', sans-serif;
+  color: $black;
+}
+
+.selectedProduct {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #E5E5E5;
   padding: 20px 0;
-  .brand{
-    font-family: 'Raleway',sans-serif;
+
+  .brand {
+    @extend %base-font;
     font-weight: 600;
     font-size: 30px;
     line-height: 27px;
-    color: $black;
     margin-bottom: 16px;
   }
-  .name{
-    font-family: 'Raleway',sans-serif;
+
+  .name {
+    @extend %base-font;
     font-weight: 400;
     font-size: 30px;
     line-height: 27px;
-    color: $black;
     margin-bottom: 12px;
   }
+
   .price {
+    @extend %base-font;
     height: 46px;
-    font-family: 'Raleway', sans-serif;
     font-weight: 700;
     font-size: 24px;
     line-height: 46px;
-    color: $black;
     margin-bottom: 12px;
   }
+
   .currentAttributes {
     user-select: none;
-    .attributeName{
-      font-family: 'Roboto Condensed',sans-serif;
+
+    .attributeName {
+      font-family: 'Roboto Condensed', sans-serif;
       font-weight: 700;
       font-size: 18px;
       line-height: 18px;
       color: $black;
       text-transform: uppercase;
     }
+
     .currentItemElement {
       @extend %attribute-box;
       background-color: $black;
@@ -60,12 +68,14 @@
       line-height: 35px;
     }
   }
+
   .amountAndGallery {
     display: flex;
     justify-content: space-between;
     margin: auto 0;
     user-select: none;
-    .deleteButton{
+
+    .deleteButton {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -74,13 +84,15 @@
       opacity: .2;
       cursor: pointer;
     }
+
     .amount {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 268px;
       margin-right: 12px;
-      button{
+
+      button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -90,13 +102,13 @@
         font-size: 30px;
         cursor: pointer;
       }
-      .amountNumber{
-        font-family: 'Raleway',sans-serif;
+
+      .amountNumber {
+        @extend %base-font;
         font-weight: 500;
         font-size: 24px;
         line-height: 26px;
         text-align: center;
-        color: $black;
       }
     }
   }

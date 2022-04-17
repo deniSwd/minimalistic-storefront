@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CurrencyType, CurrentItemType, PriceType, SelectedProductType } from '../../../MainTypes'
+import { CurrencyType, CurrentItemType, SelectedProductType } from '../../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from '../SliderForCart/SliderForCart'
 import Preloader from '../../../utilities/Preloader/Preloader'

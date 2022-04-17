@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import { productAPI } from '../../../API/api'
-import { AttributeSetType, AttributeType, PriceType, SelectedProductType } from '../../../MainTypes'
+import { AttributeSetType, AttributeType, SelectedProductType } from '../../../MainTypes'
 import { AttributeBox } from '../AttributeBox/AttributeBox'
 import { actions, setLocalCart } from '../../../redux/cartReducer'
 import Preloader from '../../../utilities/Preloader/Preloader'
@@ -102,6 +102,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                     src={mainPhoto}
                     onClick={() => this.getProductMainPhoto(mainPhoto)}
                     className={s.productPhoto}
+                    alt=''
                   />
                 </div>
               ))}
@@ -111,11 +112,13 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                 <img
                   src={this.state.product.gallery[0]}
                   className={s.productMainPhoto}
+                  alt=''
                 />
               ) : (
                 <img
                   src={this.state.productMainPhoto}
                   className={s.productMainPhoto}
+                  alt=''
                 />
               )}
             </div>
@@ -160,8 +163,8 @@ let mapStateToProps = (state: AppStateType) => {
 const connector = connect(mapStateToProps, {setLocalCart, ...actions })
 const ProductPageContainer = connector(ProductPage)
 
-let WithRouterDataContainer = withRouter(ProductPageContainer)
+let WithRouterProductPageContainer = withRouter(ProductPageContainer)
 
 type TProps = ConnectedProps<typeof connector>
 
-export default WithRouterDataContainer
+export default WithRouterProductPageContainer

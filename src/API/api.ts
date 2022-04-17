@@ -1,58 +1,58 @@
-import { ApolloClient, ApolloQueryResult, gql, InMemoryCache } from '@apollo/client'
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 import { CategoryType, ProductType } from '../MainTypes'
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000/',
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 })
 
 export const productAPI = {
   async getAllProducts(): Promise<CategoryType> {
     const resultGetAllProducts = await client
-      .query({
-        query: gql`
+    .query({
+      query: gql`
           query {
-            category {
-              name
-              products {
-                id
-                name
-                gallery
-                inStock  
-                category
-                  attributes{
+              category {
+                  name
+                  products {
                       id
                       name
-                      type
-                      items{
-                          displayValue
-                          value
+                      gallery
+                      inStock
+                      category
+                      attributes{
                           id
+                          name
+                          type
+                          items{
+                              displayValue
+                              value
+                              id
+                          }
+                      }
+                      brand
+                      prices {
+                          currency {
+                              label
+                              symbol
+                          }
+                          amount
                       }
                   }
-                brand
-                prices {
-                  currency {
-                    label
-                    symbol
-                  }
-                  amount
-                }
               }
-            }
           }
-        `,
-      })
-      .then(res => res.data.category)
-    if(!resultGetAllProducts) {
+      `
+    })
+    .then(res => res.data.category)
+    if (!resultGetAllProducts) {
       throw new Error('Data not found')
     }
     return resultGetAllProducts
   },
   async getProduct(idProduct: string): Promise<ProductType> {
     const resultGetProduct = await client
-      .query({
-        query: gql`
+    .query({
+      query: gql`
           query {
               product (id: "${idProduct}") {
                   id
@@ -81,12 +81,12 @@ export const productAPI = {
                   }
               }
           }
-      `,
-      })
-      .then(res => res.data.product)
-    if(!resultGetProduct) {
+      `
+    })
+    .then(res => res.data.product)
+    if (!resultGetProduct) {
       throw new Error('Data not found')
     }
     return resultGetProduct
-  },
+  }
 }

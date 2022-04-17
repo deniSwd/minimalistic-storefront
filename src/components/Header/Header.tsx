@@ -10,7 +10,6 @@ import { CurrencyType, PriceType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage/CartPage'
 import { actions } from '../../redux/categoryReducer'
 import { AppStateType } from '../../redux/redux-store'
-import { getLocalCart, setLocalCart } from '../../redux/cartReducer'
 
 type HeaderStateType = {
   showCurrency: boolean
@@ -33,12 +32,10 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     this.setState({ showCurrency: false })
   }
 
-  showCartOnPage = () => {
-    this.setState({ showCart: true })
+  showAndHideCartOnPage = () => {
+    this.setState({ showCart: !this.state.showCart })
   }
-  hideCartOnPage = () => {
-    this.setState({ showCart: false })
-  }
+
   getCurrencyOnPage = (currency: CurrencyType) => {
     this.props.setSelectedCurrency(currency)
   }
@@ -62,7 +59,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
           </div>
         </nav>
         <div className={s.logo}>
-          <img src={logoImg} />
+          <img src={logoImg} alt=''/>
         </div>
         <div className={s.actions}>
           <div className={s.currencySelector}
@@ -71,11 +68,11 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             <div>{this.props.selectedCurrency.symbol}</div>
             {!this.state.showCurrency ? (
               <div className={s.arrow}>
-                <img src={setCurrencyOn} />
+                <img src={setCurrencyOn} alt='' />
               </div>
             ) : (
               <div className={s.arrow}>
-                <img src={setCurrencyOff} />
+                <img src={setCurrencyOff} alt='' />
               </div>
             )}
             {this.state.showCurrency && (
@@ -91,22 +88,24 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
               </div>
             )}
           </div>
-          <div className={s.cart}
-               onMouseEnter={this.showCartOnPage}
-               onMouseLeave={this.hideCartOnPage}>
-            <img src={cartImg} />
-            {this.props.selectedProducts.length > 0 &&
-            <div className={s.counterProducts}>
-              {this.props.selectedProducts.length}
-            </div>}
+          <div className={s.cart}>
+            <div className={s.cartButton}
+                 onClick={this.showAndHideCartOnPage}>
+              <img src={cartImg} alt='' />
+              {this.props.selectedProducts.length > 0 &&
+              <div className={s.counterProducts}>
+                {this.props.selectedProducts.length}
+              </div>}
+            </div>
             {this.state.showCart && (
               <div>
-                <div className={s.overlayBackground} />
+                <div className={s.overlayBackground} onClick={this.showAndHideCartOnPage}/>
                 <div className={s.cartOverlay}>
                   <CartPageContainer anotherStyle={true} />
                   <div className={s.buttons}>
                     <NavLink to={'/cartPage'}>
-                      <button className={s.whiteButton}>
+                      <button className={s.whiteButton}
+                              onClick={this.showAndHideCartOnPage}>
                         VIEW BAG
                       </button>
                     </NavLink>

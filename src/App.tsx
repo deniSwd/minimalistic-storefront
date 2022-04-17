@@ -16,7 +16,9 @@ export class App extends Component<ConnectPropsType> {
   render() {
     return (
       <div className={s.mainStyle}>
-        <HeaderPageContainer />
+        <div className={s.headerWrapper}>
+          <HeaderPageContainer />
+        </div>
         <RoutePage />
       </div>
     )

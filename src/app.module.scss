@@ -7,8 +7,16 @@ $black: #1D1F22;
   width: 1440px;
   margin: 0 auto;
   padding: 0 100px 50px 100px;
+
+  .headerWrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 400;
+  }
 }
-@media screen and (min-width: 1440px) {/* если окно браузера больше максимальной ширины сайта */
+
+@media screen and (min-width: 1440px) { /* если окно браузера больше максимальной ширины сайта */
   html {
     margin-left: calc(100vw - 100%);
     margin-right: 0;
