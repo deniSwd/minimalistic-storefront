@@ -43,23 +43,30 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     this.getCurrencyOnPage(currency)
     this.hideCurrencyOnPage()
   }
+  forCheckOutButton = () => {
+    this.showAndHideCartOnPage()
+    alert('Happy End')
+  }
 
   render() {
     return (
       <div className={s.header}>
         <nav className={s.nav}>
           <div>
-            <NavLink exact to="/" className={s.navItem} activeClassName={s.activeNavItem}>ALL</NavLink>
+            <NavLink exact to="/" className={s.navItem}
+                     activeClassName={s.activeNavItem}>ALL</NavLink>
           </div>
           <div>
-            <NavLink to="/clothes" className={s.navItem} activeClassName={s.activeNavItem}>CLOTHES</NavLink>
+            <NavLink to="/clothes" className={s.navItem}
+                     activeClassName={s.activeNavItem}>CLOTHES</NavLink>
           </div>
           <div>
-            <NavLink to="/tech" className={s.navItem} activeClassName={s.activeNavItem}>TECH</NavLink>
+            <NavLink to="/tech" className={s.navItem}
+                     activeClassName={s.activeNavItem}>TECH</NavLink>
           </div>
         </nav>
         <div className={s.logo}>
-          <img src={logoImg} alt=''/>
+          <img src={logoImg} alt='' />
         </div>
         <div className={s.actions}>
           <div className={s.currencySelector}
@@ -99,7 +106,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             </div>
             {this.state.showCart && (
               <div>
-                <div className={s.overlayBackground} onClick={this.showAndHideCartOnPage}/>
+                <div className={s.overlayBackground} onClick={this.showAndHideCartOnPage} />
                 <div className={s.cartOverlay}>
                   <CartPageContainer anotherStyle={true} />
                   <div className={s.buttons}>
@@ -109,7 +116,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
                         VIEW BAG
                       </button>
                     </NavLink>
-                    <button className={s.greenButton} onClick={() => alert('Happy End')}>
+                    <button className={s.greenButton} onClick={this.forCheckOutButton}>
                       CHECK OUT
                     </button>
                   </div>

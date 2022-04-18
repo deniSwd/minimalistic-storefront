@@ -8,7 +8,7 @@ export class RoutePage extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" render={() => <CategoryPageContainer category=""/>} />
+        <Route exact path="/" render={() => <CategoryPageContainer category="" />} />
         <Route
           path="/clothes"
           render={() => <CategoryPageContainer category="clothes" />}
@@ -21,7 +21,7 @@ export class RoutePage extends Component {
           path="/productPage/:id"
           render={() => <WithRouterProductPageContainer />}
         />
-        <Route path="/cartPage" render={() => <CartPageContainer anotherStyle ={false} />} />
+        <Route path="/cartPage" render={() => <CartPageContainer anotherStyle={false} />} />
       </div>
     )
   }

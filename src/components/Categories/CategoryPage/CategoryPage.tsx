@@ -19,12 +19,12 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
       productMainPhoto: '',
       currentItem: {},
       attributeId: '',
-      amount: 0,
+      amount: 0
     }
   }
 
 
-  addProduct = (productId:string) => {
+  addProduct = (productId: string) => {
     let productForCart = this.props.products.filter((v) => v.id === productId)
     const newState = { ...this.state, product: productForCart[0] }
     this.setState(newState)
@@ -44,33 +44,33 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
         <div className={s.products}>
           {this.props.products && categoryName
             ? renderCategory.map((u: ProductType, i: number) => (
-                <ProductForCategories
-                  key={i}
-                  name={u.name}
-                  image={u.gallery[0]}
-                  id={u.id}
-                  brand={u.brand}
-                  inStock={u.inStock}
-                  prices={u.prices}
-                  attributes={u.attributes}
-                  addProduct={this.addProduct}
-                  selectedCurrency={this.props.selectedCurrency}
-                />
-              ))
+              <ProductForCategories
+                key={i}
+                name={u.name}
+                image={u.gallery[0]}
+                id={u.id}
+                brand={u.brand}
+                inStock={u.inStock}
+                prices={u.prices}
+                attributes={u.attributes}
+                addProduct={this.addProduct}
+                selectedCurrency={this.props.selectedCurrency}
+              />
+            ))
             : this.props.products.map((u: ProductType, i: number) => (
-                <ProductForCategories
-                  key={i}
-                  name={u.name}
-                  image={u.gallery[0]}
-                  id={u.id}
-                  brand={u.brand}
-                  inStock={u.inStock}
-                  prices={u.prices}
-                  attributes={u.attributes}
-                  addProduct={this.addProduct}
-                  selectedCurrency={this.props.selectedCurrency}
-                />
-              ))}
+              <ProductForCategories
+                key={i}
+                name={u.name}
+                image={u.gallery[0]}
+                id={u.id}
+                brand={u.brand}
+                inStock={u.inStock}
+                prices={u.prices}
+                attributes={u.attributes}
+                addProduct={this.addProduct}
+                selectedCurrency={this.props.selectedCurrency}
+              />
+            ))}
         </div>
       </div>
     )
@@ -81,7 +81,7 @@ let mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,
-    selectedCurrency: state.categoryPage.selectedCurrency,
+    selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
 const connector = connect(mapStateToProps, { setLocalCart, addProductInCart: actions.addProductInCart })

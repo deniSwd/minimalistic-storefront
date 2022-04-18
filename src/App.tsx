@@ -5,6 +5,7 @@ import s from './app.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
 import { getAllProducts } from './redux/categoryReducer'
 import { getLocalCart } from './redux/cartReducer'
+import { AppStateType } from './redux/redux-store'
 
 export class App extends Component<ConnectPropsType> {
 
@@ -14,6 +15,7 @@ export class App extends Component<ConnectPropsType> {
   }
 
   render() {
+
     return (
       <div className={s.mainStyle}>
         <div className={s.headerWrapper}>
@@ -25,7 +27,13 @@ export class App extends Component<ConnectPropsType> {
   }
 }
 
-const connector = connect(null, { getAllProducts, getLocalCart })
+let mapStateToProps = (state: AppStateType) => {
+  return {
+    selectedProducts: state.cartPage.currentCart.selectedProducts
+  }
+}
+
+const connector = connect(mapStateToProps, { getAllProducts, getLocalCart })
 const AppContainer = connector(App)
 
 type ConnectPropsType = ConnectedProps<typeof connector>

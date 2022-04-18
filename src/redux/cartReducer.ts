@@ -1,7 +1,6 @@
-import { AppStateType, BaseThunkType, InferActionsTypes } from './redux-store'
+import { BaseThunkType, InferActionsTypes } from './redux-store'
 import { CurrentItemType, SelectedProductType } from '../MainTypes'
 import { isEqual } from '../utilities/isEqual'
-import { productAPI } from '../API/api'
 
 type ThunkType = BaseThunkType<ActionsType>
 export type ActionsType = InferActionsTypes<typeof actions>
@@ -86,34 +85,32 @@ const cartReducer = (state = initialsState, action: ActionsType): InitialsStateT
         }
       }
     case 'GET_CURRENT_LOCAL_CART':
-      return  action.localCart
-        default:
-        return state
-      }
+      return { ...state, ...action.localCart }
+    default:
+      return state
   }
-  export const actions = {
-    addProductInCart: (selectedProduct: SelectedProductType) =>
-      ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
-    deletedProductInCart: (deletedProduct: SelectedProductType) =>
-      ({ type: 'DELETE_PRODUCTS_IN_CART', deletedProduct } as const),
-    setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
-      ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
-    setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
-      ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const),
-    getCurrentLocalCart: (localCart: InitialsStateType) =>
-      ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const)
-  }
+}
+export const actions = {
+  addProductInCart: (selectedProduct: SelectedProductType) =>
+    ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
+  deletedProductInCart: (deletedProduct: SelectedProductType) =>
+    ({ type: 'DELETE_PRODUCTS_IN_CART', deletedProduct } as const),
+  setCurrentAmountDown: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+    ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
+  setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
+    ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const),
+  getCurrentLocalCart: (localCart: InitialsStateType) =>
+    ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const)
+}
 
-export const setLocalCart = (): ThunkType => async ( dispatch, getState ) => {
- localStorage.setItem('cart',JSON.stringify(getState().cartPage))
+export const setLocalCart = (): ThunkType => async (dispatch, getState) => {
+  localStorage.setItem('cart', JSON.stringify(getState().cartPage))
 }
 
 export const getLocalCart = (): ThunkType => async (dispatch) => {
-  const cart = localStorage.getItem('cart')
-  const localCart = cart!=null && JSON.parse(cart)
+  const cart = localStorage.getItem('cart') ?? '{}'
+  const localCart = cart != null && JSON.parse(cart)
   dispatch(actions.getCurrentLocalCart(localCart))
 }
 
-  export default cartReducer
-
-
+export default cartReducer

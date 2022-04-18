@@ -155,12 +155,11 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
 
 let mapStateToProps = (state: AppStateType) => {
   return {
-    products: state.categoryPage.products,
     name: state.categoryPage.name,
     selectedCurrency: state.categoryPage.selectedCurrency
   }
 }
-const connector = connect(mapStateToProps, {setLocalCart, ...actions })
+const connector = connect(mapStateToProps, { setLocalCart, ...actions })
 const ProductPageContainer = connector(ProductPage)
 
 let WithRouterProductPageContainer = withRouter(ProductPageContainer)
