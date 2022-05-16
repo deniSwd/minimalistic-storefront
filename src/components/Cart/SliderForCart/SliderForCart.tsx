@@ -45,12 +45,16 @@ export class SliderForCart extends Component<OutsideProps, SliderForCartStateTyp
           <img src={this.props.gallery[imageIndex]} className={style.galleryInCart} alt='' />
           {this.props.gallery.length > 1 &&
           <div className={style.sliderButtons}>
-            <img
-              src={sliderButtonLeft}
-              onClick={() => this.imageDown(imageIndex)} alt='' />
-            <img
-              src={sliderButtonRight}
-              onClick={() => this.imageUp(imageIndex)} alt='' />
+            <div className={style.img}>
+              <img
+                src={sliderButtonLeft}
+                onClick={() => this.imageDown(imageIndex)} alt='' />
+            </div>
+            <div className={style.img}>
+              <img
+                src={sliderButtonRight}
+                onClick={() => this.imageUp(imageIndex)} alt='' />
+            </div>
           </div>
           }
         </div> : <img src={this.props.gallery[0]} className={style.imageInCart} alt='' />}
