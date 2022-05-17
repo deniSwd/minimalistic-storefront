@@ -79,6 +79,7 @@
         width: 8px;
         height: 80px;
         margin-left: 10px;
+        cursor: pointer;
       }
 
       .currencyList {
@@ -86,13 +87,21 @@
         left: 1140px;
         top: 65px;
         width: 114px;
-        padding: 20px;
-        @extend %base-font;
-        line-height: 28px;
+        padding: 20px 0;
         background-color: white;
         z-index: 90;
         box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
-        cursor: pointer;
+
+        div {
+          width: 100%;
+          @extend %base-font;
+          line-height: 45px;
+          padding-left: 20px;
+          cursor: pointer;
+        }
+        div:hover {
+          background-color: #EEEEEE;
+        }
       }
     }
 

@@ -83,11 +83,14 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
               +
             </button>
             <div className={style.amountNumber}>{this.props.productInCart.amount}</div>
-            <button onClick={() => this.props.productInCart.product && this.amountDown(
-              this.props.productInCart.amount,
-              this.props.productInCart.product.id,
-              this.props.productInCart.currentItem
-            )
+            <button onClick={() =>
+              this.props.productInCart.product &&
+              this.props.productInCart.amount > 1 ?
+                this.amountDown(
+                  this.props.productInCart.amount,
+                  this.props.productInCart.product.id,
+                  this.props.productInCart.currentItem
+                ) : this.deleteProduct()
             }
             >
               –

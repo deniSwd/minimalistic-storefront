@@ -32,11 +32,8 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     this.setCountProducts(this.props.selectedProducts)
   }
 
-  showCurrencyOnPage = () => {
-    this.setState({ showCurrency: true })
-  }
-  hideCurrencyOnPage = () => {
-    this.setState({ showCurrency: false })
+  showAndHideCurrencyOnPage = () => {
+    this.setState({ showCurrency: !this.state.showCurrency })
   }
 
   showAndHideCartOnPage = () => {
@@ -48,7 +45,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
   }
   getAndHideCurrency = (currency: CurrencyType) => {
     this.getCurrencyOnPage(currency)
-    this.hideCurrencyOnPage()
+    this.showAndHideCurrencyOnPage()
   }
   forCheckOutButton = () => {
     this.showAndHideCartOnPage()
@@ -89,8 +86,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
         </div>
         <div className={s.actions}>
           <div className={s.currencySelector}
-               onMouseEnter={this.showCurrencyOnPage}
-               onMouseLeave={this.hideCurrencyOnPage}>
+               onClick={this.showAndHideCurrencyOnPage}>
             <div>{this.props.selectedCurrency.symbol}</div>
             {!this.state.showCurrency ? (
               <div className={s.arrow}>

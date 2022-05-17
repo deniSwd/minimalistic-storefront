@@ -43,9 +43,9 @@ const cartReducer = (state = initialsState, action: ActionsType): InitialsStateT
           JSON.stringify(v.currentItem) ===
           JSON.stringify(action.currentItemProduct))
       if (currentProduct) {
-        currentProduct.amount > 1
+        currentProduct.amount > 0
           ? (currentProduct.amount = action.amountOfProduct - 1)
-          : (currentProduct.amount = 1)
+          : (currentProduct.amount = 0)
       }
       return {
         ...state,

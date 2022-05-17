@@ -1,4 +1,4 @@
-import { PriceType, ProductType } from '../MainTypes'
+import { PriceType } from '../MainTypes'
 
 export const getPrice = (prices: Array<PriceType>, selectedCurrencySymbol: string ): PriceType | undefined => {
     return prices.find(
