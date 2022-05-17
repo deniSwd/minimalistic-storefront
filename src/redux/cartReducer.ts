@@ -8,7 +8,8 @@ export type InitialsStateType = typeof initialsState
 
 let initialsState = {
   currentCart: {
-    selectedProducts: [] as Array<SelectedProductType>
+    selectedProducts: [] as Array<SelectedProductType>,
+    counterProductsValue: 0
   }
 }
 
@@ -86,10 +87,27 @@ const cartReducer = (state = initialsState, action: ActionsType): InitialsStateT
       }
     case 'GET_CURRENT_LOCAL_CART':
       return { ...state, ...action.localCart }
+    case 'SET_COUNTER_PRODUCTS_VALUE':
+      const calculate = () => {
+        let counterProductsValue = 0
+        for (let i = 0; i < state.currentCart.selectedProducts.length; i++) {
+          counterProductsValue += state.currentCart.selectedProducts[i]?.amount ?? 0
+        }
+        return counterProductsValue
+      }
+      if (state.currentCart.counterProductsValue === calculate()) return state
+      return {
+        ...state,
+        currentCart: {
+          ...state.currentCart,
+          counterProductsValue: calculate()
+        }
+      }
     default:
       return state
   }
 }
+
 export const actions = {
   addProductInCart: (selectedProduct: SelectedProductType) =>
     ({ type: 'ADD_PRODUCTS_IN_CART', selectedProduct } as const),
@@ -100,7 +118,9 @@ export const actions = {
   setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
     ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const),
   getCurrentLocalCart: (localCart: InitialsStateType) =>
-    ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const)
+    ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const),
+  setCounter: () =>
+    ({ type: 'SET_COUNTER_PRODUCTS_VALUE' } as const)
 }
 
 export const setLocalCart = (): ThunkType => async (dispatch, getState) => {

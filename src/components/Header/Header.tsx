@@ -6,15 +6,15 @@ import setCurrencyOff from '../../assets/setCurrencyOff.png'
 import logoImg from '../../assets/Logo.svg'
 import s from './header.module.scss'
 import { connect, ConnectedProps } from 'react-redux'
-import { CurrencyType, PriceType, SelectedProductType } from '../../MainTypes'
+import { CurrencyType, PriceType } from '../../MainTypes'
 import CartPageContainer from '../Cart/CartPage/CartPage'
-import { actions } from '../../redux/categoryReducer'
+import { actions as categoryActions } from '../../redux/categoryReducer'
+import { actions as cartActions } from '../../redux/cartReducer'
 import { AppStateType } from '../../redux/redux-store'
 
 type HeaderStateType = {
   showCurrency: boolean
   showCart: boolean
-  counterProductsValue: number
 }
 
 export class Header extends Component<HeaderPropsType, HeaderStateType> {
@@ -22,14 +22,12 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     super(props)
     this.state = {
       showCurrency: false,
-      showCart: false,
-      counterProductsValue: 0
+      showCart: false
     }
   }
 
   componentDidUpdate(prevProps: Readonly<HeaderPropsType>, prevState: Readonly<HeaderStateType>) {
-    if(prevState.counterProductsValue === this.countProducts(this.props.selectedProducts)) return
-    this.setCountProducts(this.props.selectedProducts)
+    this.props.setCounter()
   }
 
   showAndHideCurrencyOnPage = () => {
@@ -52,19 +50,8 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     alert('Happy End')
   }
 
-  countProducts(selectedProducts: Array<SelectedProductType>) {
-    let counterProductsValue = 0
-    for (let i = 0; i <= selectedProducts.length; i++) {
-      counterProductsValue += selectedProducts[i]?.amount ?? 0
-    }
-    return counterProductsValue
-  }
-
-  setCountProducts = (selectedProducts: Array<SelectedProductType>) => {
-    this.setState({ counterProductsValue: this.countProducts(selectedProducts) })
-  }
-
   render() {
+    console.log(this.props.counterProductsValue)
     return (
       <div className={s.header}>
         <nav className={s.nav}>
@@ -114,9 +101,9 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
             <div className={s.cartButton}
                  onClick={this.showAndHideCartOnPage}>
               <img src={cartImg} alt='' />
-              {this.props.selectedProducts.length > 0 &&
+              {this.props.counterProductsValue > 0 &&
               <div className={s.counterProducts}>
-                {this.state.counterProductsValue}
+                {this.props.counterProductsValue}
               </div>}
             </div>
             {this.state.showCart && (
@@ -149,11 +136,12 @@ let mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     selectedCurrency: state.categoryPage.selectedCurrency,
-    selectedProducts: state.cartPage.currentCart.selectedProducts
+    selectedProducts: state.cartPage.currentCart.selectedProducts,
+    counterProductsValue: state.cartPage.currentCart.counterProductsValue
   }
 }
 
-const connector = connect(mapStateToProps, { ...actions })
+const connector = connect(mapStateToProps, { ...cartActions, ...categoryActions })
 const HeaderPageContainer = connector(Header)
 
 type HeaderPropsType = ConnectedProps<typeof connector>

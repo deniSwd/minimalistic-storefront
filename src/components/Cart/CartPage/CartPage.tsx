@@ -24,7 +24,7 @@ export class Cart extends Component<CartPagePropsType> {
       <div>
         <div className={style.cartTitle}>
           <div>MY CART,</div>
-          <div className={style.numberItems}>{this.props.selectedProducts.length} items</div>
+          <div className={style.numberItems}>{this.props.counterProductsValue} items</div>
         </div>
         <div className={style.productsBlock}>
           {this.props.selectedProducts.map((productInCart: SelectedProductType, i: number) => (
@@ -51,7 +51,8 @@ export class Cart extends Component<CartPagePropsType> {
 let mapStateToProps = (state: AppStateType) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts,
-    selectedCurrency: state.categoryPage.selectedCurrency
+    selectedCurrency: state.categoryPage.selectedCurrency,
+    counterProductsValue: state.cartPage.currentCart.counterProductsValue
   }
 }
 const connector = connect(mapStateToProps, { setLocalCart, ...actions })
