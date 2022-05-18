@@ -5,7 +5,7 @@ import { BaseThunkType, InferActionsTypes } from './redux-store'
 type ActionsType = InferActionsTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionsType>
 
-let initialsState: CategoryType = {
+const initialsState: CategoryType = {
   name: '',
   products: [],
   selectedCurrency: {

@@ -52,7 +52,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   }
 
   wasAdded = () => {
-    let productWasAdded = () => {
+    const productWasAdded = () => {
       this.setState({ ...this.state, wasAdded: false })
     }
     setTimeout(productWasAdded, 1000)
@@ -153,7 +153,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     name: state.categoryPage.name,
     selectedCurrency: state.categoryPage.selectedCurrency
@@ -162,7 +162,7 @@ let mapStateToProps = (state: AppStateType) => {
 const connector = connect(mapStateToProps, { setLocalCart, ...actions })
 const ProductPageContainer = connector(ProductPage)
 
-let WithRouterProductPageContainer = withRouter(ProductPageContainer)
+const WithRouterProductPageContainer = withRouter(ProductPageContainer)
 
 type TProps = ConnectedProps<typeof connector>
 

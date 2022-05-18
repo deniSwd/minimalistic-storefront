@@ -45,7 +45,7 @@ export class TotalPrice extends Component<TotalPricePropsType> {
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts,
     selectedCurrency: state.categoryPage.selectedCurrency

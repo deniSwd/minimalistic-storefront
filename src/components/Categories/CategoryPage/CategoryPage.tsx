@@ -25,7 +25,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
 
 
   addProduct = (productId: string) => {
-    let productForCart = this.props.products.filter((v) => v.id === productId)
+    const productForCart = this.props.products.filter((v) => v.id === productId)
     const newState = { ...this.state, product: productForCart[0] }
     this.setState(newState)
     this.props.addProductInCart(newState)
@@ -77,7 +77,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     name: state.categoryPage.name,

@@ -26,7 +26,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
     }
   }
 
-  componentDidUpdate(prevProps: Readonly<HeaderPropsType>, prevState: Readonly<HeaderStateType>) {
+  componentDidUpdate() {
     this.props.setCounter()
   }
 
@@ -132,7 +132,7 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     products: state.categoryPage.products,
     selectedCurrency: state.categoryPage.selectedCurrency,

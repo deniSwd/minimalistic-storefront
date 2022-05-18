@@ -6,7 +6,7 @@ type ThunkType = BaseThunkType<ActionsType>
 export type ActionsType = InferActionsTypes<typeof actions>
 export type InitialsStateType = typeof initialsState
 
-let initialsState = {
+const initialsState = {
   currentCart: {
     selectedProducts: [] as Array<SelectedProductType>,
     counterProductsValue: 0

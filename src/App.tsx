@@ -27,7 +27,7 @@ export class App extends Component<ConnectPropsType> {
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts
   }

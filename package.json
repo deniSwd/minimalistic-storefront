@@ -29,7 +29,9 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**\""
+    "format": "prettier --write \"src/**\"",
+    "lint": "eslint ./",
+    "lint:fix": "yarn lint --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,8 +49,16 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
     "@vitejs/plugin-react": "^1.2.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.1",
     "vite": "^2.8.6"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/deniSwd/minimalistic-storefront.git",
+  "author": "deniSwd <denis_swd@mail.ru>",
+  "license": "MIT"
 }

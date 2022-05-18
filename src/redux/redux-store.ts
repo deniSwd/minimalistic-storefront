@@ -4,17 +4,16 @@ import thunkMiddleware from 'redux-thunk'
 import cartReducer from './cartReducer'
 import categoryReducer from './categoryReducer'
 
-let rootReducers = combineReducers({
+const rootReducers = combineReducers({
   categoryPage: categoryReducer,
   cartPage: cartReducer
 })
 type RootReducersType = typeof rootReducers
 export type AppStateType = ReturnType<RootReducersType>
-export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: never[]) => infer U } ? U : never
 export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = compose
 
 const store = createStore(
   rootReducers,

@@ -37,7 +37,7 @@ export class SliderForCart extends Component<OutsideProps, SliderForCartStateTyp
   }
 
   render() {
-    let style = this.props.anotherStyle ? v : s
+    const style = this.props.anotherStyle ? v : s
     const imageIndex = this.state.currentImageIndex
     return (
       <div className={style.slider}>

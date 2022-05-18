@@ -48,7 +48,7 @@ export class Cart extends Component<CartPagePropsType> {
   }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     selectedProducts: state.cartPage.currentCart.selectedProducts,
     selectedCurrency: state.categoryPage.selectedCurrency,
