@@ -47,6 +47,7 @@ export type SelectedProductType = {
   currentItem: CurrentItemType
   attributeId: string
   amount: number
+  attributesField?: boolean
   wasAdded?: boolean
   message?: boolean
 }

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { ProductForCategories } from '../ProductForCategories/ProductForCategories'
 import s from './categoryPage.module.scss'
+import closeButtonImg from '../../../assets/delete.png'
 import { connect, ConnectedProps } from 'react-redux'
 import { AppStateType } from '../../../redux/redux-store'
-import { ProductType, SelectedProductType } from '../../../MainTypes'
+import { AttributeSetType, AttributeType, ProductType, SelectedProductType } from '../../../MainTypes'
 import { actions, setLocalCart } from '../../../redux/cartReducer'
+import { AttributeBox } from '../../Product/AttributeBox/AttributeBox'
 
 type OutsideProps = {
   category: string
@@ -19,25 +21,82 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
       productMainPhoto: '',
       currentItem: {},
       attributeId: '',
-      amount: 0
+      amount: 0,
+      attributesField: false
     }
   }
 
 
   addProduct = (productId: string) => {
     const productForCart = this.props.products.filter((v) => v.id === productId)
-    const newState = { ...this.state, product: productForCart[0] }
+    const newState = {
+      ...this.state,
+      product: productForCart[0],
+      attributesField: false
+    }
     this.setState(newState)
     this.props.addProductInCart(newState)
     this.props.setLocalCart()
+  }
+
+  getProductItem = (item: AttributeType, attributeId: string) => {
+    this.setState({
+      ...this.state,
+      currentItem: { ...this.state.currentItem, [attributeId]: item }
+    })
+  }
+  setAttributesField = (productId: string) => {
+    const productForCart = this.props.products.filter((v) => v.id === productId)
+    this.setState({
+      ...this.state,
+      product: productForCart[0],
+      attributesField: !this.state.attributesField,
+      currentItem: {}
+    })
+  }
+  closeAttributesField = () => {
+    this.setState({
+      ...this.state,
+      attributesField: false
+    })
   }
 
   render() {
     const categoryName = this.props.category
     const renderCategory: Array<ProductType> = this.props.products.filter(
       (u: ProductType) => u.category === categoryName)
+    const currentAttributes = this.state.product?.attributes.map(
+      (attribute: AttributeSetType, i: number) => (
+        <AttributeBox
+          attribute={attribute}
+          getProductItem={this.getProductItem}
+          currentItem={this.state.currentItem}
+          key={i}
+        />
+      )
+    )
     return (
       <div className={s.categoryPage}>
+        {this.state.attributesField &&
+          <div className={s.messageBackground}>
+            <div className={s.attributesField}>
+              <div className={s.closeButton}>
+                <img src={closeButtonImg} onClick={() => this.closeAttributesField()} alt='' />
+              </div>
+              <div className={s.titleForField}>
+                You must selected attributes
+              </div>
+              <div>
+                {currentAttributes}
+              </div>
+              <div>
+                <button disabled={Object.keys(this.state.currentItem).length !== this.state.product?.attributes.length}
+                        onClick={() => this.state.product && this.addProduct(this.state.product?.id)}>
+                  Add product
+                </button>
+              </div>
+            </div>
+          </div>}
         <div className={s.title}>
           {categoryName ? categoryName : 'all'}
         </div>
@@ -55,6 +114,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
                 attributes={u.attributes}
                 addProduct={this.addProduct}
                 selectedCurrency={this.props.selectedCurrency}
+                setAttributesField={this.setAttributesField}
               />
             ))
             : this.props.products.map((u: ProductType, i: number) => (
@@ -69,6 +129,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
                 attributes={u.attributes}
                 addProduct={this.addProduct}
                 selectedCurrency={this.props.selectedCurrency}
+                setAttributesField={this.setAttributesField}
               />
             ))}
         </div>

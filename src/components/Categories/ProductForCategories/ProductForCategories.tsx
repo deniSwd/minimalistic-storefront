@@ -15,16 +15,20 @@ type ProductForCategoriesType = {
   attributes: Array<AttributeSetType>
   addProduct: (productId: string) => void
   selectedCurrency: CurrencyType
+  setAttributesField: (productId: string) => void
 }
 
 export class ProductForCategories extends Component<ProductForCategoriesType> {
 
   render() {
+    console.log((this.props.attributes))
     const currentPrice = getPrice(this.props.prices, this.props.selectedCurrency.symbol)
     return (
       <div className={s.productWrapper}>
-        {this.props.inStock && this.props.attributes.length === 0 &&
-        <div className={s.addToCartButton} onClick={() => this.props.addProduct(this.props.id)}>
+        {this.props.inStock &&
+        <div className={s.addToCartButton} onClick={() =>
+          this.props.attributes.length < 1 ?
+          this.props.addProduct(this.props.id) : this.props.setAttributesField(this.props.id) }>
           <img src={cartButtonImg} alt='' />
         </div>}
         <div className={s.productStyle}>
