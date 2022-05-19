@@ -11,6 +11,12 @@
   text-align: center;
   letter-spacing: 0.05em;
 }
+%attribute-colorbox{
+  margin: 8px 12px 16px 0;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
 
 .attributeName {
   font-family: 'Roboto Condensed', sans-serif;
@@ -32,6 +38,10 @@
     line-height: 44px;
     color: #292929;
   }
+  .colorItemElement{
+    @extend %attribute-colorbox;
+    border: 1px solid $black;
+  }
 
   .currentItemElement {
     @extend %attribute-box;
@@ -39,6 +49,11 @@
     border: 5px solid $black;
     color: white;
     line-height: 35px;
+  }
+  .currentColorItemElement{
+    @extend %attribute-colorbox;
+    outline: 1px solid #5ECE7B;
+    outline-offset: 2px;
   }
 }
 

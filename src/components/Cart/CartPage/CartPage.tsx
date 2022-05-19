@@ -20,6 +20,7 @@ export class Cart extends Component<CartPagePropsType> {
     if (this.props.selectedProducts.length === 0) {
       return <div className={style.cartEmpty}>CART EMPTY...</div>
     }
+
     return (
       <div>
         <div className={style.cartTitle}>

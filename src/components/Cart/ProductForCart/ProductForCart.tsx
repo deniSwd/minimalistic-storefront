@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { CurrencyType, CurrentItemType, SelectedProductType } from '../../../MainTypes'
+import { AttributeSetType, AttributeType, CurrencyType, CurrentItemType, SelectedProductType } from '../../../MainTypes'
 import s from './productForCart.module.scss'
 import { SliderForCart } from '../SliderForCart/SliderForCart'
 import Preloader from '../../../utilities/Preloader/Preloader'
 import v from './productForOverlay.module.scss'
 import deleteImg from '../../../assets/delete.png'
 import { getPrice } from '../../../utilities/getPrice'
+import { AttributeBox } from '../../Product/AttributeBox/AttributeBox'
 
 type ProductForCartPropsType = {
   productInCart: SelectedProductType
@@ -35,6 +36,9 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     this.props.deleteProductInCart(this.props.productInCart)
     this.props.setLocalCart()
   }
+  getProductItem = (item: AttributeType, attributeId: string) => {
+    console.log(item, attributeId)
+  }
 
   render() {
     let style = s
@@ -44,6 +48,17 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     if (!this.props.productInCart.product) {
       return <Preloader />
     }
+    const currentAttributes = this.props.productInCart.product.attributes.map(
+      (attribute: AttributeSetType, i: number) => (
+        <AttributeBox
+          anotherStyle={this.props.anotherStyle}
+          attribute={attribute}
+          getProductItem={this.getProductItem}
+          currentItem={this.props.productInCart.currentItem}
+          key={i}
+        />
+      )
+    )
     return (
       <div className={style.selectedProduct}>
         <div>
@@ -56,7 +71,10 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           <div className={style.price}>
             {currentPrice && currentPrice.currency.symbol} {currentPrice && currentPrice.amount}
           </div>
-          {Object.entries(this.props.productInCart.currentItem).map(
+          <div>
+            {currentAttributes}
+          </div>
+         {/* {Object.entries(this.props.productInCart.currentItem).map(
             ([attribute, itemValues], i: number) => (
               <div className={style.currentAttributes} key={i}>
                 <div className={style.attributeName}>{attribute}:</div>
@@ -67,7 +85,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
                   <div className={style.currentItemElement}>{itemValues.value}</div>)}
               </div>
             )
-          )}
+          )}*/}
         </div>
         <div className={style.amountAndGallery}>
           <div className={style.deleteButton} onClick={this.deleteProduct}>

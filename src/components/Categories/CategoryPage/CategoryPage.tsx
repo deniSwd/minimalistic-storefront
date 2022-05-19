@@ -68,6 +68,7 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
     const currentAttributes = this.state.product?.attributes.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
+          anotherStyle={false}
           attribute={attribute}
           getProductItem={this.getProductItem}
           currentItem={this.state.currentItem}

@@ -9,6 +9,24 @@
   white-space: nowrap;
   color: $black;
 }
+%attribute-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 8px 8px 0;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+%attribute-colorbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
 
 .selectedProduct {
   display: flex;
@@ -47,21 +65,32 @@
       color: $black;
       text-transform: uppercase;
     }
+    .attributesItem {
+      display: flex;
+      user-select: none;
 
-    .currentItemElement {
-      margin: 5px 0;
-      width: 48px;
-      height: 34px;
-      cursor: pointer;
-      font-family: 'Source Sans Pro', sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 24px;
-      text-align: center;
-      letter-spacing: 0.05em;
-      background-color: $black;
-      border: 5px solid $black;
-      color: white;
+      .itemElement {
+        @extend %attribute-box;
+        border: 1px solid $black;
+        color: #292929;
+      }
+      .colorItemElement {
+        @extend %attribute-colorbox;
+        margin: 8px 8px 8px 0;
+        border: 1px solid $black;
+      }
+
+      .currentItemElement {
+       @extend %attribute-box;
+        background-color: $black;
+        color: white;
+      }
+      .currentColorItemElement {
+        @extend %attribute-colorbox;
+        margin: 8px 8px 8px 3px;
+        outline: 1px solid #5ECE7B;
+        outline-offset: 2px;
+      }
     }
   }
 
