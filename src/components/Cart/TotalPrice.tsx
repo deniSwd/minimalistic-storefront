@@ -25,21 +25,27 @@ export class TotalPrice extends Component<TotalPricePropsType> {
     let style = s
     this.props.anotherStyle ? style = v : style
     return (
-      <div className={style.totalPrice}>
-        <div className={style.total}>
-          <div>
-            Total Price:
-          </div>
-          <div className={style.price}>
-            {this.props.selectedCurrency.symbol} {this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
-          </div>
-        </div>
+      <div>
         {!this.props.anotherStyle &&
-          <div>
-            <button className={s.greenButton} onClick={() => alert('Happy End')}>
-              CHECK OUT
-            </button>
+          <div className={style.tax}>
+            Tax 21%: $42
           </div>}
+        <div className={style.totalPrice}>
+          <div className={style.total}>
+            <div>
+              Total Price:
+            </div>
+            <div className={style.price}>
+              {this.props.selectedCurrency.symbol} {this.props.selectedProducts && this.getTotalPrice().toFixed(2)}
+            </div>
+          </div>
+          {!this.props.anotherStyle &&
+            <div>
+              <button className={s.greenButton} onClick={() => alert('Happy End')}>
+                CHECK OUT
+              </button>
+            </div>}
+        </div>
       </div>
     )
   }
