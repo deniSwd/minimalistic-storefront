@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { actions, setLocalCart } from '../../../redux/cartReducer'
-import { ProductForCart } from '../ProductForCart/ProductForCart'
+import ProductForCartContainer from '../ProductForCart/ProductForCart'
 import TotalPriceContainer from '../TotalPrice'
 import { AppStateType } from '../../../redux/redux-store'
 import { SelectedProductType } from '../../../MainTypes'
@@ -29,7 +29,7 @@ export class Cart extends Component<CartPagePropsType> {
         </div>
         <div className={style.productsBlock}>
           {this.props.selectedProducts.map((productInCart: SelectedProductType, i: number) => (
-            <ProductForCart
+            <ProductForCartContainer
               key={i}
               productInCart={productInCart}
               currentAmountDown={this.props.setCurrentAmountDown}

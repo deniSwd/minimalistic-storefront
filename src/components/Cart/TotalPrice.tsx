@@ -35,11 +35,11 @@ export class TotalPrice extends Component<TotalPricePropsType> {
           </div>
         </div>
         {!this.props.anotherStyle &&
-        <div>
-          <button className={s.greenButton} onClick={() => alert('Happy End')}>
-            CHECK OUT
-          </button>
-        </div>}
+          <div>
+            <button className={s.greenButton} onClick={() => alert('Happy End')}>
+              CHECK OUT
+            </button>
+          </div>}
       </div>
     )
   }

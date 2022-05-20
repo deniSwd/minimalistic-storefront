@@ -1,5 +1,5 @@
 import { BaseThunkType, InferActionsTypes } from './redux-store'
-import { CurrentItemType, SelectedProductType } from '../MainTypes'
+import { AttributeType, CurrentItemType, SelectedProductType } from '../MainTypes'
 import { isEqual } from '../utilities/isEqual'
 
 type ThunkType = BaseThunkType<ActionsType>
@@ -85,7 +85,7 @@ const cartReducer = (state = initialsState, action: ActionsType): InitialsStateT
           selectedProducts: [...newSelectedProducts]
         }
       }
-    case 'GET_CURRENT_LOCAL_CART':
+    case 'SET_CURRENT_LOCAL_CART':
       return { ...state, ...action.localCart }
     case 'SET_COUNTER_PRODUCTS_VALUE':
       const calculate = () => {
@@ -103,6 +103,21 @@ const cartReducer = (state = initialsState, action: ActionsType): InitialsStateT
           counterProductsValue: calculate()
         }
       }
+    case 'SET_ATTRIBUTES_FROM_CART':
+      const products = state.currentCart.selectedProducts.map(v => ({
+        ...v,
+        currentItem: { ...v.currentItem }
+      }))
+      const productToChange = products.find(v => v.product?.id === action.productId)
+      if (productToChange)
+        productToChange.currentItem[action.attributeId] = action.item
+      return {
+        ...state,
+        currentCart: {
+          ...state.currentCart,
+          selectedProducts: products
+        }
+      }
     default:
       return state
   }
@@ -117,10 +132,12 @@ export const actions = {
     ({ type: 'SET_CURRENT_AMOUNT_DOWN', amountOfProduct, productId, currentItemProduct } as const),
   setCurrentAmountUp: (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) =>
     ({ type: 'SET_CURRENT_AMOUNT_UP', amountOfProduct, productId, currentItemProduct } as const),
-  getCurrentLocalCart: (localCart: InitialsStateType) =>
-    ({ type: 'GET_CURRENT_LOCAL_CART', localCart } as const),
+  setCurrentLocalCart: (localCart: InitialsStateType) =>
+    ({ type: 'SET_CURRENT_LOCAL_CART', localCart } as const),
   setCounter: () =>
-    ({ type: 'SET_COUNTER_PRODUCTS_VALUE' } as const)
+    ({ type: 'SET_COUNTER_PRODUCTS_VALUE' } as const),
+  setAttributesFromCart: (item: AttributeType, attributeId: string, productId: string) =>
+    ({ type: 'SET_ATTRIBUTES_FROM_CART', item, attributeId, productId } as const)
 }
 
 export const setLocalCart = (): ThunkType => async (dispatch, getState) => {
@@ -129,8 +146,8 @@ export const setLocalCart = (): ThunkType => async (dispatch, getState) => {
 
 export const getLocalCart = (): ThunkType => async (dispatch) => {
   const cart = localStorage.getItem('cart') ?? '{}'
-  const localCart = cart != null && JSON.parse(cart)
-  dispatch(actions.getCurrentLocalCart(localCart))
+  const localCart = cart !== null && JSON.parse(cart)
+  dispatch(actions.setCurrentLocalCart(localCart))
 }
 
 export default cartReducer

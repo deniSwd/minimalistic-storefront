@@ -73,12 +73,14 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
   }
 
   render() {
-    if (!this.state.product) {
+    const product = this.state.product
+    if (!product) {
       return <div><Preloader /></div>
     }
-    const currentAttributes = this.state.product.attributes.map(
+    const currentAttributes = product.attributes.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
+          anotherStyle={false}
           attribute={attribute}
           getProductItem={this.getProductItem}
           currentItem={this.state.currentItem}
@@ -87,16 +89,16 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
       )
     )
     const currentPrice = this.state.product != null &&
-      getPrice(this.state.product.prices, this.props.selectedCurrency.symbol)
+      getPrice(product.prices, this.props.selectedCurrency.symbol)
 
     return (
       <>
         {this.state.product && (
           <div className={s.productPage}>
             {this.state.message &&
-            <MessageAboutAttributes messageOff={this.messageOff} />}
+              <MessageAboutAttributes messageOff={this.messageOff} />}
             <div className={s.productPhotos}>
-              {this.state.product.gallery.map((mainPhoto: string, i: number) => (
+              {product.gallery.map((mainPhoto: string, i: number) => (
                 <div key={i}>
                   <img
                     src={mainPhoto}
@@ -110,7 +112,7 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
             <div>
               {this.state.productMainPhoto === '' ? (
                 <img
-                  src={this.state.product.gallery[0]}
+                  src={product.gallery[0]}
                   className={s.productMainPhoto}
                   alt=''
                 />
@@ -124,10 +126,10 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
             </div>
             <div className={s.info}>
               <div className={s.brand}>
-                {this.state.product.brand}
+                {product.brand}
               </div>
               <div className={s.name}>
-                {this.state.product.name}
+                {product.name}
               </div>
               <div>{currentAttributes}</div>
               <div className={s.price}>PRICE:</div>
@@ -135,15 +137,15 @@ export class ProductPage extends Component<ProductPagePropsType, SelectedProduct
                 {currentPrice && currentPrice.currency.symbol} {
                 currentPrice && currentPrice.amount}
               </div>
-              {this.state.product.inStock
+              {product.inStock
                 ? <button className={s.button} onClick={this.buttonOnClick}>
                   {this.state.wasAdded ? 'WAS ADDED' : 'ADD TO CART'}
                 </button>
                 :
                 <div className={s.outOfStock}>OUT OF STOCK</div>}
               <div className={s.description}>
-                {this.state.product.description &&
-                ReactHtmlParser(this.state.product.description)}
+                {product.description &&
+                  ReactHtmlParser(product.description)}
               </div>
             </div>
           </div>

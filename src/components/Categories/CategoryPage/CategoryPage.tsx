@@ -62,10 +62,11 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
   }
 
   render() {
+    const product = this.state.product
     const categoryName = this.props.category
     const renderCategory: Array<ProductType> = this.props.products.filter(
       (u: ProductType) => u.category === categoryName)
-    const currentAttributes = this.state.product?.attributes.map(
+    const currentAttributes = product?.attributes.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
           anotherStyle={false}
@@ -91,8 +92,8 @@ export class CategoryPage extends Component<CategoryPagePropsType, SelectedProdu
                 {currentAttributes}
               </div>
               <div>
-                <button disabled={Object.keys(this.state.currentItem).length !== this.state.product?.attributes.length}
-                        onClick={() => this.state.product && this.addProduct(this.state.product?.id)}>
+                <button disabled={Object.keys(this.state.currentItem).length !== product?.attributes.length}
+                        onClick={() => product && this.addProduct(product.id)}>
                   Add product
                 </button>
               </div>

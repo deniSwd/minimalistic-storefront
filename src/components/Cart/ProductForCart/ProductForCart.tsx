@@ -7,8 +7,11 @@ import v from './productForOverlay.module.scss'
 import deleteImg from '../../../assets/delete.png'
 import { getPrice } from '../../../utilities/getPrice'
 import { AttributeBox } from '../../Product/AttributeBox/AttributeBox'
+import { connect, ConnectedProps } from 'react-redux'
+import { actions } from '../../../redux/cartReducer'
+import { AppStateType } from '../../../redux/redux-store'
 
-type ProductForCartPropsType = {
+type OutsidePropsType = {
   productInCart: SelectedProductType
   currentAmountDown: (amountOfProduct: number,
                       productId: string,
@@ -21,6 +24,7 @@ type ProductForCartPropsType = {
   deleteProductInCart: (deletedProduct: SelectedProductType) => void
   setLocalCart: () => void
 }
+export type ProductForCartPropsType = OutsidePropsType & ConnectPropsType
 
 export class ProductForCart extends Component<ProductForCartPropsType> {
   amountDown = (amountOfProduct: number, productId: string, currentItemProduct: CurrentItemType) => {
@@ -37,18 +41,20 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     this.props.setLocalCart()
   }
   getProductItem = (item: AttributeType, attributeId: string) => {
-    console.log(item, attributeId)
+    if (!this.props.productInCart.product) return
+    this.props.setAttributesFromCart(item, attributeId, this.props.productInCart.product.id)
   }
 
   render() {
     let style = s
     this.props.anotherStyle ? style = v : style
-    const currentPrice = this.props.productInCart.product != null
-      && getPrice(this.props.productInCart.product.prices, this.props.selectedCurrency.symbol)
-    if (!this.props.productInCart.product) {
+    const product = this.props.productInCart.product
+    const currentPrice = product != null
+      && getPrice(product.prices, this.props.selectedCurrency.symbol)
+    if (!product) {
       return <Preloader />
     }
-    const currentAttributes = this.props.productInCart.product.attributes.map(
+    const currentAttributes = product.attributes.map(
       (attribute: AttributeSetType, i: number) => (
         <AttributeBox
           anotherStyle={this.props.anotherStyle}
@@ -63,10 +69,10 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
       <div className={style.selectedProduct}>
         <div>
           <div className={style.brand}>
-            {this.props.productInCart.product.brand}
+            {product.brand}
           </div>
           <div className={style.name}>
-            {this.props.productInCart.product.name}
+            {product.name}
           </div>
           <div className={style.price}>
             {currentPrice && currentPrice.currency.symbol} {currentPrice && currentPrice.amount}
@@ -74,18 +80,6 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           <div>
             {currentAttributes}
           </div>
-         {/* {Object.entries(this.props.productInCart.currentItem).map(
-            ([attribute, itemValues], i: number) => (
-              <div className={style.currentAttributes} key={i}>
-                <div className={style.attributeName}>{attribute}:</div>
-                {attribute === 'Color' ? (
-                  <div className={style.currentItemElement}
-                       style={{ backgroundColor: itemValues.value }} />
-                ) : (
-                  <div className={style.currentItemElement}>{itemValues.value}</div>)}
-              </div>
-            )
-          )}*/}
         </div>
         <div className={style.amountAndGallery}>
           <div className={style.deleteButton} onClick={this.deleteProduct}>
@@ -94,7 +88,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
           <div className={style.amount}>
             <button onClick={() => this.props.productInCart.product && this.amountUp(
               this.props.productInCart.amount,
-              this.props.productInCart.product.id,
+              product.id,
               this.props.productInCart.currentItem)
             }
             >
@@ -106,7 +100,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
               this.props.productInCart.amount > 1 ?
                 this.amountDown(
                   this.props.productInCart.amount,
-                  this.props.productInCart.product.id,
+                  product.id,
                   this.props.productInCart.currentItem
                 ) : this.deleteProduct()
             }
@@ -115,7 +109,7 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
             </button>
           </div>
           <div>
-            <SliderForCart gallery={this.props.productInCart.product.gallery}
+            <SliderForCart gallery={product.gallery}
                            anotherStyle={this.props.anotherStyle} />
           </div>
         </div>
@@ -123,3 +117,9 @@ export class ProductForCart extends Component<ProductForCartPropsType> {
     )
   }
 }
+
+const connector = connect((state: AppStateType) => ({ selectedProducts: state.cartPage.currentCart.selectedProducts }), { ...actions })
+const ProductForCartContainer = connector(ProductForCart)
+
+type ConnectPropsType = ConnectedProps<typeof connector>
+export default ProductForCartContainer

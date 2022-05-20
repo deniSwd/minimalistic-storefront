@@ -17,7 +17,6 @@ export class AttributeBox extends Component<AttributeBoxPropsType> {
     const currentItemAttribute = this.props.currentItem[attributeId]
 
     const style = this.props.anotherStyle ? v : s
-    console.log(this.props.anotherStyle)
     return (
       <div className={style.currentAttributes}>
         <div className={style.attributeName}>

@@ -51,20 +51,19 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
   }
 
   render() {
-    console.log(this.props.counterProductsValue)
     return (
       <div className={s.header}>
         <nav className={s.nav}>
           <div>
-            <NavLink exact to="/" className={s.navItem}
+            <NavLink exact to='/' className={s.navItem}
                      activeClassName={s.activeNavItem}>ALL</NavLink>
           </div>
           <div>
-            <NavLink to="/clothes" className={s.navItem}
+            <NavLink to='/clothes' className={s.navItem}
                      activeClassName={s.activeNavItem}>CLOTHES</NavLink>
           </div>
           <div>
-            <NavLink to="/tech" className={s.navItem}
+            <NavLink to='/tech' className={s.navItem}
                      activeClassName={s.activeNavItem}>TECH</NavLink>
           </div>
         </nav>
@@ -102,9 +101,9 @@ export class Header extends Component<HeaderPropsType, HeaderStateType> {
                  onClick={this.showAndHideCartOnPage}>
               <img src={cartImg} alt='' />
               {this.props.counterProductsValue > 0 &&
-              <div className={s.counterProducts}>
-                {this.props.counterProductsValue}
-              </div>}
+                <div className={s.counterProducts}>
+                  {this.props.counterProductsValue}
+                </div>}
             </div>
             {this.state.showCart && (
               <div>

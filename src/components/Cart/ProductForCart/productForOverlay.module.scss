@@ -13,13 +13,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8px 8px 8px 0;
-  width: 34px;
-  height: 34px;
+  margin: 7px 7px 7px 0;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 0.05em;
 }
 %attribute-colorbox {
@@ -76,7 +76,7 @@
       }
       .colorItemElement {
         @extend %attribute-colorbox;
-        margin: 8px 8px 8px 0;
+        margin: 7px 7px 7px 0;
         border: 1px solid $black;
       }
 
@@ -87,7 +87,7 @@
       }
       .currentColorItemElement {
         @extend %attribute-colorbox;
-        margin: 8px 8px 8px 3px;
+        margin: 7px 7px 7px 3px;
         outline: 1px solid #5ECE7B;
         outline-offset: 2px;
       }
