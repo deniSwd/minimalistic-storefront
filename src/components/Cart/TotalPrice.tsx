@@ -20,6 +20,10 @@ export class TotalPrice extends Component<TotalPricePropsType> {
     })
     return currentProductPrice.reduce((a: number, b: number) => a + b)
   }
+  getTax = (): string => {
+    const tax = this.getTotalPrice() * 0.21
+    return tax.toFixed(2)
+  }
 
   render() {
     let style = s
@@ -28,7 +32,8 @@ export class TotalPrice extends Component<TotalPricePropsType> {
       <div>
         {!this.props.anotherStyle &&
           <div className={style.tax}>
-            Tax 21%: $42
+            <div className={style.taxName}>Tax 21%:</div>
+            <div className={style.taxValue}>{this.props.selectedCurrency.symbol}{this.getTax()}</div>
           </div>}
         <div className={style.totalPrice}>
           <div className={style.total}>

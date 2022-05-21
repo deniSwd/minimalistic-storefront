@@ -19,14 +19,30 @@
   @extend %position-center;
   height: 10em;
 }
-.tax{
+
+.tax {
+  display: flex;
+  padding-top: 20px;
   border-top: 1px solid #E5E5E5;
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  line-height: 28px;
+  color: $black;
+
+  .taxName {
+    font-weight: 400;
+  }
+
+  .taxValue {
+    margin-left: 20px;
+    font-weight: 700;
+  }
 }
 
 .totalPrice {
   display: flex;
   justify-content: space-between;
-  padding: 50px 0;
+  padding: 20px 0 50px 0;
 
 
   .total {
@@ -36,6 +52,10 @@
     font-size: 30px;
     line-height: 32px;
     color: $black;
+  }
+
+  .price {
+    margin-left: 20px;
   }
 
   .greenButton {
